@@ -1,0 +1,24 @@
+.gallery{min-width:0}
+.figure{margin:0}
+.main{position:relative;display:block;width:100%;aspect-ratio:4/3;padding:0;border:1px solid #e4dacb;border-radius:12px;overflow:hidden;background:#eee8de;cursor:zoom-in}
+.main img{width:100%;height:100%;object-fit:contain}
+.zoom{position:absolute;right:12px;bottom:12px;padding:5px 10px;border-radius:20px;background:var(--green);color:var(--cream);font-size:11px}
+.caption{font-size:11px;line-height:1.6;color:var(--graphite);margin-top:10px}
+.thumbnails{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
+.thumbnail{position:relative;width:78px;aspect-ratio:1;padding:4px;border:1px solid #d6ccbd;border-radius:8px;background:var(--cream);cursor:pointer}
+.thumbnail[aria-pressed="true"]{border:2px solid var(--green)}
+.thumbnail img{width:100%;height:100%;object-fit:contain;border-radius:4px}
+.compact{max-width:300px}
+.compact .main{aspect-ratio:4/5}
+.modal{width:min(1100px,96vw);max-width:96vw;max-height:94dvh;padding:16px;border:1px solid var(--gold);border-radius:12px;background:var(--cream);color:var(--green)}
+.modal::backdrop{background:#102420d9}
+.toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}
+.toolbar p{font-size:12px}
+.control{min-width:44px;min-height:44px;padding:8px 12px;border:1px solid #c7b79f;border-radius:6px;background:var(--cream);color:var(--green);cursor:pointer;font:inherit}
+.modalImage{position:relative;width:100%;height:68dvh}
+.modalImage img{object-fit:contain}
+.navigation{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:10px}
+.navigation span{font-size:12px}
+@media(max-width:640px){.main{aspect-ratio:1}.modal{padding:12px}.modalImage{height:60dvh}.toolbar p{max-width:25ch}}
+.main[data-image="majestic-room-detail"],.main[data-image^="diamond-room-"],.main[data-image^="elegance-room-"],.main[data-image^="confort-room-"]{aspect-ratio:3/2}
+.main[data-image="majestic-room-detail"] img,.main[data-image^="diamond-room-"] img,.main[data-image^="elegance-room-"] img,.main[data-image^="confort-room-"] img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}

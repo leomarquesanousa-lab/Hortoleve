@@ -4,21 +4,33 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "prisma generate && next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "db:validate": "prisma validate",
+    "db:generate": "prisma generate",
+    "db:deploy": "prisma migrate deploy",
+    "admin:first-owner": "node scripts/create-owner.mts",
+    "test:admin": "node --test --test-isolation=none tests/admin-foundation.test.mjs"
   },
   "dependencies": {
+    "@prisma/adapter-pg": "7.10.1",
+    "@prisma/client": "7.10.1",
+    "better-auth": "1.7.11",
     "next": "16.4.2",
+    "pg": "8.23.1",
     "react": "19.3.0",
-    "react-dom": "19.3.0"
+    "react-dom": "19.3.0",
+    "server-only": "0.0.1"
   },
   "devDependencies": {
     "@types/node": "^20",
+    "@types/pg": "8.23.1",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.4.2",
+    "prisma": "7.10.1",
     "typescript": "^5"
   }
 }

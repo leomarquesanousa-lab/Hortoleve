@@ -1,0 +1,211 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+  importFileExtension = "ts"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  OWNER
+  ADMIN
+}
+
+enum ProductStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+enum SocialChannel {
+  FACEBOOK
+  TIKTOK
+  INSTAGRAM
+  WHATSAPP
+}
+
+enum LeadStatus {
+  NEW
+  IN_PROGRESS
+  CLOSED
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String
+  email         String    @unique
+  emailVerified Boolean   @default(false)
+  image         String?
+  role          Role      @default(ADMIN)
+  active        Boolean   @default(true)
+  permissions   String[]  @default([])
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  sessions      Session[]
+  accounts      Account[]
+  auditLogs     AuditLog[]
+}
+
+// O hash de senha é mantido por Better Auth em Account.password, nunca em texto puro.
+model Account {
+  id                    String    @id @default(cuid())
+  accountId             String
+  providerId            String
+  userId                String
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  @@unique([providerId, accountId])
+  @@index([userId])
+}
+
+model Session {
+  id        String   @id @default(cuid())
+  token     String   @unique
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  ipAddress String?
+  userAgent String?
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  @@index([userId, expiresAt])
+}
+
+model Verification {
+  id         String   @id @default(cuid())
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  @@index([identifier])
+}
+
+model RateLimit {
+  id          String @id @default(cuid())
+  key         String @unique
+  count       Int
+  lastRequest BigInt
+}
+
+model Banner {
+  id         String   @id @default(cuid())
+  title      String
+  subtitle   String?
+  image      String
+  buttonText String?
+  buttonUrl  String?
+  order      Int      @default(0)
+  active     Boolean  @default(false)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  @@index([active, order])
+}
+
+model Category {
+  id          String    @id @default(cuid())
+  name        String
+  slug        String    @unique
+  description String?
+  order       Int       @default(0)
+  active      Boolean   @default(false)
+  products    Product[]
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  @@index([active, order])
+}
+
+model Product {
+  id             String         @id @default(cuid())
+  categoryId     String
+  name           String
+  slug           String
+  description    String
+  status         ProductStatus  @default(DRAFT)
+  characteristics Json?
+  specifications Json?
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+  category       Category       @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+  media          ProductMedia[]
+  leads          ContactLead[]
+  @@unique([categoryId, slug])
+  @@index([categoryId, status])
+}
+
+model ProductMedia {
+  id        String   @id @default(cuid())
+  productId String
+  url       String
+  alt       String
+  order     Int      @default(0)
+  type      String   @default("IMAGE")
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  @@index([productId, order])
+}
+
+model SocialLink {
+  id        String        @id @default(cuid())
+  channel   SocialChannel @unique
+  url       String?
+  active    Boolean       @default(true)
+  order     Int           @default(0)
+  updatedAt DateTime      @updatedAt
+}
+
+model SiteSetting {
+  key       String   @id
+  value     Json
+  updatedAt DateTime @updatedAt
+}
+
+model SeoSetting {
+  id          String   @id @default(cuid())
+  route       String   @unique
+  title       String?
+  description String?
+  ogImage     String?
+  canonical   String?
+  indexable   Boolean  @default(false)
+  updatedAt   DateTime @updatedAt
+}
+
+model ContactLead {
+  id        String     @id @default(cuid())
+  name      String
+  email     String?
+  phone     String
+  subject   String
+  message   String?
+  productId String?
+  status    LeadStatus @default(NEW)
+  consentAt DateTime
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  product   Product?   @relation(fields: [productId], references: [id], onDelete: SetNull)
+  @@index([status, createdAt])
+  @@index([productId])
+}
+
+model AuditLog {
+  id         String   @id @default(cuid())
+  userId     String?
+  action     String
+  entity     String
+  recordId   String?
+  metadata   Json?
+  createdAt  DateTime @default(now())
+  user       User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  @@index([userId, createdAt])
+  @@index([entity, recordId])
+}
