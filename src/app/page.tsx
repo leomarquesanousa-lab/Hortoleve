@@ -5,11 +5,16 @@ import { SectionHeading } from "@/components/SectionHeading";
 import { ProductCard } from "@/components/ProductCard";
 import { CTAWhatsApp } from "@/components/CTAWhatsApp";
 import { FAQ } from "@/components/FAQ";
-import { products } from "@/modules/catalog/data";
 import { experiences } from "@/modules/content/data";
 import s from "@/components/site.module.css";
-export const metadata: Metadata = { alternates: { canonical: "/" } };
-export default function Home() {
+import { getPublicSnapshot, publicDocument, seoMetadata } from "@/modules/cms/public";
+import { CmsHome } from "@/components/CmsHome";
+export function generateMetadata(): Promise<Metadata> { return seoMetadata("/", { alternates: { canonical: "/" } }); }
+export default async function Home() {
+    const snapshot = await getPublicSnapshot();
+    const products = snapshot.products;
+    const content = await publicDocument("home");
+    if (content) return <CmsHome data={content} products={products} />;
     return <>
     <HomeHero />
     <section className={s.section + " " + s.linesSection} aria-labelledby="lines-title"><div className={s.sectionTop}><div><p className={s.eyebrow}>COLCHÕES HORTOLEVE</p><h2 id="lines-title">Conheça nossas linhas</h2></div><Link className={s.textLink} href="/produtos/colchoes">Ver todos os colchões ↗</Link></div><div className={s.linesGrid}>{products.filter(p => p.categoryId === "colchoes" && p.featured).map(p => <ProductCard key={p.id} product={p}/>)}</div></section>

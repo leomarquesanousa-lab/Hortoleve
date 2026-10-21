@@ -1,0 +1,55 @@
+# Arquivos da implementacao CMS
+
+Somente codigo, configuracao de exemplo e documentacao. Imagens e backups preexistentes nao estao incluidos.
+
+- .env.example
+- next.config.ts
+- package-lock.json
+- package.json
+- scripts/import-content.mts
+- src/app/admin/(protected)/[module]/page.tsx
+- src/app/admin/(protected)/layout.tsx
+- src/app/admin/(protected)/page.tsx
+- src/app/admin/(protected)/preview/[resource]/[id]/page.tsx
+- src/app/admin/admin.module.css
+- src/app/api/admin-upload/route.ts
+- src/app/api/admin/[resource]/route.ts
+- src/app/api/leads/route.ts
+- src/app/contato/page.tsx
+- src/app/layout.tsx
+- src/app/page.tsx
+- src/app/produtos/[categoria]/[slug]/page.tsx
+- src/app/produtos/[categoria]/page.tsx
+- src/app/produtos/page.tsx
+- src/app/robots.ts
+- src/app/sitemap.ts
+- src/app/sobre/page.tsx
+- src/app/tecnologias/page.tsx
+- src/components/BrandLogo.tsx
+- src/components/CTAWhatsApp.tsx
+- src/components/CmsHome.tsx
+- src/components/CmsPage.tsx
+- src/components/Footer.tsx
+- src/components/Header.tsx
+- src/components/HomeHero.tsx
+- src/components/ProductCard.tsx
+- src/components/ProductPresentation.tsx
+- src/components/PublicConfig.tsx
+- src/components/SiteChrome.tsx
+- src/components/SocialOrbit.tsx
+- src/components/admin/ContentManager.module.css
+- src/components/admin/ContentManager.tsx
+- src/config/site.ts
+- src/modules/admin/modules.ts
+- src/modules/catalog/data.ts
+- src/modules/catalog/technology-comparison.ts
+- src/modules/catalog/types.ts
+- src/modules/cms/ACTIVATION.md
+- src/modules/cms/contracts.ts
+- src/modules/cms/hero-defaults.ts
+- src/modules/cms/public.ts
+- src/modules/cms/repository.ts
+- src/modules/cms/storage.ts
+- src/modules/cms/validation.ts
+- src/modules/leads/delivery.ts
+- src/proxy.ts

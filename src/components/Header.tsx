@@ -2,12 +2,13 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { categories } from "@/modules/catalog/data";
+import { usePublicConfig } from "./PublicConfig";
 import { ProductsNavigation } from "./ProductsNavigation";
 import { BrandLogo } from "./BrandLogo";
 import styles from "./site.module.css";
 const links = [["/tecnologias", "Tecnologias"], ["/sobre", "A Hortoleve"], ["/contato", "Contato"]];
 export function Header() {
+    const { categories } = usePublicConfig();
     const [compact, setCompact] = useState(false);
     useEffect(() => {
         let frame = 0;

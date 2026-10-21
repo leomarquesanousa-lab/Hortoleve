@@ -12,7 +12,7 @@ function loader(overrides = {}) {
         file = path.resolve(file);
         if (cache.has(file)) return cache.get(file);
         const mod = { exports: {} };
-        const code = ts.transpileModule(fs.readFileSync(file, "utf8"), { compilerOptions: { module: ts.ModuleKind.CommonJS, jsx: ts.JsxEmit.ReactJSX, esModuleInterop: true } }).outputText;
+        const code = ts.transpileModule(fs.readFileSync(file, "utf8"), { compilerOptions: { target: ts.ScriptTarget.ES2022, module: ts.ModuleKind.CommonJS, jsx: ts.JsxEmit.ReactJSX, esModuleInterop: true } }).outputText;
         function local(name) {
             if (name in overrides) return overrides[name];
             if (name === "server-only") return {};
@@ -149,7 +149,7 @@ test("migração e rotas preparadas; nenhuma senha padrão ou integração públ
     const sql = fs.readFileSync("prisma/migrations/202610190001_admin_foundation/migration.sql", "utf8");
     for (const model of ["User", "Account", "Session", "RateLimit", "Banner", "Category", "Product", "ProductMedia", "SocialLink", "SiteSetting", "SeoSetting", "ContactLead", "AuditLog"]) assert.ok(sql.includes('CREATE TABLE "' + model + '"'));
     const { adminModules } = loader()("src/modules/admin/modules.ts");
-    assert.equal(adminModules.length, 9);
+    assert.ok(["produtos", "categorias", "tecnologias", "midia", "home", "paginas", "usuarios"].every(slug => adminModules.some(m => m.slug === slug)));
     assert.ok(fs.existsSync("src/app/admin/(protected)/page.tsx"));
     assert.ok(fs.readFileSync("src/components/SiteChrome.tsx", "utf8").includes('pathname?.startsWith("/admin/")'));
     assert.ok(fs.readFileSync("scripts/create-owner.mts", "utf8").includes("bootstrapMode(process.env, process.argv)"));
@@ -246,4 +246,133 @@ test("logout não declara sucesso se a sessão permanecer válida no banco", asy
         "better-auth/next-js": { toNextJsHandler: () => ({ POST: async () => Response.json({ success: true }) }) },
     })(routeFile);
     assert.equal((await route.POST(request("sign-out"))).status, 503);
+});
+
+test("CMS valida campos, rejeita XSS em links e exige imagem para publicar", () => {
+    const { validateData, safeLink, mediaPath, hasReference } = loader()("src/modules/cms/validation.ts");
+    assert.equal(safeLink("javascript:alert(1)"), false);
+    assert.equal(safeLink("//other.test/x"), false);
+    assert.equal(mediaPath("/images/%2e%2e/private.png"), false);
+    assert.equal(mediaPath("https://example.test/a.svg"), false);
+    assert.equal(mediaPath("/majestic/4.png"), true);
+    assert.equal(mediaPath("/tecnologia/cromoterapia e massagem.png"), true);
+    assert.equal(hasReference({ technologyIds: "tech-a\ntech-b\ntech-c" }, ["tech-b"]), true);
+    assert.throws(() => validateData("usuarios", { name: "Test", email: "invalid", role: "OWNER" }));
+    assert.throws(() => validateData("redes-sociais", { name: "Instagram", channel: "instagram", url: "https://facebook.com/test" }));
+    assert.throws(() => validateData("produtos", { name: "Test", slug: "test", categoryId: "colchoes", summary: "Test", description: "Test", published: true, gallery: [] }));
+    const data = validateData("configuracoes", { name: "Hortoleve", whatsapp: "5511999999999", secret: "must-not-persist" });
+    assert.equal(data.secret, undefined);
+});
+
+test("CMS API: visitante 401, ADMIN sem delegação 403 e CSRF rejeitado sem escrita", async () => {
+    let identity = null, writes = 0;
+    const load = loader({
+        "@/modules/admin/session": { currentAdmin: async () => identity },
+        "@/modules/admin/environment": { adminEnvironment: () => ({ baseURL: "https://example.test" }) },
+        "@/modules/admin/database": { getDatabase: () => { writes++; throw Error("Não deve acessar banco"); } },
+    });
+    const route = load("src/app/api/admin/[resource]/route.ts");
+    const context = { params: Promise.resolve({ resource: "usuarios" }) };
+    const req = origin => new Request("http://127.0.0.1/api/admin/usuarios", { method: "POST", headers: { origin, "content-type": "application/json" }, body: "{}" });
+    assert.equal((await route.POST(req("https://example.test"), context)).status, 401);
+    identity = { ...user, permissions: ["users:manage"] };
+    assert.equal((await route.POST(req("https://example.test"), context)).status, 403);
+    identity = { ...user, role: "OWNER" };
+    assert.equal((await route.POST(req("https://other.test"), context)).status, 403);
+    assert.equal(writes, 0);
+});
+
+test("CMS usuários: último OWNER protegido e senha/hash nunca retornados na listagem", async () => {
+    const existing = { ...user, role: "OWNER", active: true, updatedAt: new Date(1000), password: "not-public" };
+    let updates = 0;
+    const tx = { $queryRaw: async () => [], user: { findUnique: async () => existing, count: async () => 1, update: async () => { updates++; } } };
+    const db = { $transaction: async fn => fn(tx), user: { findMany: async () => [existing] } };
+    const repo = loader({ "@/modules/admin/database": { getDatabase: () => db } })("src/modules/cms/repository.ts");
+    await assert.rejects(repo.saveDocument({ ...user, role: "OWNER" }, "usuarios", { name: "Test", email: "test@example.test", role: "ADMIN", active: true }, user.id, 1000, true), /último OWNER/);
+    assert.equal(updates, 0);
+    assert.ok(!JSON.stringify(await repo.listDocuments("usuarios")).includes("not-public"));
+});
+
+test("CMS rascunho, publicação, revisão concorrente e referências antes da exclusão", async () => {
+    const records = new Map(), calls = [];
+    const tx = {
+        $queryRaw: async () => [],
+        siteSetting: {
+            findUnique: async ({ where }) => records.get(where.key) ?? null,
+            findMany: async ({ where }) => [...records.values()].filter(r => r.key.startsWith(where.key.startsWith) && r.key !== where.key.not),
+            upsert: async ({ where, create, update }) => { records.set(where.key, { key: where.key, value: records.has(where.key) ? update.value : create.value }); },
+            delete: async ({ where }) => records.delete(where.key),
+        },
+        category: { findUnique: async () => ({ id: "colchoes", slug: "colchoes", active: true }), findUniqueOrThrow: async () => ({ id: "colchoes", slug: "colchoes", active: true }) },
+        product: { findUnique: async () => null, upsert: async () => { calls.push("product-published"); }, deleteMany: async () => { calls.push("product-deleted"); } },
+        productMedia: { deleteMany: async () => {}, createMany: async () => {} }, contactLead: { count: async () => 0 },
+        auditLog: { create: async () => { calls.push("audit"); } },
+    };
+    const repo = loader({ "@/modules/admin/database": { getDatabase: () => ({ $transaction: async fn => fn(tx) }) } })("src/modules/cms/repository.ts");
+    const owner = { ...user, role: "OWNER" }, data = { name: "Test", slug: "test", categoryId: "colchoes", summary: "Summary", description: "Description", published: true, order: 0, gallery: [{ id: "front", src: "/majestic/4.png", alt: "Test mattress", width: 1536, height: 1024 }] };
+    const id = await repo.saveDocument(owner, "produtos", data, undefined, 0, false);
+    assert.equal(records.get("cms:produtos:" + id).value.published, null);
+    assert.ok(!calls.includes("product-published"));
+    await repo.saveDocument(owner, "produtos", data, id, 1, true);
+    assert.ok(calls.includes("product-published"));
+    await assert.rejects(repo.saveDocument(owner, "produtos", data, id, 1, true), /outro operador/);
+    await assert.rejects(repo.removeDocument(owner, "produtos", id, 2), /Despublique/);
+    await repo.saveDocument(owner, "produtos", { ...data, published: false }, id, 2, true);
+    records.set("cms:home:principal", { key: "cms:home:principal", value: { resource: "home", draft: { productId: id } } });
+    await assert.rejects(repo.removeDocument(owner, "produtos", id, 3), /referenciado/);
+    records.delete("cms:home:principal");
+    await repo.removeDocument(owner, "produtos", id, 3);
+    assert.ok(!records.has("cms:produtos:" + id));
+});
+
+test("CMS público desativado preserva catálogo sem consultar banco", async () => {
+    const previous = process.env.CMS_PUBLIC_ENABLED; process.env.CMS_PUBLIC_ENABLED = "false";
+    try {
+        const pub = loader({ "next/server": { connection: async () => {} }, "@/modules/admin/database": { getDatabase: () => { throw Error("não consultar"); } } })("src/modules/cms/public.ts");
+        const snapshot = await pub.getPublicSnapshot();
+        assert.equal(snapshot.enabled, false); assert.equal(snapshot.products.length, 5); assert.equal(snapshot.categories.length, 8);
+    } finally { if (previous === undefined) delete process.env.CMS_PUBLIC_ENABLED; else process.env.CMS_PUBLIC_ENABLED = previous; }
+});
+
+test("uploads exigem sessão e storage real; não há gravação em disco temporário", async () => {
+    let identity = null, storageWrites = 0;
+    const route = loader({ "@/modules/admin/session": { currentAdmin: async () => identity }, "@/modules/admin/environment": { adminEnvironment: () => ({ baseURL: "https://example.test" }) }, "@/modules/cms/storage": { storageConfig: () => null, putMedia: async () => { storageWrites++; } }, "@/modules/admin/database": { getDatabase: () => { throw Error("não consultar"); } } })("src/app/api/admin-upload/route.ts");
+    const req = () => new Request("https://example.test/api/admin-upload", { method: "POST", headers: { origin: "https://example.test" } });
+    assert.equal((await route.POST(req())).status, 401);
+    identity = { ...user, permissions: ["content:write"] };
+    assert.equal((await route.POST(req())).status, 503); assert.equal(storageWrites, 0);
+});
+
+test("CMS público usa somente a versão publicada, mantém URLs e oculta rascunhos", async () => {
+    const old = process.env.CMS_PUBLIC_ENABLED; process.env.CMS_PUBLIC_ENABLED = "true";
+    const rows = [
+        { key: "cms:categorias:colchoes", value: { id: "colchoes", resource: "categorias", published: { name: "Colchões", slug: "colchoes", order: 0 }, draft: { name: "Rascunho privado" } } },
+        { key: "cms:produtos:test", value: { id: "test", resource: "produtos", published: { name: "Produto publicado", categoryId: "colchoes", slug: "test", summary: "Texto publicado", description: "Descrição", gallery: [{ id: "front", src: "/majestic/4.png", alt: "Colchão", width: 1536, height: 1024 }] }, draft: { name: "Não publicar este texto" } } },
+        { key: "cms:produtos:draft", value: { id: "draft", resource: "produtos", published: null, draft: { name: "Somente rascunho" } } },
+    ];
+    try {
+        const pub = loader({ "next/server": { connection: async () => {} }, "@/modules/admin/database": { getDatabase: () => ({ siteSetting: { findUnique: async () => ({ value: true }), findMany: async () => rows } }) } })("src/modules/cms/public.ts");
+        const snapshot = await pub.getPublicSnapshot(); assert.equal(snapshot.products.length, 1); assert.equal(snapshot.products[0].categorySlug, "colchoes");
+        assert.equal(snapshot.products[0].name, "Produto publicado");
+        assert.ok(!JSON.stringify(snapshot).includes("Não publicar este texto"));
+        assert.ok(!JSON.stringify(snapshot).includes("Rascunho privado"));
+    } finally { if (old === undefined) delete process.env.CMS_PUBLIC_ENABLED; else process.env.CMS_PUBLIC_ENABLED = old; }
+});
+
+test("upload real de PNG é decodificado e convertido; SVG é rejeitado antes do storage", async () => {
+    const sharp = require("sharp"); let writes = 0; const saved = [];
+    const route = loader({
+        "@/modules/admin/session": { currentAdmin: async () => ({ ...user, role: "OWNER" }) },
+        "@/modules/admin/environment": { adminEnvironment: () => ({ baseURL: "https://example.test" }) },
+        "@/modules/cms/storage": { storageConfig: () => ({}), putMedia: async bytes => { writes++; const info = await sharp(bytes).metadata(); assert.equal(info.format, "webp"); return { src: "https://storage.example.test/image.webp", objectKey: "image.webp" }; } },
+        "@/modules/admin/database": { getDatabase: () => ({ $transaction: async fn => fn({ $queryRaw: async () => [], siteSetting: { findUnique: async () => null, upsert: async ({ create }) => { saved.push(create); } }, auditLog: { create: async () => {} } }) }) },
+    })("src/app/api/admin-upload/route.ts");
+    const req = file => { const form = new FormData(); form.append("files", file); form.append("replaceId", ""); return new Request("https://example.test/api/admin-upload", { method: "POST", headers: { origin: "https://example.test" }, body: form }); };
+    assert.equal((await route.POST(req(new File(["<svg></svg>"], "bad.svg", { type: "image/svg+xml" })))).status, 400);
+    assert.equal(writes, 0);
+    const png = await sharp({ create: { width: 16, height: 10, channels: 3, background: "#213c37" } }).png().toBuffer();
+    const response = await route.POST(req(new File([png], "test.png", { type: "image/png" })));
+    assert.equal(response.status, 200); assert.equal(writes, 1);
+    assert.ok(saved[0].key.length > "cms:midia:".length);
+    assert.equal(saved[0].value.draft.width, 16);
 });

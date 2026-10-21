@@ -1,22 +1,28 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { categories, getCategory, getCategoryProducts } from "@/modules/catalog/data";
+import { categories } from "@/modules/catalog/data";
 import { ProductCard } from "@/components/ProductCard";
 import s from "../products.module.css";
+import { getPublicSnapshot, savedRedirect, seoMetadata } from "@/modules/cms/public";
+import { permanentRedirect } from "next/navigation";
 import shared from "@/components/site.module.css";
 
 type Props = { params: Promise<{ categoria: string }> };
 export const instant = false;
 export function generateStaticParams() { return categories.map(category => ({ categoria: category.slug })); }
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-    const category = getCategory((await params).categoria);
-    return category ? { title: category.name, description: category.description, alternates: { canonical: "/produtos/" + category.slug } } : { title: "Categoria não encontrada", robots: { index: false } };
+    const slug = (await params).categoria;
+    const snapshot = await getPublicSnapshot();
+    const category = snapshot.categories.find(c => c.slug === slug);
+    return seoMetadata("/produtos/" + slug, category ? { title: category.name, description: category.description, alternates: { canonical: "/produtos/" + category.slug } } : { title: "Categoria não encontrada", robots: { index: false } });
 }
 export default async function Categoria({ params }: Props) {
-    const category = getCategory((await params).categoria);
-    if (!category) notFound();
-    const items = getCategoryProducts(category.id);
+    const slug = (await params).categoria;
+    const snapshot = await getPublicSnapshot();
+    const category = snapshot.categories.find(c => c.slug === slug);
+    if (!category) { const redirect = await savedRedirect("/produtos/" + slug); if (redirect) permanentRedirect(redirect); notFound(); }
+    const items = snapshot.products.filter(p => p.categoryId === category.id);
     return <div className={s.page}><nav className={s.breadcrumbs} aria-label="Navegação estrutural"><Link href="/">Início</Link><span>/</span><Link href="/produtos">Produtos</Link><span>/</span><span aria-current="page">{category.name}</span></nav>
         <header className={s.hero}><p className={s.eyebrow}>PRODUTOS HORTOLEVE</p><h1>{category.name}</h1><p>{category.description}</p></header>
         {items.length ? <section aria-label={"Produtos de " + category.name} className={shared.linesGrid}>{items.map(product => <ProductCard product={product} key={product.id} />)}</section>

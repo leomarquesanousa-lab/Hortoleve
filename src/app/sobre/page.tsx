@@ -1,10 +1,12 @@
+import { publicDocument, seoMetadata } from "@/modules/cms/public";
+import { CmsPage } from "@/components/CmsPage";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { CTAWhatsApp } from "@/components/CTAWhatsApp";
 import s from "./page.module.css";
 
-export const metadata: Metadata = {
+const defaultMetadata: Metadata = {
     title: "Quem somos — A Hortoleve",
     description: "Conheça a Hortoleve: colchões de alto padrão, materiais selecionados, tecnologia e atendimento próximo. Nossa missão, visão e valores.",
     alternates: { canonical: "/sobre" },
@@ -26,7 +28,10 @@ const values = [
     { title: "Elegância e sofisticação", text: "Conforto e design juntos para tornar o quarto um ambiente acolhedor e especial." },
 ];
 
-export default function Sobre() {
+export function generateMetadata() { return seoMetadata("/sobre", defaultMetadata); }
+export default async function Sobre() {
+    const content = await publicDocument("paginas", "sobre");
+    if (content) return <CmsPage data={content} />;
     return <article className={s.editorial}>
         <div className={s.opening}>
             <header className={s.headline}>

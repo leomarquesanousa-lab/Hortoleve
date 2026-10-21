@@ -3,7 +3,8 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useId, useRef, useState, type CSSProperties } from "react";
-import { socialChannels, socialChannelUrl } from "@/config/social";
+import { socialChannelUrl } from "@/config/social";
+import { usePublicConfig, publicWhatsapp } from "./PublicConfig";
 import s from "./SocialOrbit.module.css";
 
 type Destination = { label: string; href: string | null; icon: string; external?: boolean };
@@ -15,13 +16,14 @@ const icons = {
 };
 
 function OrbitMenu() {
+    const { socials: socialChannels, settings } = usePublicConfig();
     const [open, setOpen] = useState(false);
     const [hint, setHint] = useState<string | null>(null);
     const [suppressed, setSuppressed] = useState(false);
     const root = useRef<HTMLDivElement>(null);
     const trigger = useRef<HTMLButtonElement>(null);
     const id = useId();
-    const destinations: Destination[] = socialChannels.filter(channel => channel.visible).slice().sort((a, b) => a.order - b.order).map(channel => ({ label: channel.name, href: socialChannelUrl(channel), icon: icons[channel.id], external: true }));
+    const destinations: Destination[] = socialChannels.filter(channel => channel.visible).slice().sort((a, b) => a.order - b.order).map(channel => ({ label: channel.name, href: socialChannelUrl({ ...channel, url: channel.url ?? (channel.id === "whatsapp" ? publicWhatsapp(settings.whatsapp, "Olá! Gostaria de conhecer melhor a Hortoleve.") : null) }), icon: icons[channel.id], external: true }));
     destinations.push({ label: "Atendimento Personalizado", href: "/contato", icon: "M4 4H20V16H11L6 21V16H4ZM8 8H16M8 12H13" });
 
     useEffect(() => {

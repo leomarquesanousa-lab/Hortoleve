@@ -2,15 +2,17 @@ import { requireAdmin } from "@/modules/admin/session";
 import { hasAdminPermission } from "@/modules/admin/authorization";
 import { getDatabase } from "@/modules/admin/database";
 import s from "../admin.module.css";
+import Link from "next/link";
+import { adminModules } from "@/modules/admin/modules";
 export const metadata = { title: "Dashboard" };
 export default async function Dashboard() {
     const user = await requireAdmin();
     const db = getDatabase();
     const metrics: { label: string; value: number }[] = [];
     if (hasAdminPermission(user, "content:write")) {
-        const [products, categories, banners] = await db.$transaction([db.product.count(), db.category.count(), db.banner.count()]);
-        metrics.push({ label: "Produtos no banco", value: products }, { label: "Categorias no banco", value: categories }, { label: "Banners no banco", value: banners });
+        const [products, active, categories] = await db.$transaction([db.siteSetting.count({ where: { key: { startsWith: "cms:produtos:" } } }), db.product.count({ where: { status: "PUBLISHED" } }), db.siteSetting.count({ where: { key: { startsWith: "cms:categorias:" } } })]);
+        metrics.push({ label: "Produtos cadastrados", value: products }, { label: "Produtos publicados", value: active }, { label: "Categorias", value: categories });
     }
-    if (hasAdminPermission(user, "leads:read")) metrics.push({ label: "Solicitações no banco", value: await db.contactLead.count() });
-    return <><p className={s.eyebrow}>VISÃO GERAL</p><h1>Dashboard</h1><p className={s.lead}>Uma base segura para administrar a Hortoleve.</p><div className={s.metrics}>{metrics.map(metric => <article key={metric.label}><span>{metric.value}</span><p>{metric.label}</p></article>)}</div><section className={s.panel}><h2>Fundação administrativa</h2><p>Os dados acima são consultados no banco conectado. O conteúdo público continua no código e não foi migrado nesta fase.</p><p>Os módulos estão em desenvolvimento. Acesso e futuras operações dependem das permissões concedidas pelo OWNER.</p>{metrics.length === 0 && <p>Nenhuma permissão de consulta de métricas foi delegada à sua conta.</p>}</section></>;
+    if (hasAdminPermission(user, "leads:read")) { const [total, pending] = await db.$transaction([db.contactLead.count(), db.contactLead.count({ where: { status: { in: ["NEW", "IN_PROGRESS"] } } })]); metrics.push({ label: "Leads recebidos", value: total }, { label: "Atendimentos pendentes", value: pending }); }
+    return <><p className={s.eyebrow}>VISÃO GERAL</p><h1>Dashboard</h1><p className={s.lead}>Conteúdo e atendimento, com dados reais do banco.</p><div className={s.metrics}>{metrics.map(metric => <article key={metric.label}><span>{metric.value}</span><p>{metric.label}</p></article>)}</div><section className={s.panel}><h2>Acesso rápido</h2><nav className={s.shortcuts}>{adminModules.filter(m => hasAdminPermission(user, m.permission)).map(m => <Link href={"/admin/" + m.slug} key={m.slug}>{m.name} ↗</Link>)}</nav><p>Conteúdo estático ainda não importado não é contado como cadastro. Visitas e conversões não são apresentadas sem integração real.</p>{metrics.length === 0 && <p>Nenhuma permissão de consulta foi delegada.</p>}</section></>;
 }

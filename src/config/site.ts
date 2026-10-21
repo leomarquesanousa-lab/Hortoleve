@@ -5,6 +5,6 @@ export const site = {
     whatsapp: null as string | null, email: null as string | null, address: null as string | null,
     indexingEnabled: false, // Ativar após aprovação do conteúdo oficial.
 };
-export function whatsappUrl(message: string) {
-    return site.whatsapp && /^\d{10,15}$/.test(site.whatsapp) ? "https://wa.me/" + site.whatsapp + "?text=" + encodeURIComponent(message) : null;
+export function whatsappUrl(message: string, whatsapp = site.whatsapp) {
+    return whatsapp && /^\d{10,15}$/.test(whatsapp) ? "https://wa.me/" + whatsapp + "?text=" + encodeURIComponent(message) : null;
 }

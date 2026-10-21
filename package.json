@@ -11,6 +11,7 @@
     "db:generate": "prisma generate",
     "db:deploy": "prisma migrate deploy",
     "admin:first-owner": "node scripts/create-owner.mts",
+    "cms:import": "node scripts/import-content.mts",
     "test:admin": "node --test --test-isolation=none tests/admin-foundation.test.mjs"
   },
   "dependencies": {
@@ -22,7 +23,8 @@
     "pg": "8.23.1",
     "react": "19.3.0",
     "react-dom": "19.3.0",
-    "server-only": "0.0.1"
+    "server-only": "0.0.1",
+    "sharp": "0.35.5"
   },
   "devDependencies": {
     "@types/node": "^20",

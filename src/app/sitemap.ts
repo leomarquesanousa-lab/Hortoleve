@@ -1,7 +1,8 @@
 import type { MetadataRoute } from "next";
-import { site } from "@/config/site";
-import { categories, products, productHref } from "@/modules/catalog/data";
-export default function sitemap(): MetadataRoute.Sitemap {
+import { productHref } from "@/modules/catalog/data";
+import { getPublicSnapshot } from "@/modules/cms/public";
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+    const { settings: site, categories, products } = await getPublicSnapshot();
     // Produtos demonstrativos ficam fora da indexação. Incluir somente os oficiais publicados.
     if (!site.indexingEnabled)
         return [];

@@ -2,7 +2,8 @@ import { products } from "./data";
 import { presentations } from "./presentations";
 
 // A comparação usa somente conteúdo comercial já registrado no catálogo.
-export function getTechnologyComparison() {
+export function getTechnologyComparison(catalog = { products, presentations }) {
+    const { products, presentations } = catalog;
     return products.map(product => {
         const detail = presentations[product.slug];
         const technologies = detail?.technologies ?? [];

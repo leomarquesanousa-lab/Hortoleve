@@ -6,6 +6,7 @@ export interface ProductMedia {
     height: number;
 }
 export interface Product {
+    categorySlug?: string;
     id: string;
     slug: string;
     name: string;
@@ -24,6 +25,7 @@ export interface Product {
     isDemo: boolean;
 }
 export interface Category {
+    image?: string;
     id: string;
     name: string;
     slug: string;

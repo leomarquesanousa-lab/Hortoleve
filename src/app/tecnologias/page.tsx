@@ -1,3 +1,5 @@
+import { getPublicSnapshot, publicDocument, seoMetadata } from "@/modules/cms/public";
+import { CmsPage } from "@/components/CmsPage";
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
@@ -6,7 +8,7 @@ import { comparisonAttributes, getTechnologyComparison } from "@/modules/catalog
 import { TechnologyExplorer } from "./TechnologyExplorer";
 import s from "./page.module.css";
 
-export const metadata: Metadata = { title: "Tecnologias Hortoleve", description: "Explore materiais, massagem, iluminação e conectividade das linhas Hortoleve. Compare os recursos informados por modelo e versão.", alternates: { canonical: "/tecnologias" } };
+const defaultMetadata: Metadata = { title: "Tecnologias Hortoleve", description: "Explore materiais, massagem, iluminação e conectividade das linhas Hortoleve. Compare os recursos informados por modelo e versão.", alternates: { canonical: "/tecnologias" } };
 
 const images = {
     layers: { src: "/tecnologia/Tecnologias Hortoleve_ Conforto Inteligente.png", width: 1672, height: 941, alt: "Representação conceitual de colchão em camadas separadas, com legendas de materiais e recursos integrados" },
@@ -21,9 +23,13 @@ const structure = [
     ["Recursos integrados", "Iluminação, som e conectividade podem compor o produto. A presença de um recurso na ilustração não indica disponibilidade em todas as linhas."],
 ];
 
-export default function Tecnologias() {
-    const comparison = getTechnologyComparison();
-    const contact = whatsappUrl("Olá! Gostaria de conhecer as tecnologias das linhas Hortoleve.");
+export function generateMetadata() { return seoMetadata("/tecnologias", defaultMetadata); }
+export default async function Tecnologias() {
+    const content = await publicDocument("paginas", "tecnologias");
+    if (content) return <CmsPage data={content} />;
+    const snapshot = await getPublicSnapshot();
+    const comparison = getTechnologyComparison(snapshot);
+    const contact = whatsappUrl("Olá! Gostaria de conhecer as tecnologias das linhas Hortoleve.", snapshot.settings.whatsapp);
     return <div className={s.page}>
         <section className={s.hero} aria-labelledby="technology-title"><div className={s.heroCopy}><p className={s.eyebrow}>MATERIAIS · DESIGN · TECNOLOGIA</p><h1 id="technology-title">Tecnologias Hortoleve</h1><p className={s.subtitle}>A inovação por trás de cada experiência de conforto.</p><p>Um olhar sobre materiais e recursos que dão identidade às nossas linhas.</p><a className={s.heroLink} href="#engenharia">Explore a estrutura <span aria-hidden="true">↓</span></a></div>
             <figure><Image {...images.layers} alt={images.layers.alt} loading="eager" fetchPriority="high" sizes="(max-width: 760px) 88vw, 58vw" /><figcaption>Vista explodida conceitual. As camadas ilustradas não representam a construção certificada de um modelo.</figcaption></figure>

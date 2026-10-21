@@ -38,7 +38,7 @@ export function getProduct(slug: string) { return products.find(product => produ
 export function getCategory(slug: string) { return categories.find(category => category.slug === slug); }
 export function getCategoryProducts(categoryId: string) { return products.filter(product => product.categoryId === categoryId); }
 export function productHref(product: Product) {
-    const category = categories.find(item => item.id === product.categoryId);
+    const category = product.categorySlug ? { slug: product.categorySlug } : categories.find(item => item.id === product.categoryId);
     if (!category) throw new Error("Categoria de produto não cadastrada");
     return "/produtos/" + category.slug + "/" + product.slug;
 }

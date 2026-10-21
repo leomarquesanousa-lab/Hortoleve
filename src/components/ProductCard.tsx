@@ -5,11 +5,12 @@ import { productHref } from "@/modules/catalog/data";
 import type { Product } from "@/modules/catalog/types";
 import { ProductPlaceholder } from "./ProductPlaceholder";
 import styles from "./ProductCard.module.css";
+import { getPublicSnapshot } from "@/modules/cms/public";
 
-export function ProductCard({ product }: { product: Product }) {
+export async function ProductCard({ product }: { product: Product }) {
     const image = product.media[0];
     const href = productHref(product);
-    const contact = whatsappUrl("Olá! Gostaria de conhecer a linha " + product.name + " da Hortoleve.");
+    const contact = whatsappUrl("Olá! Gostaria de conhecer a linha " + product.name + " da Hortoleve.", (await getPublicSnapshot()).settings.whatsapp);
     return <article className={styles.card} aria-labelledby={product.id + "-title"}>
         <Link className={styles.imageLink} href={href} data-line={product.slug} aria-label={"Conhecer linha " + product.name}>
             {image ? <Image src={image.src} alt={image.alt} width={image.width} height={image.height}
