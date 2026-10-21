@@ -1,0 +1,1 @@
+.hero{position:relative}.controls{display:flex;align-items:center;justify-content:flex-end;gap:12px;grid-column:1/-1;font-size:12px}.controls button{width:44px;height:44px;border:1px solid #ae865380;border-radius:50%;background:transparent;color:inherit;cursor:pointer;font:inherit}.controls button:focus-visible{outline:2px solid #ae8653;outline-offset:3px}

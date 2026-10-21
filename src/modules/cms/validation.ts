@@ -3,10 +3,12 @@ import { socialChannelUrl } from "@/config/social";
 
 export class CmsError extends Error { constructor(message: string, public status = 400) { super(message); } }
 export function safeLink(value: string) {
+    if (/^#[a-zA-Z][\w-]*$/.test(value)) return true;
     if (value.startsWith("/") && !value.startsWith("//") && !/[\\\u0000-\u001f]/.test(value)) return true;
     try { const u = new URL(value); return u.protocol === "https:" && !u.username && !u.password; } catch { return false; }
 }
 export function mediaPath(value: string) {
+    if (value.startsWith("#")) return false;
     try { return safeLink(value) && !value.split(/[?#]/)[0].split("/").some(part => [".", ".."].includes(decodeURIComponent(part))) && !/\.(svg|html?|js)(?:[?#]|$)/i.test(value); } catch { return false; }
 }
 function fields(input: unknown, schema: Field[]): Data {
@@ -15,10 +17,10 @@ function fields(input: unknown, schema: Field[]): Data {
     for (const f of schema) {
         const v = raw[f.key];
         if (f.type === "array") {
-            if (v !== undefined && (!Array.isArray(v) || v.length > 100)) throw new CmsError(f.label + ": limite de 100 itens.");
+            if (v !== undefined && (!Array.isArray(v) || v.length > (f.maxItems ?? 100))) throw new CmsError(f.label + ": limite de " + (f.maxItems ?? 100) + " itens.");
             result[f.key] = (Array.isArray(v) ? v : []).map(item => fields(item, f.fields ?? [])); continue;
         }
-        if (f.type === "checkbox") { result[f.key] = v === true; continue; }
+        if (f.type === "checkbox") { result[f.key] = f.key === "visible" ? v !== false : v === true; continue; }
         if (f.type === "number") { const n = Number(v ?? 0); if (!Number.isSafeInteger(n) || n < 0 || n > 40000 || f.required && n === 0) throw new CmsError(f.label + ": número inválido."); result[f.key] = n; continue; }
         const text = typeof v === "string" ? (f.type === "password" ? v : v.trim()) : "";
         if ((f.required && !text) || text.length > (f.max ?? (f.type === "textarea" ? 16000 : 1000)) || /\u0000/.test(text)) throw new CmsError("Revise: " + f.label);
@@ -33,6 +35,7 @@ function fields(input: unknown, schema: Field[]): Data {
 }
 export function validateData(resource: Resource, input: unknown): Data {
     const data = fields(input, definitions[resource].fields);
+    if (resource === "analytics" && (data.measurementId && !/^G-[A-Z0-9]{5,20}$/.test(String(data.measurementId)) || data.enabled && !data.measurementId)) throw new CmsError("Informe um Measurement ID GA4 válido, começando por G-.");
     if (resource === "usuarios" || resource === "configuracoes") {
         if (data.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(data.email))) throw new CmsError("E-mail inválido.");
         if (data.email) data.email = String(data.email).toLowerCase();

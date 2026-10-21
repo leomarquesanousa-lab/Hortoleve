@@ -13,8 +13,10 @@ function subscribeMotion(callback: () => void) {
 }
 function reducedMotion() { return window.matchMedia("(prefers-reduced-motion: reduce)").matches; }
 
-export function HomeHero({ slides = defaultHeroSlides }: { slides?: HeroSlide[] }) {
-    const [active, setActive] = useState(0);
+export function HomeHero({ slides: providedSlides = defaultHeroSlides }: { slides?: HeroSlide[] }) {
+    const slides = providedSlides.filter(slide => slide.visible !== false).slice(0, 5);
+    const [selected, setActive] = useState(0);
+    const active = Math.min(selected, Math.max(0, slides.length - 1));
     const [paused, setPaused] = useState(false);
     const [hovered, setHovered] = useState(false);
     const [focused, setFocused] = useState(false);
@@ -25,7 +27,7 @@ export function HomeHero({ slides = defaultHeroSlides }: { slides?: HeroSlide[] 
         const timer = window.setInterval(() => { if (!document.hidden) setActive(index => (index + 1) % slides.length); }, 6000);
         return () => window.clearInterval(timer);
     }, [rotating, slides.length]);
-    const select = (index: number) => { setPaused(true); setActive((index + slides.length) % slides.length); };
+    const select = (index: number) => { const next = (index + slides.length) % slides.length; setPaused(true); setActive(next); window.dispatchEvent(new CustomEvent("hortoleve:banner", { detail: { placement: "home", index: next + 1 } })); };
 
     if (!slides.length) return null;
     return <section className={s.hero} role="region" aria-roledescription="carrossel" aria-label="Destaques Hortoleve" tabIndex={0}
@@ -51,8 +53,8 @@ export function HomeHero({ slides = defaultHeroSlides }: { slides?: HeroSlide[] 
                 <button type="button" onClick={() => select(active + 1)} aria-label="Próximo banner"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.2" aria-hidden="true"><path d="M8 5L13 10L8 15" /></svg></button>
                 {!reduced && <button type="button" className={s.rotation} onClick={() => setPaused(value => !value)} aria-label={paused ? "Retomar rotação automática ao sair do carrossel" : "Pausar rotação automática"} title={paused ? "Retomar rotação" : "Pausar rotação"}><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.2" aria-hidden="true">{paused ? <path d="M7 5L14 10L7 15Z" /> : <path d="M7 5V15M13 5V15" />}</svg></button>}
             </div>
-            <p className={s.caption}>{active === 1 ? "Representação tecnológica conceitual · recursos variam por linha." : "HORTOLEVE · CONFORTO EM CADA DETALHE"}</p>
+            <p className={s.caption}>{slides[active].kind === "technology" ? "Representação tecnológica conceitual · recursos variam por linha." : "HORTOLEVE · CONFORTO EM CADA DETALHE"}</p>
         </div>
-        <span className={s.srOnly} aria-live={rotating ? "off" : "polite"}>{active + 1} de 3 · {slides[active].name}</span>
+        <span className={s.srOnly} aria-live={rotating ? "off" : "polite"}>{active + 1} de {slides.length} · {slides[active].name}</span>
     </section>;
 }

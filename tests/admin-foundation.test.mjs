@@ -29,6 +29,103 @@ function loader(overrides = {}) {
     return load;
 }
 const user = { id: "test-user", name: "Test", email: "test@example.test", role: "ADMIN", active: true, permissions: [] };
+
+test("conteúdo inicial é validável, único e preserva cards, galerias e páginas reais", () => {
+    const load = loader();
+    const { initialContent } = load("src/modules/cms/initial-content.ts");
+    const { validateData } = load("src/modules/cms/validation.ts");
+    const keys = initialContent.map(i => i.resource + ":" + i.id);
+    assert.equal(new Set(keys).size, keys.length);
+    for (const item of initialContent) {
+        const validated = validateData(item.resource, item.data);
+        if (item.resource === "produtos") {
+            assert.equal(validated.cardImage, item.data.cardImage);
+            assert.deepEqual(validated.gallery.map(m => m.src), item.data.gallery.map(m => m.src));
+        }
+    }
+    assert.equal(initialContent.filter(i => i.resource === "produtos").length, 5);
+    assert.equal(initialContent.filter(i => i.resource === "categorias").length, 8);
+    assert.equal(initialContent.find(i => i.resource === "home").data.banners.length, 3);
+    assert.equal(initialContent.find(i => i.resource === "paginas" && i.id === "tecnologias").data.slides.length, 1);
+    assert.equal(initialContent.filter(i => i.resource === "seo").length, 18);
+    for (const asset of initialContent.filter(i => i.resource === "midia")) {
+        let directory = "public";
+        for (const segment of asset.data.src.split("/").filter(Boolean)) {
+            assert.ok(fs.readdirSync(directory).includes(segment), "Maiúsculas/minúsculas do caminho: " + asset.data.src);
+            directory = path.join(directory, segment);
+        }
+    }
+});
+
+test("carrosséis recusam sexto item mesmo desativado e GA4 exige ID válido", () => {
+    const load = loader(); const { initialContent } = load("src/modules/cms/initial-content.ts");
+    const { validateData } = load("src/modules/cms/validation.ts");
+    const home = initialContent.find(i => i.resource === "home").data;
+    assert.throws(() => validateData("home", { ...home, banners: Array.from({ length: 6 }, () => ({ ...home.banners[0], visible: false })) }), /limite de 5/);
+    const tech = initialContent.find(i => i.resource === "paginas" && i.id === "tecnologias").data;
+    assert.throws(() => validateData("paginas", { ...tech, slides: Array(6).fill(tech.slides[0]) }), /limite de 5/);
+    assert.throws(() => validateData("analytics", { enabled: true, measurementId: "<script>" }), /Measurement/);
+    assert.equal(validateData("analytics", { enabled: true, measurementId: "G-1234567890" }).enabled, true);
+});
+
+test("pré-importação exibe fonte sem gravar e bloqueia edição implícita", async () => {
+    let writes = 0;
+    const tx = { $queryRaw: async () => [], siteSetting: { findMany: async () => [], findUnique: async () => null, upsert: async () => { writes++; } } };
+    const repo = loader({ "@/modules/admin/database": { getDatabase: () => ({ ...tx, $transaction: async fn => fn(tx) }) } })("src/modules/cms/repository.ts");
+    const records = await repo.listDocuments("produtos");
+    assert.equal(records.length, 5); assert.ok(records.every(r => r.source === "static"));
+    await assert.rejects(repo.saveDocument({ ...user, role: "OWNER" }, "produtos", records[0].draft, records[0].id, 0, true), /importação inicial exige autorização/);
+    assert.equal(writes, 0);
+});
+
+test("Analytics protege leitura e não consulta Google sem configuração externa", async () => {
+    let identity = null, calls = 0;
+    const route = loader({ "@/modules/admin/session": { currentAdmin: async () => identity }, "@/modules/cms/analytics": { analyticsReport: async () => { calls++; return null; } } })("src/app/api/admin-analytics/route.ts");
+    assert.equal((await route.GET()).status, 401);
+    identity = user; assert.equal((await route.GET()).status, 403); assert.equal(calls, 0);
+    identity = { ...user, role: "OWNER" }; assert.equal((await route.GET()).status, 503);
+    const previous = process.env.GA4_PROPERTY_ID; delete process.env.GA4_PROPERTY_ID;
+    try { assert.equal(await loader()("src/modules/cms/analytics.ts").analyticsReport(), null); }
+    finally { if (previous !== undefined) process.env.GA4_PROPERTY_ID = previous; }
+});
+
+test("Data API usa JWT com escopo mínimo e retorna somente métricas recebidas", async () => {
+    const { generateKeyPairSync } = require("node:crypto");
+    const { privateKey } = generateKeyPairSync("rsa", { modulusLength: 2048 });
+    const keys = ["GA4_PROPERTY_ID", "GOOGLE_SERVICE_ACCOUNT_EMAIL", "GOOGLE_PRIVATE_KEY"];
+    const previous = keys.map(k => process.env[k]); const originalFetch = globalThis.fetch;
+    process.env.GA4_PROPERTY_ID = "123456"; process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL = "reader@example.test";
+    process.env.GOOGLE_PRIVATE_KEY = privateKey.export({ type: "pkcs8", format: "pem" });
+    const requests = [];
+    globalThis.fetch = async (url, options) => {
+        requests.push(url);
+        if (requests.length === 1) {
+            const jwt = options.body.get("assertion");
+            const claims = JSON.parse(Buffer.from(jwt.split(".")[1], "base64url"));
+            assert.equal(claims.scope, "https://www.googleapis.com/auth/analytics.readonly");
+            assert.equal(claims.aud, "https://oauth2.googleapis.com/token");
+            return Response.json({ access_token: "test-only-token" });
+        }
+        assert.equal(JSON.parse(options.body).dateRanges[0].endDate, "yesterday");
+        return Response.json({ rows: [{ metricValues: [{ value: "17" }, { value: "23" }, { value: "91" }, { value: "3" }] }] });
+    };
+    try {
+        const report = await loader()("src/modules/cms/analytics.ts").analyticsReport();
+        assert.equal(report.metrics[0].value, "17"); assert.equal(report.metrics[3].value, "3");
+        assert.deepEqual(requests, ["https://oauth2.googleapis.com/token", "https://analyticsdata.googleapis.com/v1beta/properties/123456:runReport"]);
+    } finally { globalThis.fetch = originalFetch; keys.forEach((k,i) => { if (previous[i] === undefined) delete process.env[k]; else process.env[k] = previous[i]; }); }
+});
+
+test("textos e imagens editam espaços reais sem perder a fonte original", () => {
+    const load = loader(); const { pageDefaults, getPageText, getPageImage } = load("src/modules/content/page-defaults.ts");
+    for (const [page, template] of Object.entries(pageDefaults)) for (const slot of template.texts) assert.equal(getPageText(null, page, slot.key), slot.text);
+    const slot = pageDefaults.sobre.texts.find(t => t.key === "sobre-1");
+    assert.equal(getPageText({ texts: [{ ...slot, text: "Título revisado" }] }, "sobre", slot.key), "Título revisado");
+    const photo = pageDefaults.sobre.images[0];
+    const updated = getPageImage({ images: [{ ...photo, src: "/image.webp" }] }, photo.key, photo);
+    assert.equal(updated.src, "/image.webp"); assert.ok(!("key" in updated));
+    const validation = load("src/modules/cms/validation.ts"); assert.equal(validation.mediaPath("#banner"), false);
+});
 const routeFile = "src/app/api/auth/[...all]/route.ts";
 function request(pathname, body = {}, origin = "https://example.test") {
     return new Request("https://example.test/api/auth/" + pathname, { method: "POST", headers: { origin, "content-type": "application/json" }, body: JSON.stringify(body) });
@@ -105,6 +202,30 @@ test("proxy HTTP interno aceita somente a origem pública configurada e ignora h
     assert.equal((await route.POST(proxied("http://127.0.0.1:3000"))).status, 403);
     assert.equal((await route.POST(proxied("https://untrusted.test"))).status, 403);
     assert.equal((await route.POST(proxied("null"))).status, 403);
+});
+
+test("regressão Hostinger: origem HTTPS Hortoleve, proxy interno e CSRF sem confiar em forwarded", async () => {
+    const publicOrigin = "https://hortoleve.com.br";
+    const internalURL = "http://127.0.0.1:3000/api/auth/sign-in/email";
+    // Reproduz o motivo do 403 na comparação anterior, independente da senha.
+    assert.notEqual(new URL(internalURL).origin, publicOrigin);
+    let handlerCalls = 0;
+    const route = loader({
+        "@/modules/admin/environment": { adminEnvironment: () => ({ baseURL: publicOrigin, secret: "test-only" }) },
+        "@/modules/admin/auth": { getAdminAuth: () => ({}) },
+        "@/modules/admin/login-limit": { allowAccountLogin: async () => { throw Error("Corpo vazio não deve consultar banco"); } },
+        "better-auth/next-js": { toNextJsHandler: () => { handlerCalls++; throw Error("Credenciais vazias não chegam ao Better Auth"); } },
+    })(routeFile);
+    const req = (origin, url = internalURL) => new Request(url, {
+        method: "POST", headers: { "content-type": "application/json", ...(origin === undefined ? {} : { origin }), host: "untrusted.test", "x-forwarded-host": "hortoleve.com.br", "x-forwarded-proto": "https", forwarded: "proto=https;host=hortoleve.com.br" }, body: "{}",
+    });
+    for (const url of [internalURL, "http://internal-hostinger:8080/api/auth/sign-in/email", publicOrigin + "/api/auth/sign-in/email"]) {
+        assert.equal((await route.POST(req(publicOrigin, url))).status, 400);
+    }
+    for (const origin of [undefined, "null", "http://hortoleve.com.br", "https://www.hortoleve.com.br", "https://other.test", "https://hortoleve.com.br.other.test"]) {
+        assert.equal((await route.POST(req(origin))).status, 403);
+    }
+    assert.equal(handlerCalls, 0);
 });
 
 test("limite por conta usa incremento atômico e chave sem e-mail", async () => {

@@ -24,7 +24,7 @@ export async function ProductPresentation({ product, presentation: p }: { produc
             </div>
         </div>
         <section className={s.section} aria-labelledby="technologies-title"><p className={s.eyebrow}>ACABAMENTO & RECURSOS</p><h2 id="technologies-title">Tecnologias da linha</h2>
-            <ul className={s.technologies}>{p.technologies.map((name, index) => <li key={name}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d={p.technologyIcons?.[name] ?? icons[index % icons.length]} /></svg><span>{name}</span></li>)}</ul>
+            <ul className={s.technologies}>{p.technologies.map((name, index) => <li key={name}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d={p.technologyIcons?.[name] ?? icons[index % icons.length]} /></svg><span title={p.technologyDescriptions?.[name] || undefined}>{name}</span></li>)}</ul>
         </section>
         <div className={s.technicalLayout}>
             <section aria-labelledby="specifications-title"><p className={s.eyebrow}>EM CADA DETALHE</p><h2 id="specifications-title">Especificações técnicas</h2>

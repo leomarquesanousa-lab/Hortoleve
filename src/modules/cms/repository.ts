@@ -7,8 +7,9 @@ import { hasAdminPermission } from "@/modules/admin/authorization";
 import { hashAdminPassword } from "@/modules/admin/password";
 import { definitions, type Data, type Resource } from "./contracts";
 import { CmsError, hasReference, lines, validateData } from "./validation";
+import { initialContent } from "./initial-content";
 
-export interface Document { id: string; resource: Resource; revision: number; draft: Data; published: Data | null }
+export interface Document { id: string; resource: Resource; revision: number; draft: Data; published: Data | null; source?: "static" }
 export const cmsKey = (resource: Resource, id: string) => `cms:${resource}:${id}`;
 export const json = (value: unknown) => JSON.parse(JSON.stringify(value)) as Prisma.InputJsonValue;
 export function document(value: unknown): Document { return value as Document; }
@@ -20,13 +21,26 @@ export async function listDocuments(resource: Resource): Promise<Document[]> {
         const [leads, notes] = await Promise.all([db.contactLead.findMany({ take: 1000, orderBy: { createdAt: "desc" } }), db.siteSetting.findMany({ where: { key: { startsWith: "lead-notes:" } } })]);
         return leads.map(l => ({ id: l.id, resource, revision: l.updatedAt.getTime(), published: null, draft: { name: l.name, phone: l.phone, email: l.email ?? "", subject: l.subject, message: l.message ?? "", status: l.status, productId: l.productId, createdAt: l.createdAt.toISOString(), source: String((notes.find(n => n.key === "lead-notes:" + l.id)?.value as Data)?.source ?? "Não informado"), interest: String((notes.find(n => n.key === "lead-notes:" + l.id)?.value as Data)?.interest ?? ""), notes: String((notes.find(n => n.key === "lead-notes:" + l.id)?.value as Data)?.text ?? "") } }));
     }
-    return (await db.siteSetting.findMany({ where: { key: { startsWith: `cms:${resource}:` } }, orderBy: { key: "asc" } })).map(r => document(r.value));
+    const saved = (await db.siteSetting.findMany({ where: { key: { startsWith: `cms:${resource}:` } }, orderBy: { key: "asc" } })).map(r => document(r.value));
+    const initial: Document[] = initialContent.filter(i => i.resource === resource && !saved.some(d => d.id === i.id)).map(i => ({ id: i.id, resource, revision: 0, draft: structuredClone(i.data), published: i.published ? structuredClone(i.data) : null, source: "static" }));
+    // Fonte real do site visível antes da importação; nenhuma escrita implícita.
+    const imported = await db.siteSetting.findUnique({ where: { key: "cms-import-completed" } });
+    return imported?.value === true ? saved : [...saved, ...initial];
 }
 export async function allDocuments() { return (await getDatabase().siteSetting.findMany({ where: { key: { startsWith: "cms:" } } })).map(r => document(r.value)); }
 function replaceRoute(from: string, to: string) { return { from, to }; }
 export async function saveDocument(user: AdminIdentity, resource: Resource, raw: unknown, id: string | undefined, revision: number, publish: boolean) {
     authorize(user, resource);
     const data = validateData(resource, raw), db = getDatabase();
+    if (definitions[resource].singleton && id && id !== "principal") throw new CmsError("Este módulo possui uma única configuração.");
+    if (resource === "paginas") {
+        if (!["sobre", "tecnologias", "contato"].includes(String(data.slug)) || id && id !== data.slug) throw new CmsError("Selecione uma das páginas institucionais existentes.");
+        id = String(data.slug);
+    }
+    if (resource === "redes-sociais") {
+        if (id && id !== data.channel) throw new CmsError("O canal social não pode ser alterado.");
+        id = String(data.channel);
+    }
     if (resource === "usuarios") {
         const passwordHash = data.password ? await hashAdminPassword(String(data.password)) : undefined;
         if (!id && !passwordHash) throw new CmsError("Defina uma senha inicial segura.");
@@ -61,6 +75,9 @@ export async function saveDocument(user: AdminIdentity, resource: Resource, raw:
         await tx.$queryRaw`SELECT pg_advisory_xact_lock(hashtext('hortoleve-cms'))::text`;
         const oldRow = await tx.siteSetting.findUnique({ where: { key } });
         const previous = oldRow ? document(oldRow.value) : null;
+        if (!previous && ["produtos", "categorias", "tecnologias", "home", "paginas", "midia"].includes(resource) && initialContent.some(i => i.resource === resource && (i.id === id || data.slug && i.data.slug === data.slug))) {
+            if ((await tx.siteSetting.findUnique({ where: { key: "cms-import-completed" } }))?.value !== true) throw new CmsError("Conteúdo atual ainda não importado. A importação inicial exige autorização; nenhuma alteração foi gravada.", 409);
+        }
         if ((previous?.revision ?? 0) !== revision) throw new CmsError("Conteúdo alterado por outro operador. Atualize antes de salvar.", 409);
         const docs = (await tx.siteSetting.findMany({ where: { key: { startsWith: `cms:${resource}:` } } })).map(r => document(r.value));
         const unique = resource === "redes-sociais" ? "channel" : resource === "seo" ? "route" : "slug";

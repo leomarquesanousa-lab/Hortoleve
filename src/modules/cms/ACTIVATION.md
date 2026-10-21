@@ -23,10 +23,14 @@ A correção local do login atrás do proxy foi preservada e coberta por testes.
   imagens animadas e formatos desconhecidos são recusados. Uploads vão para S3/R2,
   nunca para disco efêmero. Substituição cria URL nova e atualiza referências.
   Remoção da biblioteca verifica referências; objetos e originais são preservados.
-- Editor da Home: banners, seções ordenáveis, produtos destacados, benefícios,
-  tecnologias, história, depoimentos (somente conteúdo cadastrado), FAQ e CTA.
-- Páginas Sobre/Tecnologias/Contato com blocos editoriais em HTML/React, imagens
-  e prévia. O formulário de contato é mantido mesmo com conteúdo editado.
+- Editor da Home: os três banners atuais, até cinco no total, imagem, texto,
+  botão, destino, ordem, visibilidade e prévia individual; textos reais das seções,
+  experiências e FAQ. Os componentes e a composição aprovados são reutilizados.
+- Sobre/Tecnologias/Contato: campos vinculados aos textos e imagens reais, sem
+  editor de páginas arbitrárias. Prévia e publicação utilizam os mesmos componentes.
+  Abas, comparação de tecnologias e formulário de contato permanecem presentes.
+  Tecnologias tinha um banner estático, não um carrossel: começa com um slide;
+  controles manuais acessíveis aparecem somente quando há mais de um, até cinco.
 - Configuração compartilhada: empresa, WhatsApp, e-mail, telefone, endereço,
   horários, logo, rodapé e redes. Somente perfis válidos da plataforma são aceitos.
 - SEO por rota: title/description/canonical/OG/indexação, sitemap/robots derivados
@@ -41,8 +45,9 @@ A correção local do login atrás do proxy foi preservada e coberta por testes.
   rebaixamento/desativação/exclusão do último OWNER ativo. Somente OWNER gerencia.
 - Auditoria transacional de publicação, edição, exclusão, usuários e uploads.
   Revisão otimista e lock compartilhado evitam sobrescritas concorrentes.
-- Dashboard consulta cadastros e status reais. Analytics informa a ausência de
-  integração: não inventa visitas, conversões ou mensagens de WhatsApp.
+- Dashboard consulta produtos, categorias, leads e usuários reais. Analytics tem
+  Measurement ID, habilitação após consentimento e consulta explícita à Data API.
+  Sem configuração/autorização externa, não mostra números ou conexão fictícios.
 
 ## Persistência e migrações
 
@@ -64,7 +69,8 @@ npm.cmd run cms:import
 
 Sem `--apply`, o comando apenas prepara e conta documentos locais; não conecta
 ao banco. Plano atual: 8 categorias, 5 produtos, 19 tecnologias, 26 mídias,
-configurações, quatro redes, Home e três páginas. Fotos e slugs são reutilizados,
+configurações, quatro redes, Home, três páginas, 18 registros SEO e uma configuração
+GA4 desativada. Fotos e slugs são reutilizados,
 sem copiar/renomear arquivos. Imagens de card e galerias mantêm suas fontes próprias.
 
 O script só aplica com `CMS_IMPORT_ALLOWED=true`, terminal interativo e confirmação
@@ -76,14 +82,16 @@ aprovação específica. Comando preparado, **não executado**:
 NODE_ENV=production CMS_IMPORT_ALLOWED=true npm run cms:import -- --apply --allow-production-write
 ```
 
-É uma transação: se já houver CMS, produtos ou categorias no destino, interrompe
-sem sobrescrever. Importações parciais não são publicadas. A marca
+É uma transação: se já houver produtos/categorias ou uma importação concluída,
+interrompe sem sobrescrever. Configurações CMS previamente salvas são preservadas.
+A marca
 `cms-import-completed` só aparece ao concluir. Repetição não duplica conteúdo.
-Home e páginas são importadas como rascunho; os layouts originais continuam
-visíveis até publicação explícita. Os blocos de páginas são um ponto de partida
-extraído de textos literais; revisar títulos, blocos e imagens na prévia antes de
-publicar. A publicação dos blocos usa a composição editorial existente, mas não
-reproduz automaticamente todas as seções interativas da página Tecnologias.
+Home e páginas usam versões publicadas equivalentes ao conteúdo estático atual;
+nenhuma novidade é publicada na importação. A flag pública permanece desativada
+até a homologação. Antes da importação, o painel apresenta fontes locais claramente
+identificadas, com revisão zero: não são registros persistidos. Edição desses
+conteúdos exige a importação autorizada. Não é necessário recadastrar produtos.
+Somente a simulação foi executada nesta tarefa.
 
 ## Variáveis novas — nenhuma configurada na Hostinger nesta tarefa
 
@@ -98,6 +106,9 @@ reproduz automaticamente todas as seções interativas da página Tecnologias.
 | CMS_STORAGE_SECRET_KEY | Segredo privado, nunca NEXT_PUBLIC_ ou Git |
 | CMS_STORAGE_PUBLIC_URL | Origem/base HTTPS pública para servir as imagens |
 | CMS_STORAGE_REGION | Região do S3; `auto` no R2 |
+| GA4_PROPERTY_ID | ID numérico da propriedade, apenas servidor |
+| GOOGLE_SERVICE_ACCOUNT_EMAIL | Conta de serviço com papel Leitor na propriedade |
+| GOOGLE_PRIVATE_KEY | Chave privada da conta; nunca Git, logs ou NEXT_PUBLIC_ |
 
 Manter DATABASE_URL, BETTER_AUTH_SECRET/URL, ADMIN_DATABASE_READY e
 ADMIN_BOOTSTRAP_ALLOWED conforme a configuração segura existente. `.env.example`
@@ -130,4 +141,35 @@ Testes automatizados usam Better Auth real com memória, validação real de ima
 via sharp e doubles explícitos de PostgreSQL/storage para lógica de serviços.
 Não são evidência de upload S3 real, CRUD em PostgreSQL, entrega de lead real ou
 conferência visual no navegador. Essas validações permanecem pendentes de ambiente
-e credenciais. Não há integração de analytics nem ingestão automática de WhatsApp.
+e credenciais. Não há ingestão automática de conversas do WhatsApp.
+
+## Google Analytics 4
+
+No módulo Analytics, informar Measurement ID `G-…`, habilitar e salvar. Com CMS
+ativado e configuração publicada, o site carrega gtag somente após consentimento.
+Eventos: `page_view`, `view_item`, `whatsapp_click`, `generate_lead` após recibo real
+e `banner_interaction` em navegação manual. Eventos próprios não enviam nome,
+telefone, e-mail, mensagem nem parâmetros da URL. Para esta coleta manual, desligar
+no fluxo GA4 a medição aprimorada automática de formulários, cliques externos e
+mudanças de histórico, evitando eventos duplicados ou URLs com dados pessoais.
+
+Habilitar Google Analytics Data API no projeto Google Cloud, criar uma conta de
+serviço e conceder papel Leitor somente na propriedade necessária. Configurar as
+três variáveis privadas acima no servidor autorizado. JWT RS256 usa exclusivamente
+`analytics.readonly`; endpoints Google são fixos, consultas têm timeout e no-store.
+O Dashboard consulta sob demanda os últimos 28 dias completos; ausência de linhas
+é informada como ausência de dados, sem fabricar zeros. A API exige OWNER.
+
+Referências: [Data API](https://developers.google.com/analytics/devguides/reporting/data/v1/quickstart)
+e [eventos GA4](https://developers.google.com/analytics/devguides/collection/ga4/events).
+
+## Comando Windows preparado — não executado
+
+Somente após backup, homologação e autorização explícita da importação:
+
+```cmd
+cmd /D /C "set NODE_ENV=production&&set CMS_IMPORT_ALLOWED=true&&npm.cmd run cms:import -- --apply --allow-production-write"
+```
+
+A autorização existe apenas nesse processo filho. O script ainda exige a frase
+interativa de confirmação. Não alterar `.env` para simular nem executar no build.

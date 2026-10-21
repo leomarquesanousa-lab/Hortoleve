@@ -8,6 +8,7 @@ export interface ProductPresentation {
     media: ProductMedia[];
     technicalSheetId: string;
     technologies: string[];
+    technologyDescriptions?: Record<string, string>;
     technologyIcons?: Record<string, string>;
     specifications: { label: string; value: string }[];
     sizes: { name: string; dimensions: string }[];

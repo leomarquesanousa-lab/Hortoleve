@@ -36,9 +36,16 @@ export const getPublicSnapshot = cache(async (): Promise<Snapshot> => {
         const presentations: Snapshot["presentations"] = {};
         for (const d of entries("produtos")) {
             const p = toPresentation(d.published!);
-            if (p) { const technologies = entries("tecnologias").filter(t => lines(d.published!.technologyIds).includes(t.id)).map(t => String(t.published!.name)); p.technologies = [...new Set([...p.technologies, ...technologies])]; presentations[String(d.published!.slug)] = p; }
+            if (p) {
+                const ids = lines(d.published!.technologyIds);
+                const technologies = ids.flatMap(id => entries("tecnologias").filter(t => t.id === id));
+                if (ids.length) p.technologies = technologies.map(t => String(t.published!.name));
+                p.technologyDescriptions = Object.fromEntries(technologies.map(t => [String(t.published!.name), String(t.published!.description ?? "")]));
+                presentations[String(d.published!.slug)] = p;
+            }
         }
         const settings = { ...site, ...entries("configuracoes")[0]?.published } as Snapshot["settings"];
+        settings.analytics = entries("analytics")[0]?.published ?? null;
         const socials = entries("redes-sociais").map(d => ({ id: d.published!.channel as SocialChannel["id"], name: String(d.published!.name), url: String(d.published!.url || "") || null, order: Number(d.published!.order), visible: d.published!.visible === true }));
         return { enabled: true, products, categories, presentations, settings, socials, documents };
     } catch { console.error("Conteúdo CMS indisponível; apresentação aprovada preservada."); return fallback; }

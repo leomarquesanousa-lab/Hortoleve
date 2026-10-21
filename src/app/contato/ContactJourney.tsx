@@ -50,6 +50,7 @@ export function ContactJourney({ lines, initialLine, available, whatsapp }: { li
                 return;
             }
             setReceived(true);
+            window.dispatchEvent(new CustomEvent("hortoleve:lead"));
         } catch { setFailure("Não foi possível confirmar o recebimento. Verifique sua conexão antes de tentar novamente."); }
         finally { setSending(false); }
     }

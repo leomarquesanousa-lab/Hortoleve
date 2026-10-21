@@ -10,6 +10,6 @@ export const adminModules: { slug: string; name: string; permission: Permission 
     { slug: "redes-sociais", name: "Redes Sociais", permission: "settings:write" },
     { slug: "contatos", name: "Contatos", permission: "leads:read" },
     { slug: "usuarios", name: "Usuários", permission: "users:manage" },
-    { slug: "analytics", name: "Analytics", permission: "leads:read" },
+    { slug: "analytics", name: "Analytics", permission: "settings:write" },
     { slug: "configuracoes", name: "Configurações", permission: "settings:write" },
 ];
