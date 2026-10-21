@@ -3,6 +3,7 @@ import { getAdminAuth } from "@/modules/admin/auth";
 import { adminEnvironment } from "@/modules/admin/environment";
 import { allowAccountLogin } from "@/modules/admin/login-limit";
 import { isIP } from "node:net";
+import { validAdminPassword } from "@/modules/admin/password";
 
 async function handle(request: Request) {
     const path = new URL(request.url).pathname;
@@ -32,7 +33,7 @@ async function handle(request: Request) {
             if (path.endsWith("/sign-in/email")) {
                 let credentials: Record<string, unknown>;
                 try { credentials = JSON.parse(body); } catch { return Response.json({ error: "Credenciais inválidas." }, { status: 400 }); }
-                if (!credentials || typeof credentials.email !== "string" || typeof credentials.password !== "string" || credentials.email.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(credentials.email) || credentials.password.length < 14 || credentials.password.length > 128) return Response.json({ error: "Credenciais inválidas." }, { status: 400 });
+                if (!credentials || typeof credentials.email !== "string" || typeof credentials.password !== "string" || credentials.email.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(credentials.email) || !validAdminPassword(credentials.password)) return Response.json({ error: "Credenciais inválidas." }, { status: 400 });
                 const email = credentials.email.trim().toLowerCase();
                 if (!await allowAccountLogin(email, adminEnvironment()!.secret)) return Response.json({ error: "Aguarde antes de tentar novamente." }, { status: 429, headers: { "Retry-After": "900" } });
                 body = JSON.stringify({ email, password: credentials.password, rememberMe: false, callbackURL: "/admin" });
@@ -42,6 +43,11 @@ async function handle(request: Request) {
         const normalized = new Request(request.url, { method: request.method, headers: normalizedHeaders, ...(body !== undefined ? { body } : {}) });
         const handler = toNextJsHandler(auth);
         const response = request.method === "GET" ? await handler.GET(normalized) : await handler.POST(normalized);
+        // Better Auth pode responder sucesso mesmo se a exclusão no banco falhar.
+        // Só confirmar logout depois de verificar a revogação do cookie original.
+        if (path.endsWith("/sign-out") && response.ok && await auth.api.getSession({ headers: normalizedHeaders })) {
+            return Response.json({ error: "Não foi possível encerrar a sessão. Tente novamente." }, { status: 503, headers: { "Cache-Control": "no-store" } });
+        }
         response.headers.set("Cache-Control", "no-store");
         return response;
     } catch { return Response.json({ error: "Não foi possível concluir a autenticação." }, { status: 503, headers: { "Cache-Control": "no-store" } }); }

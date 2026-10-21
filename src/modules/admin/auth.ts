@@ -3,6 +3,7 @@ import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 import { getDatabase } from "./database";
 import { adminEnvironment } from "./environment";
+import { hashAdminPassword, verifyAdminPassword } from "./password";
 
 function createAuth() {
     const env = adminEnvironment();
@@ -13,7 +14,7 @@ function createAuth() {
         secret: env.secret,
         baseURL: env.baseURL,
         trustedOrigins: [env.baseURL],
-        emailAndPassword: { enabled: true, disableSignUp: true, minPasswordLength: 14, maxPasswordLength: 128 },
+        emailAndPassword: { enabled: true, disableSignUp: true, minPasswordLength: 14, maxPasswordLength: 72, password: { hash: hashAdminPassword, verify: verifyAdminPassword } },
         session: { expiresIn: 60 * 60 * 8, updateAge: 60 * 30, cookieCache: { enabled: false } },
         rateLimit: { enabled: true, storage: "database", window: 60, max: 60, customRules: { "/sign-in/email": { window: 300, max: 5 } } },
         advanced: { useSecureCookies: process.env.NODE_ENV === "production", defaultCookieAttributes: { httpOnly: true, sameSite: "lax", secure: process.env.NODE_ENV === "production" }, ipAddress: { ipAddressHeaders: ["x-hortoleve-client-ip"] } },

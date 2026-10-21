@@ -2,9 +2,12 @@
 
 ## Estado atual
 
-Prisma 7.10.1, PostgreSQL/Neon, Better Auth 1.7.11. Não existe configuração de
-banco real neste workspace. Não foram executados migrations, db push, seeds nem
-bootstrap. Dados do site público continuam nos módulos existentes.
+Prisma 7.10.1, PostgreSQL/Neon, Better Auth 1.7.11. Em 20/10/2026, a migração
+inicial foi aplicada com autorização e o operador criou o primeiro OWNER.
+Estrutura, histórico e conta ativa com bcrypt foram conferidos. Ambiente privado
+local preparado; configuração Hostinger e publicação aguardam confirmação.
+Dados do site público continuam nos módulos existentes. Procedimento e estado
+atuais: [OWNER-SETUP.md](./OWNER-SETUP.md).
 
 O hash de senha fica em `Account.password`, conforme Better Auth; User mantém o
 perfil. Session, Account, Verification e RateLimit são tabelas do mecanismo real
@@ -36,11 +39,15 @@ Depois de autorização para escrever na branch de desenvolvimento:
 - Executar `npm run admin:first-owner -- --allow-development-write` em terminal
   interativo. O script exige confirmação escrita, pergunta nome/e-mail e lê a
   senha duas vezes sem eco. Não passar senha como argumento, arquivo ou env.
-- Mínimo de 14 caracteres; hash scrypt do Better Auth. Nenhuma senha conhecida ou
+- Mínimo de 14 caracteres e máximo de 72 bytes UTF-8; bcrypt com custo 12,
+  compartilhado entre bootstrap e Better Auth. Entradas longas são rejeitadas sem
+  truncamento. Nenhuma senha conhecida ou
   conta padrão é criada. Uma transação e advisory lock impedem dois primeiros
   OWNER concorrentes; o evento registra apenas IDs, nunca senha ou hash.
-- Desativar ADMIN_BOOTSTRAP_ALLOWED imediatamente após uso. O script bloqueia
-  NODE_ENV=production, não serve para provisionar contas adicionais e não foi executado.
+- Desativar ADMIN_BOOTSTRAP_ALLOWED imediatamente após uso. Produção exige
+  NODE_ENV=production, --allow-production-write, TLS e confirmação específica;
+  seguir OWNER-SETUP.md somente após aprovação. O script não serve para provisionar
+  contas adicionais e não foi executado.
 
 ## Segurança e delegação
 
@@ -94,8 +101,9 @@ verificam os contratos e os caminhos fechados, não substituem esse ensaio integ
 
 Verificações disponíveis: `npm run db:validate`, `npm run db:generate` (não escrevem
 no banco) e `npm run test:admin`. O bootstrap usa o suporte TypeScript nativo do
-Node 24 do ambiente atual. Schema, cliente, TypeScript, ESLint e oito testes locais
-foram aprovados. Nenhum build completo foi executado.
+Node 24 do ambiente atual. Os testes incluem bcrypt real e Better Auth com banco
+em memória; não substituem a integração PostgreSQL. O build do checkpoint anterior
+passou; esta etapa usa verificações direcionadas, sem novo build completo.
 
 Auditoria npm: dependências de produção sem alertas na consulta realizada. Existem
 cinco alertas altos na cadeia de desenvolvimento eslint-config-next/fast-glob/

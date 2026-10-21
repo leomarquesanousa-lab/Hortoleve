@@ -7,7 +7,7 @@ export function adminEnvironment() {
         const origin = new URL(baseURL);
         const db = new URL(databaseUrl);
         if (!["postgres:", "postgresql:"].includes(db.protocol) || !["http:", "https:"].includes(origin.protocol)) return null;
-        if (origin.username || origin.password || origin.pathname !== "/") return null;
+        if (origin.username || origin.password || origin.pathname !== "/" || origin.search || origin.hash) return null;
         if (process.env.NODE_ENV === "production" && (origin.protocol !== "https:" || !["require", "verify-full"].includes(db.searchParams.get("sslmode") ?? ""))) return null;
         return { databaseUrl, secret, baseURL: origin.origin };
     } catch { return null; }

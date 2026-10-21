@@ -133,5 +133,98 @@ test("migração e rotas preparadas; nenhuma senha padrão ou integração públ
     assert.equal(adminModules.length, 9);
     assert.ok(fs.existsSync("src/app/admin/(protected)/page.tsx"));
     assert.ok(fs.readFileSync("src/components/SiteChrome.tsx", "utf8").includes('pathname?.startsWith("/admin/")'));
-    assert.ok(fs.readFileSync("scripts/create-owner.mts", "utf8").includes("--allow-development-write"));
+    assert.ok(fs.readFileSync("scripts/create-owner.mts", "utf8").includes("bootstrapMode(process.env, process.argv)"));
+});
+
+test("bcrypt real: salt único, senha correta, inválida e limite UTF-8 sem truncamento", async () => {
+    const { hashAdminPassword, verifyAdminPassword, validAdminPassword } = loader()("src/modules/admin/password.ts");
+    const password = "local-test-only-" + (await import("node:crypto")).randomBytes(16).toString("hex");
+    const a = await hashAdminPassword(password);
+    const b = await hashAdminPassword(password);
+    assert.match(a, /^\$2[ab]\$12\$/);
+    assert.notEqual(a, b);
+    assert.equal(await verifyAdminPassword({ hash: a, password }), true);
+    assert.equal(await verifyAdminPassword({ hash: a, password: password + "wrong" }), false);
+    assert.equal(validAdminPassword("é".repeat(37)), false);
+    assert.equal(validAdminPassword("a".repeat(73)), false);
+    await assert.rejects(hashAdminPassword("a".repeat(73)));
+    assert.equal(await verifyAdminPassword({ hash: "invalid", password }), false);
+});
+
+test("bootstrap: produção exige flag, TLS e autorização; OWNER existente nunca é recriado", async () => {
+    const { bootstrapMode, createFirstOwner } = loader()("src/modules/admin/bootstrap.ts");
+    const env = { ADMIN_BOOTSTRAP_ALLOWED: "true", NODE_ENV: "production", DATABASE_URL: "postgresql://example.test/test?sslmode=require" };
+    assert.throws(() => bootstrapMode(env, ["--allow-development-write"]));
+    assert.throws(() => bootstrapMode({ ...env, ADMIN_BOOTSTRAP_ALLOWED: "false" }, ["--allow-production-write"]));
+    assert.throws(() => bootstrapMode({ ...env, DATABASE_URL: "postgresql://example.test/test" }, ["--allow-production-write"]));
+    assert.equal(bootstrapMode(env, ["--allow-production-write"]), "production");
+    let exists = true;
+    const calls = [];
+    const tx = {
+        $queryRaw: async () => { calls.push("lock"); },
+        user: { count: async () => { calls.push("count"); return exists ? 1 : 0; }, create: async ({ data }) => { calls.push("user"); assert.equal(data.role, "OWNER"); assert.equal(data.emailVerified, false); return { id: "local-test" }; } },
+        account: { create: async ({ data }) => { calls.push("account"); assert.equal(data.providerId, "credential"); assert.equal(data.password, "hash-only-test"); } },
+        auditLog: { create: async ({ data }) => { calls.push("audit"); assert.ok(!JSON.stringify(data).includes("hash-only-test")); } },
+    };
+    const db = { $transaction: async fn => fn(tx) };
+    await assert.rejects(createFirstOwner(db, { name: "Test", email: "test@example.test", passwordHash: "hash-only-test" }));
+    assert.deepEqual(calls, ["lock", "count"]);
+    calls.length = 0; exists = false;
+    await createFirstOwner(db, { name: "Test", email: "test@example.test", passwordHash: "hash-only-test" });
+    assert.deepEqual(calls, ["lock", "count", "user", "account", "audit"]);
+});
+
+test("Better Auth real em memória: login, cookie HttpOnly, sessão e logout revogado", async () => {
+    const { betterAuth } = await import("better-auth");
+    const { memoryAdapter } = await import("better-auth/adapters/memory");
+    const { randomBytes } = await import("node:crypto");
+    const { hashAdminPassword } = loader()("src/modules/admin/password.ts");
+    const password = randomBytes(24).toString("hex");
+    const date = new Date();
+    const memory = {
+        user: [{ ...user, role: "OWNER", emailVerified: false, createdAt: date, updatedAt: date }],
+        account: [{ id: "test-account", userId: user.id, accountId: user.id, providerId: "credential", password: await hashAdminPassword(password), createdAt: date, updatedAt: date }],
+        session: [], verification: [], rateLimit: [],
+    };
+    const audits = [];
+    const { getAdminAuth } = loader({
+        "./environment": { adminEnvironment: () => ({ secret: randomBytes(32).toString("hex"), baseURL: "https://example.test" }) },
+        "./database": { getDatabase: () => ({ user: { findUnique: async () => memory.user[0] }, auditLog: { create: async ({ data }) => { audits.push(data.action); } } }) },
+        "better-auth": { betterAuth: options => betterAuth({ ...options, advanced: { ...options.advanced, useSecureCookies: true, defaultCookieAttributes: { ...options.advanced.defaultCookieAttributes, secure: true } } }) },
+        "better-auth/adapters/prisma": { prismaAdapter: () => memoryAdapter(memory) },
+    })("src/modules/admin/auth.ts");
+    const auth = getAdminAuth();
+    const route = loader({
+        "@/modules/admin/auth": { getAdminAuth: () => auth },
+        "@/modules/admin/environment": { adminEnvironment: () => ({ secret: "test-only" }) },
+        "@/modules/admin/login-limit": { allowAccountLogin: async () => true },
+    })(routeFile);
+    const post = (endpoint, body, cookie = "") => route.POST(new Request("https://example.test/api/auth/" + endpoint, { method: "POST", headers: { origin: "https://example.test", "content-type": "application/json", cookie }, body: JSON.stringify(body) }));
+    const getSession = cookie => route.GET(new Request("https://example.test/api/auth/get-session", { headers: { cookie } }));
+    assert.equal(await (await getSession("")).json(), null);
+    assert.equal((await post("sign-in/email", { email: user.email, password: password + "invalid" })).status, 401);
+    const login = await post("sign-in/email", { email: user.email, password, rememberMe: false });
+    assert.equal(login.status, 200);
+    const cookies = login.headers.getSetCookie();
+    const sessionCookie = cookies.find(value => value.startsWith("__Secure-better-auth.session_token="));
+    assert.ok(sessionCookie);
+    assert.match(sessionCookie, /HttpOnly/i);
+    assert.match(sessionCookie, /Secure/i);
+    assert.match(sessionCookie, /SameSite=Lax/i);
+    const cookie = cookies.map(value => value.split(";")[0]).join("; ");
+    assert.equal((await (await getSession(cookie)).json()).user.id, user.id);
+    assert.equal(memory.session.length, 1);
+    assert.equal((await post("sign-out", {}, cookie)).status, 200);
+    assert.equal(memory.session.length, 0);
+    assert.equal(await (await getSession(cookie)).json(), null);
+    assert.deepEqual(audits, ["ADMIN_LOGIN", "ADMIN_LOGOUT"]);
+});
+
+test("logout não declara sucesso se a sessão permanecer válida no banco", async () => {
+    const route = loader({
+        "@/modules/admin/auth": { getAdminAuth: () => ({ api: { getSession: async () => ({ user }) } }) },
+        "@/modules/admin/login-limit": { allowAccountLogin: async () => true },
+        "better-auth/next-js": { toNextJsHandler: () => ({ POST: async () => Response.json({ success: true }) }) },
+    })(routeFile);
+    assert.equal((await route.POST(request("sign-out"))).status, 503);
 });

@@ -19,7 +19,7 @@ export function LoginForm({ enabled }: { enabled: boolean }) {
     return <form onSubmit={submit} className={s.form} aria-busy={busy}>
         {!enabled && <p className={s.notice}>Acesso indisponível até a configuração do banco Neon, da autenticação e do primeiro OWNER. Nenhuma conta padrão foi criada.</p>}
         <label>E-mail<input name="email" type="email" autoComplete="username" required maxLength={254} disabled={!enabled || busy} /></label>
-        <label>Senha<input name="password" type="password" autoComplete="current-password" required minLength={14} maxLength={128} disabled={!enabled || busy} /></label>
+        <label>Senha<input name="password" type="password" autoComplete="current-password" required minLength={14} maxLength={72} disabled={!enabled || busy} /></label>
         {error && <p role="alert" className={s.error}>{error}</p>}
         <button className={s.button} type="submit" disabled={!enabled || busy}>{busy ? "Entrando…" : "Entrar na administração"}</button>
     </form>;
