@@ -88,6 +88,25 @@ test("login limita corpo e conta; normaliza IP e ignora redirect externo", async
     assert.equal(received.headers.get("x-hortoleve-client-ip"), "127.0.0.1");
 });
 
+test("proxy HTTP interno aceita somente a origem pública configurada e ignora headers forjados", async () => {
+    let received;
+    const route = loader({
+        "@/modules/admin/auth": { getAdminAuth: () => ({}) },
+        "@/modules/admin/environment": { adminEnvironment: () => ({ baseURL: "https://example.test", secret: "unit-test-only" }) },
+        "@/modules/admin/login-limit": { allowAccountLogin: async () => true },
+        "better-auth/next-js": { toNextJsHandler: () => ({ POST: async req => { received = req; return Response.json({ ok: true }); } }) },
+    })(routeFile);
+    const proxied = origin => new Request("http://127.0.0.1:3000/api/auth/sign-in/email", {
+        method: "POST", headers: { origin, host: "untrusted.test", "x-forwarded-host": "untrusted.test", "x-forwarded-proto": "http", "content-type": "application/json" },
+        body: JSON.stringify({ email: user.email, password: "unit-test-password-only" }),
+    });
+    assert.equal((await route.POST(proxied("https://example.test"))).status, 200);
+    assert.equal(received.url, "https://example.test/api/auth/sign-in/email");
+    assert.equal((await route.POST(proxied("http://127.0.0.1:3000"))).status, 403);
+    assert.equal((await route.POST(proxied("https://untrusted.test"))).status, 403);
+    assert.equal((await route.POST(proxied("null"))).status, 403);
+});
+
 test("limite por conta usa incremento atômico e chave sem e-mail", async () => {
     let count = 0;
     let key;
@@ -196,10 +215,10 @@ test("Better Auth real em memória: login, cookie HttpOnly, sessão e logout rev
     const auth = getAdminAuth();
     const route = loader({
         "@/modules/admin/auth": { getAdminAuth: () => auth },
-        "@/modules/admin/environment": { adminEnvironment: () => ({ secret: "test-only" }) },
+        "@/modules/admin/environment": { adminEnvironment: () => ({ secret: "test-only", baseURL: "https://example.test" }) },
         "@/modules/admin/login-limit": { allowAccountLogin: async () => true },
     })(routeFile);
-    const post = (endpoint, body, cookie = "") => route.POST(new Request("https://example.test/api/auth/" + endpoint, { method: "POST", headers: { origin: "https://example.test", "content-type": "application/json", cookie }, body: JSON.stringify(body) }));
+    const post = (endpoint, body, cookie = "") => route.POST(new Request("http://127.0.0.1:3000/api/auth/" + endpoint, { method: "POST", headers: { origin: "https://example.test", "content-type": "application/json", cookie }, body: JSON.stringify(body) }));
     const getSession = cookie => route.GET(new Request("https://example.test/api/auth/get-session", { headers: { cookie } }));
     assert.equal(await (await getSession("")).json(), null);
     assert.equal((await post("sign-in/email", { email: user.email, password: password + "invalid" })).status, 401);
