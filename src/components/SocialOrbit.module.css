@@ -1,12 +1,14 @@
-.orbit{position:fixed;right:max(22px,calc(env(safe-area-inset-right) + 12px));bottom:max(24px,calc(env(safe-area-inset-bottom) + 12px));width:56px;height:56px;z-index:60}
+.orbit{--orbit-ring:var(--gold);--orbit-stroke:var(--sand);--orbit-dot:var(--gold);--orbit-glow:#ae865328;position:fixed;right:max(22px,calc(env(safe-area-inset-right) + 12px));bottom:calc(max(24px,calc(env(safe-area-inset-bottom) + 12px)) + var(--orbit-lift,0px));width:56px;height:56px;z-index:90}
+.orbit[data-over-footer="true"]{--orbit-ring:#F7F4EF;--orbit-stroke:#F7F4EF;--orbit-dot:#F7F4EF;--orbit-glow:#f7f4ef30}
 .orbit[hidden]{display:none}
-.trigger,.action{display:grid;place-items:center;width:56px;height:56px;border:1px solid var(--gold);border-radius:50%;background:var(--green);color:var(--cream);box-shadow:0 5px 22px #10242024}
-.trigger{position:relative;z-index:2;padding:9px;cursor:pointer;isolation:isolate}
-.trigger::after{content:"";position:absolute;inset:-5px;border-radius:50%;background:radial-gradient(circle,#ae865328,transparent 70%);opacity:0;transition:opacity .3s;z-index:-1}
-.constellation{width:36px;height:36px;stroke:var(--sand);stroke-width:1;transition:transform .3s}
-.constellation circle{fill:var(--gold);stroke:var(--gold)}
+.trigger,.action{display:grid;place-items:center;width:56px;height:56px;border:1px solid var(--orbit-ring);border-radius:50%;background:var(--green);color:var(--cream);box-shadow:0 5px 22px #10242024}
+.trigger{position:relative;z-index:2;padding:9px;cursor:pointer;isolation:isolate;transition:border-color .25s,box-shadow .25s}
+.trigger::after{content:"";position:absolute;inset:-5px;border-radius:50%;background:radial-gradient(circle,var(--orbit-glow),transparent 70%);opacity:0;transition:opacity .25s,background .25s;z-index:-1}
+.constellation{width:36px;height:36px;stroke:var(--orbit-stroke);stroke-width:1;transition:transform .3s,stroke .25s}
+.constellation circle{fill:var(--orbit-dot);stroke:var(--orbit-dot);transition:fill .25s,stroke .25s}
+.trigger:focus-visible::after,.orbit[data-open="true"] .trigger::after{opacity:1}
 .fan{position:absolute;inset:0;pointer-events:none}
-.action{position:absolute;inset:0;opacity:0;visibility:hidden;transform:translate(0,0) scale(.45);pointer-events:none;transition:transform .32s cubic-bezier(.2,.7,.3,1),opacity .25s,visibility .32s}
+.action{position:absolute;inset:0;opacity:0;visibility:hidden;transform:translate(0,0) scale(.45);pointer-events:none;transition:transform .32s cubic-bezier(.2,.7,.3,1),opacity .25s,visibility .32s,border-color .25s}
 .action svg{width:24px;height:24px}
 .action{padding:0;font:inherit;cursor:pointer}
 .label small{display:block;font-size:9px;color:var(--sand);margin-top:2px}
@@ -15,8 +17,8 @@
 .label,.triggerLabel{position:absolute;right:calc(100% + 12px);top:50%;transform:translateY(-50%) translateX(4px);background:var(--green);color:var(--cream);border:1px solid #ae86535c;border-radius:5px;padding:7px 10px;font-size:10px;line-height:1.5;white-space:nowrap;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .2s,transform .2s,visibility .2s;box-shadow:0 4px 16px #10242014}
 .orbit[data-open="true"] .triggerLabel{display:none}
 .action:focus-visible .label,.trigger:focus-visible .triggerLabel{opacity:1;visibility:visible;transform:translateY(-50%)}
-.trigger:focus-visible,.action:focus-visible{outline:2px solid var(--gold);outline-offset:4px}
+.trigger:focus-visible,.action:focus-visible{outline:2px solid var(--orbit-ring);outline-offset:4px}
 @media(hover:hover) and (pointer:fine){.trigger:hover .constellation{transform:rotate(12deg) scale(1.04)}.trigger:hover::after{opacity:1}.action:hover .label,.trigger:hover .triggerLabel{opacity:1;visibility:visible;transform:translateY(-50%)}.action:hover{background:#30534c}}
-@media(max-width:640px){.orbit{right:max(16px,calc(env(safe-area-inset-right) + 10px));bottom:max(18px,calc(env(safe-area-inset-bottom) + 10px));width:50px;height:50px}.trigger,.action{width:50px;height:50px}.constellation{width:32px;height:32px}.label{top:auto;bottom:calc(100% + 9px);right:0;max-width:min(156px,calc(100vw - 170px));white-space:normal;text-align:right;transform:none}.action:focus-visible .label{transform:none}}
-@media(prefers-reduced-motion:reduce){.action,.constellation,.label,.triggerLabel,.trigger::after{transition:none}.trigger:hover .constellation{transform:none}}
+@media(max-width:640px){.orbit{right:max(16px,calc(env(safe-area-inset-right) + 10px));bottom:calc(max(18px,calc(env(safe-area-inset-bottom) + 10px)) + var(--orbit-lift,0px));width:50px;height:50px}.trigger,.action{width:50px;height:50px}.constellation{width:32px;height:32px}.label{top:auto;bottom:calc(100% + 9px);right:0;max-width:min(156px,calc(100vw - 170px));white-space:normal;text-align:right;transform:none}.action:focus-visible .label{transform:none}}
+@media(prefers-reduced-motion:reduce){.trigger,.action,.constellation,.constellation circle,.label,.triggerLabel,.trigger::after{transition:none}.trigger:hover .constellation{transform:none}}
 @media(max-width:640px){.label{max-width:min(156px,calc(100vw - 220px))}.action[data-hint="true"] .label{transform:none}}

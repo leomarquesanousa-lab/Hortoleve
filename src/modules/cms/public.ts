@@ -31,7 +31,7 @@ export const getPublicSnapshot = cache(async (): Promise<Snapshot> => {
         if ((await db.siteSetting.findUnique({ where: { key: "cms-import-completed" } }))?.value !== true) return fallback;
         const documents = (await db.siteSetting.findMany({ where: { key: { startsWith: "cms:" } } })).map(r => r.value as unknown as Document).filter(d => d.published).map(d => ({ ...d, draft: {}, published: d.published }));
         const entries = (resource: Resource) => documents.filter(d => d.resource === resource).sort((a, b) => Number(a.published?.order ?? 0) - Number(b.published?.order ?? 0));
-        const categories: Category[] = entries("categorias").map(d => ({ id: d.id, slug: String(d.published!.slug), name: String(d.published!.name), description: String(d.published!.description ?? ""), icon: String(d.published!.icon ?? "M3 9H21V19H3Z"), image: String(d.published!.image ?? "") }));
+        const categories: Category[] = entries("categorias").map(d => ({ id: d.id, ...(d.published!.parentId ? { parentId: String(d.published!.parentId) } : {}), slug: String(d.published!.slug), name: String(d.published!.name), description: String(d.published!.description ?? ""), icon: String(d.published!.icon ?? "M3 9H21V19H3Z"), image: String(d.published!.image ?? "") }));
         const products = entries("produtos").map(d => toProduct(d.id, d.published!)).filter(p => categories.some(c => c.id === p.categoryId)).map(p => ({ ...p, categorySlug: categories.find(c => c.id === p.categoryId)!.slug }));
         const presentations: Snapshot["presentations"] = {};
         for (const d of entries("produtos")) {

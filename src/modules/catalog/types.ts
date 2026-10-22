@@ -25,6 +25,7 @@ export interface Product {
     isDemo: boolean;
 }
 export interface Category {
+    parentId?: string;
     image?: string;
     id: string;
     name: string;

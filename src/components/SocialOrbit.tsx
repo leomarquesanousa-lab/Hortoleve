@@ -2,10 +2,12 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useId, useRef, useState, type CSSProperties } from "react";
+import { useEffect, useId, useRef, useState, useSyncExternalStore, type CSSProperties } from "react";
+import { createPortal } from "react-dom";
 import { socialChannelUrl } from "@/config/social";
 import { usePublicConfig, publicWhatsapp } from "./PublicConfig";
 import s from "./SocialOrbit.module.css";
+import { footerOrbitPosition } from "./social-orbit-position";
 
 type Destination = { label: string; href: string | null; icon: string; external?: boolean };
 const icons = {
@@ -20,8 +22,10 @@ function OrbitMenu() {
     const [open, setOpen] = useState(false);
     const [hint, setHint] = useState<string | null>(null);
     const [suppressed, setSuppressed] = useState(false);
+    const [overFooter, setOverFooter] = useState(false);
     const root = useRef<HTMLDivElement>(null);
     const trigger = useRef<HTMLButtonElement>(null);
+    const lift = useRef(0);
     const id = useId();
     const destinations: Destination[] = socialChannels.filter(channel => channel.visible).slice().sort((a, b) => a.order - b.order).map(channel => ({ label: channel.name, href: socialChannelUrl({ ...channel, url: channel.url ?? (channel.id === "whatsapp" ? publicWhatsapp(settings.whatsapp, "Olá! Gostaria de conhecer melhor a Hortoleve.") : null) }), icon: icons[channel.id], external: true }));
     destinations.push({ label: "Atendimento Personalizado", href: "/contato", icon: "M4 4H20V16H11L6 21V16H4ZM8 8H16M8 12H13" });
@@ -29,26 +33,47 @@ function OrbitMenu() {
     useEffect(() => {
         let footerVisible = false;
         let frame = 0;
+        const footer = document.querySelector("footer");
         const update = () => {
             frame = 0;
             const active = document.activeElement;
             const editing = active instanceof HTMLElement && !!active.closest("form, input, textarea, select, [contenteditable='true']");
             const menuOpen = !!document.querySelector("header details[open], header button[aria-expanded='true']");
-            const blocked = footerVisible || editing || menuOpen;
+            const blocked = editing || menuOpen;
             setSuppressed(blocked);
-            if (blocked) setOpen(false);
+            if (blocked) { setOpen(false); return; }
+            const element = root.current, button = trigger.current;
+            if (!element || !button) return;
+            // Aguarda a remoção de hidden antes de medir após edição/menu.
+            if (element.hidden) { schedule(); return; }
+            let placement = { lift: 0, overFooter: false };
+            if (footer && footerVisible) {
+                const rect = button.getBoundingClientRect();
+                const base = { top: rect.top + lift.current, bottom: rect.bottom + lift.current, left: rect.left, right: rect.right };
+                const links = Array.from(footer.querySelectorAll("a,button,input,select,textarea")).map(link => link.getBoundingClientRect());
+                const headerBottom = document.querySelector("header")?.getBoundingClientRect().bottom ?? 0;
+                placement = footerOrbitPosition(base, footer.getBoundingClientRect(), links, Math.max(0, Math.min(120, base.top - headerBottom - 12)));
+            }
+            lift.current = placement.lift;
+            element.style.setProperty("--orbit-lift", placement.lift + "px");
+            setOverFooter(placement.overFooter);
         };
         const schedule = () => { if (!frame) frame = requestAnimationFrame(update); };
-        const footer = document.querySelector("footer");
-        const observer = new IntersectionObserver(entries => { footerVisible = entries.some(entry => entry.isIntersecting); schedule(); }, { rootMargin: "0px 0px 100px 0px" });
+        const observer = new IntersectionObserver(entries => { footerVisible = entries.some(entry => entry.isIntersecting); schedule(); });
         if (footer) observer.observe(footer);
+        const resize = new ResizeObserver(schedule);
+        if (footer) resize.observe(footer);
+        resize.observe(document.body);
         const header = document.querySelector("header");
         const mutation = new MutationObserver(schedule);
         if (header) mutation.observe(header, { attributes: true, subtree: true, attributeFilter: ["open", "aria-expanded"] });
         document.addEventListener("focusin", schedule);
         document.addEventListener("focusout", schedule);
+        const onScroll = () => { if (footerVisible) schedule(); };
+        window.addEventListener("scroll", onScroll, { passive: true });
+        window.addEventListener("resize", schedule, { passive: true });
         schedule();
-        return () => { observer.disconnect(); mutation.disconnect(); document.removeEventListener("focusin", schedule); document.removeEventListener("focusout", schedule); cancelAnimationFrame(frame); };
+        return () => { observer.disconnect(); resize.disconnect(); mutation.disconnect(); document.removeEventListener("focusin", schedule); document.removeEventListener("focusout", schedule); window.removeEventListener("scroll", onScroll); window.removeEventListener("resize", schedule); cancelAnimationFrame(frame); };
     }, []);
 
     useEffect(() => {
@@ -60,7 +85,7 @@ function OrbitMenu() {
         return () => { document.removeEventListener("pointerdown", outside); document.removeEventListener("keydown", escape); };
     }, [open]);
 
-    return <div ref={root} className={s.orbit} hidden={suppressed} data-open={open}
+    return <div ref={root} className={s.orbit} hidden={suppressed} data-open={open} data-over-footer={overFooter}
         onBlur={event => { if (!event.currentTarget.contains(event.relatedTarget)) setOpen(false); }}
         onKeyDown={event => {
             if (!["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) return;
@@ -81,7 +106,7 @@ function OrbitMenu() {
                 const radius = 168;
                 const style = { "--x": (-Math.cos(angle) * radius).toFixed(2) + "px", "--y": (-Math.sin(angle) * radius).toFixed(2) + "px", "--delay": index * 40 + "ms" } as CSSProperties;
                 const content = <><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d={destination.icon} /></svg><span className={s.label}>{destination.label}{!destination.href && <small>Em breve</small>}</span></>;
-                const attributes = { className: s.action, style, "aria-label": destination.label + (!destination.href ? " ? Em breve" : ""), "data-hint": hint === destination.label, "data-orbit-action": true, tabIndex: open ? 0 : -1, onClick: () => setOpen(false) };
+                const attributes = { className: s.action, style, "aria-label": destination.label + (!destination.href ? " — Em breve" : ""), "data-hint": hint === destination.label, "data-orbit-action": true, tabIndex: open ? 0 : -1, onClick: () => setOpen(false) };
                 if (!destination.href) return <button key={destination.label} {...attributes} type="button" aria-disabled="true" onClick={() => setHint(destination.label)}>{content}</button>;
                 return destination.external ? <a key={destination.label} {...attributes} href={destination.href} target="_blank" rel="noopener noreferrer">{content}</a> : <Link key={destination.label} {...attributes} href={destination.href}>{content}</Link>;
             })}
@@ -89,9 +114,11 @@ function OrbitMenu() {
     </div>;
 }
 
+const subscribeMounted = () => () => {};
 export function SocialOrbit() {
     const pathname = usePathname();
+    const mounted = useSyncExternalStore(subscribeMounted, () => true, () => false);
     // O próprio fluxo de atendimento substitui o acesso flutuante nesta rota.
-    if (pathname === "/contato" || pathname?.startsWith("/admin")) return null;
-    return <OrbitMenu key={pathname} />;
+    if (!mounted || pathname === "/contato" || pathname?.startsWith("/admin")) return null;
+    return createPortal(<OrbitMenu key={pathname} />, document.body);
 }

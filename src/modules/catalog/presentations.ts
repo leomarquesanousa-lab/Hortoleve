@@ -1,4 +1,12 @@
 import type { ProductMedia } from "./types";
+import { divanPresentation } from "./divan.ts";
+import { housePresentation } from "./house.ts";
+import { viscoelasticoPresentation } from "./viscoelastico.ts";
+import { futurePresentation } from "./future.ts";
+import { cervicalOrtoPlusPresentation } from "./cervical-orto-plus.ts";
+import { recoveryMaisPresentation } from "./recovery-mais.ts";
+import { eliteAzulPresentation } from "./elite-azul.ts";
+import { eliteCinzaPresentation } from "./elite-cinza.ts";
 
 export interface ProductPresentation {
     displayName?: string;
@@ -16,6 +24,12 @@ export interface ProductPresentation {
 
 // Conteúdo e dados comerciais fornecidos pelo cliente; nomes de tecnologias sem alegações clínicas.
 export const presentations: Partial<Record<string, ProductPresentation>> = {
+    divan: divanPresentation,
+    house: housePresentation,
+    "travesseiro-viscoelastico": viscoelasticoPresentation,
+    "travesseiro-future": futurePresentation,
+    "travesseiro-cervical-orto-plus": cervicalOrtoPlusPresentation,
+    "recover-mais": recoveryMaisPresentation,
     comfort: {
         displayName: "Confort",
         title: "Linha Confort",
@@ -165,4 +179,6 @@ export const presentations: Partial<Record<string, ProductPresentation>> = {
             { name: "King", dimensions: "1,93 x 2,03 m" },
         ],
     },
+    "elite-azul": eliteAzulPresentation,
+    "elite-cinza": eliteCinzaPresentation,
 };

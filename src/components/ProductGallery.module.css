@@ -2,6 +2,8 @@
 .figure{margin:0}
 .main{position:relative;display:block;width:100%;aspect-ratio:4/3;padding:0;border:1px solid #e4dacb;border-radius:12px;overflow:hidden;background:#eee8de;cursor:zoom-in}
 .main img{width:100%;height:100%;object-fit:contain}
+.main[data-image^="elite-azul-"]{aspect-ratio:3/2}
+.main[data-image^="elite-cinza-"]{aspect-ratio:3/2}
 .zoom{position:absolute;right:12px;bottom:12px;padding:5px 10px;border-radius:20px;background:var(--green);color:var(--cream);font-size:11px}
 .caption{font-size:11px;line-height:1.6;color:var(--graphite);margin-top:10px}
 .thumbnails{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
@@ -22,3 +24,8 @@
 @media(max-width:640px){.main{aspect-ratio:1}.modal{padding:12px}.modalImage{height:60dvh}.toolbar p{max-width:25ch}}
 .main[data-image="majestic-room-detail"],.main[data-image^="diamond-room-"],.main[data-image^="elegance-room-"],.main[data-image^="confort-room-"]{aspect-ratio:3/2}
 .main[data-image="majestic-room-detail"] img,.main[data-image^="diamond-room-"] img,.main[data-image^="elegance-room-"] img,.main[data-image^="confort-room-"] img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.main[data-image^="recovery-"]{aspect-ratio:3/2}
+.main[data-image^="divan-"]{aspect-ratio:3/2}
+.main[data-image^="house-"]{aspect-ratio:3/2}
+.main[data-image^="viscoelastico-"]{aspect-ratio:3/2}
+.main[data-image^="future-"],.main[data-image^="cervical-orto-plus-"]{aspect-ratio:3/2}

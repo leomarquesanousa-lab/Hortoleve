@@ -1,23 +1,43 @@
-# Atendimento e recebimento de solicitações
+# Atendimento e recebimento
 
-`/contato` usa quatro etapas e `POST /api/leads`. Atualmente não existe banco,
-provedor de entrega ou WhatsApp comercial configurado. O envio está desabilitado
-na interface; chamadas diretas válidas ao endpoint retornam 503. Não há gravação
-em arquivos, armazenamento local, envio a terceiros ou confirmação simulada.
+## Auditoria
 
-Para ativar:
+O único formulário público é `ContactJourney`, em `/contato`. Home, produtos e
+demais CTAs reutilizam o WhatsApp central ou direcionam ao contato com
+`?linha=slug`. Formulários administrativos não fazem parte da captação.
 
-1. Definir o canal comercial real e um adaptador de servidor em `delivery.ts`,
-   implementando `LeadDelivery`. Segredos devem permanecer somente no servidor.
-2. Retornar `LeadReceipt` apenas após o destino confirmar o recebimento.
-3. Configurar limitação distribuída de solicitações no gateway ou armazenamento
-   compartilhado confiável. Não há contador em memória que simule proteção entre instâncias.
-4. Revisar retenção, acesso e política de privacidade com a operação comercial.
-5. Se aprovado, cadastrar o telefone verdadeiro em `src/config/site.ts` para o
-   WhatsApp opcional, aberto somente por ação explícita do visitante.
+Nome, telefone e consentimento são obrigatórios. E-mail, produto e mensagem são
+opcionais. A validação compartilhada verifica limites, formato, produto e
+honeypot; erros ficam associados aos campos.
 
-Proteções atuais: origem obrigatória do próprio site, JSON limitado a 12 KB durante
-a leitura, validação no servidor, slugs permitidos, limites de campos e honeypot.
-O endpoint não registra dados pessoais em logs. Não foi criada infraestrutura de
-banco, migração ou painel administrativo. `ReceivedLead` é o contrato de entrada
-para um futuro receptor/painel; `LeadReceipt` representa confirmação real.
+## WhatsApp principal
+
+Depois da revisão e validação, “Continuar no WhatsApp” abre a mensagem com nome,
+telefone, e-mail opcional, produto, assunto, mensagem e origem. O número vem da
+configuração central. Não há envio automático nem armazenamento pelo site
+nesse fluxo: o visitante precisa confirmar o envio no aplicativo. A interface
+não afirma recebimento; o link da revisão permite tentar novamente.
+
+## CMS existente
+
+Quando `CMS_LEADS_ENABLED` e a configuração administrativa permitem, o botão
+secundário preserva `POST /api/leads`. Só confirma com comprovante do backend.
+Permanecem validação no servidor, origem obrigatória, corpo máximo de 12 KB,
+honeypot e limites por telefone/global no banco. Nenhuma configuração foi
+ativada por esta alteração. Não registrar conteúdo pessoal em logs.
+
+## E-mail complementar pendente
+
+Não foi encontrada integração SMTP/transacional configurada. `email.ts` prepara
+um adaptador opcional para Resend, sem dependências e somente no servidor.
+Variáveis em `.env.example`: `CONTACT_EMAIL_ENABLED`, `RESEND_API_KEY`,
+`CONTACT_EMAIL_FROM` e `CONTACT_EMAIL_TO`.
+
+Para ativar: fornecer remetente autorizado e destinatário comercial, configurar
+a chave no servidor, conectar explicitamente o adaptador após validação e rate
+limit da rota e testar entrega. O adaptador ainda não está conectado à rota;
+nenhuma opção de e-mail é anunciada como ativa. O ID do provedor confirma
+aceitação, não entrega na caixa postal nem leitura. O WhatsApp independe disso.
+
+Não incluir dados sensíveis nas mensagens nem segredos em logs. Revisar retenção
+e acesso com a operação comercial antes de habilitar novos destinos.

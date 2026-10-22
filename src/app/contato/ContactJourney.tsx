@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { formatPhone, subjects, validateLead, type LeadErrors, type LeadRequest } from "@/modules/leads/contracts";
 import s from "./page.module.css";
+import { leadWhatsappUrl } from "@/modules/leads/whatsapp";
 
 export interface ContactLine { slug: string; name: string; src: string; alt: string; width: number; height: number }
 const steps = ["Assunto", "Sua linha", "Seus dados", "Revisão"];
@@ -15,6 +16,7 @@ export function ContactJourney({ lines, initialLine, available, whatsapp }: { li
     const [sending, setSending] = useState(false);
     const [failure, setFailure] = useState("");
     const [received, setReceived] = useState(false);
+    const [prepared, setPrepared] = useState(false);
     const heading = useRef<HTMLHeadingElement>(null);
     const mounted = useRef(false);
     useEffect(() => { if (mounted.current) heading.current?.focus(); else mounted.current = true; }, [step, received]);
@@ -27,8 +29,7 @@ export function ContactJourney({ lines, initialLine, available, whatsapp }: { li
         setErrors(previous => ({ ...previous, [key]: validation.errors[key] }));
     };
     const selectedLine = lines.find(line => line.slug === data.line);
-    const summary = ["Assunto: " + subjects.find(subject => subject.id === data.subject)?.label, "Linha: " + (selectedLine?.name ?? "Ainda não sei"), "Nome: " + data.name, "Telefone: " + data.phone, data.email && "E-mail: " + data.email, data.message && "Mensagem: " + data.message].filter(Boolean).join("\n");
-    const whatsappHref = whatsapp ? whatsapp + "?text=" + encodeURIComponent(summary) : null;
+    const whatsappHref = leadWhatsappUrl(whatsapp, data, selectedLine?.name);
 
     async function submit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
@@ -39,6 +40,14 @@ export function ContactJourney({ lines, initialLine, available, whatsapp }: { li
         setErrors(validation.errors);
         if (!validation.data) { if (step === 4) setStep(3); return; }
         if (step === 3) { setStep(4); return; }
+        const submitter = (event.nativeEvent as SubmitEvent).submitter as HTMLButtonElement | null;
+        if (submitter?.value !== "inbox" && whatsapp) {
+            const href = leadWhatsappUrl(whatsapp, validation.data, selectedLine?.name);
+            if (!href) { setFailure("O WhatsApp está indisponível. Tente o canal de atendimento, quando disponível."); return; }
+            setPrepared(true);
+            window.location.assign(href);
+            return;
+        }
         if (!available) { setFailure("O canal de recebimento ainda está em configuração. Nenhum dado foi enviado."); return; }
         setSending(true); setFailure("");
         try {
@@ -72,13 +81,13 @@ export function ContactJourney({ lines, initialLine, available, whatsapp }: { li
                     <label className={s.consent}><input type="checkbox" checked={data.consent} onChange={event => update("consent", event.target.checked)} aria-invalid={!!errors.consent} aria-describedby={errors.consent ? "error-consent" : undefined} /><span>Concordo com o uso dos meus dados exclusivamente para responder a esta solicitação de atendimento.</span></label>{errors.consent && <p id="error-consent" className={s.error}>{errors.consent}</p>}
                 </div>}
                 {step === 4 && <><dl className={s.review}><div><dt>Assunto</dt><dd>{subjects.find(subject => subject.id === data.subject)?.label}<button type="button" onClick={() => setStep(1)}>Editar assunto</button></dd></div><div><dt>Linha</dt><dd>{selectedLine?.name ?? "Ainda não sei"}{data.subject !== "outros" && <button type="button" onClick={() => setStep(2)}>Editar linha</button>}</dd></div><div><dt>Contato</dt><dd>{data.name}<br />{data.phone}{data.email && <><br />{data.email}</>}<button type="button" onClick={() => setStep(3)}>Editar contato</button></dd></div>{data.message && <div><dt>Mensagem</dt><dd className={s.message}>{data.message}</dd></div>}</dl>
-                    {!available && <p className={s.notice} role="status">O canal de recebimento ainda está em configuração. O envio está indisponível e seus dados não foram enviados nem armazenados. Suas respostas ficam apenas nesta página enquanto ela estiver aberta.</p>}
+                    <p className={s.notice} role="status">{prepared ? "Mensagem preparada. Confirme o envio no WhatsApp; ainda não há confirmação de recebimento." : whatsappHref ? "Ao continuar, o WhatsApp será aberto com sua mensagem. Confira os dados e confirme o envio no aplicativo. Seus dados não são armazenados por esta opção." : !available ? "Os canais de atendimento estão indisponíveis. Nenhum dado foi enviado ou armazenado." : "Confira seus dados antes de enviar ao atendimento."}</p>
                     {whatsappHref && <a className={s.whatsapp} href={whatsappHref} target="_blank" rel="noopener noreferrer">Abrir WhatsApp com este resumo ↗</a>}
                 </>}
             </div>
             {failure && <p className={s.error} role="alert">{failure}</p>}
             {(errors.subject || errors.line || errors.website) && <p className={s.error} role="alert">{errors.subject || errors.line || errors.website}</p>}
-            <div className={s.navigation}>{step > 1 && <button type="button" className={s.back} disabled={sending} onClick={() => { setFailure(""); setStep(step === 3 && data.subject === "outros" ? 1 : step - 1); }}>← Voltar</button>}<button className={s.next} type="submit" disabled={sending || (step === 4 && !available)}>{sending ? "Enviando…" : step === 4 ? "Enviar solicitação" : step === 3 ? "Revisar solicitação" : "Continuar"}<span aria-hidden="true">↗</span></button></div>
+            <div className={s.navigation}>{step > 1 && <button type="button" className={s.back} disabled={sending} onClick={() => { setFailure(""); setPrepared(false); setStep(step === 3 && data.subject === "outros" ? 1 : step - 1); }}>← Voltar</button>}{step === 4 && available && whatsappHref && <button type="submit" name="channel" value="inbox" className={s.back} disabled={sending}>Enviar ao atendimento do site</button>}<button className={s.next} type="submit" disabled={sending || (step === 4 && !available && !whatsappHref)}>{sending ? "Enviando…" : step === 4 ? whatsappHref ? "Continuar no WhatsApp" : "Enviar solicitação" : step === 3 ? "Revisar solicitação" : "Continuar"}<span aria-hidden="true">↗</span></button></div>
             <p className={s.privacy}>Seus dados são utilizados somente para o atendimento solicitado. Não informe dados sensíveis na mensagem.</p>
         </form>}
     </div>;

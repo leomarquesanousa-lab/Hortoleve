@@ -49,8 +49,8 @@ export const pageDefaults: Record<"sobre"|"tecnologias"|"contato"|"explorer"|"ho
       },
       {
         "key": "sobre-8",
-        "label": "P — Recover Mais, Diamond, Elegance, Majestic e Confort compõem um po",
-        "text": "Recover Mais, Diamond, Elegance, Majestic e Confort compõem um portfólio pensado para diferentes preferências, com identidade própria e atenção ao design, à tecnologia e ao conforto."
+        "label": "P — Colchão Recovery⁺, Diamond, Elegance, Majestic e Confort compõem um po",
+        "text": "Colchão Recovery⁺, Diamond, Elegance, Majestic e Confort compõem um portfólio pensado para diferentes preferências, com identidade própria e atenção ao design, à tecnologia e ao conforto."
       },
       {
         "key": "sobre-9",
@@ -336,8 +336,8 @@ export const pageDefaults: Record<"sobre"|"tecnologias"|"contato"|"explorer"|"ho
       },
       {
         "key": "explorer-2",
-        "label": "P — Nos materiais comerciais cadastrados, Recover Mais informa 8 moto",
-        "text": "Nos materiais comerciais cadastrados, Recover Mais informa 8 motores e 20 tipos de massagem; Elegance informa 6 motores e 20 massagens. Para as outras linhas, consulte os detalhes com a equipe."
+        "label": "P — Nos materiais comerciais cadastrados, Colchão Recovery⁺ informa 8 moto",
+        "text": "Nos materiais comerciais cadastrados, Colchão Recovery⁺ informa 8 motores e 20 tipos de massagem; Elegance informa 6 motores e 20 massagens. Para as outras linhas, consulte os detalhes com a equipe."
       },
       {
         "key": "explorer-3",
@@ -497,8 +497,8 @@ export const pageDefaults: Record<"sobre"|"tecnologias"|"contato"|"explorer"|"ho
       },
       {
         "key": "explorer-2",
-        "label": "P — Nos materiais comerciais cadastrados, Recover Mais informa 8 moto",
-        "text": "Nos materiais comerciais cadastrados, Recover Mais informa 8 motores e 20 tipos de massagem; Elegance informa 6 motores e 20 massagens. Para as outras linhas, consulte os detalhes com a equipe."
+        "label": "P — Nos materiais comerciais cadastrados, Colchão Recovery⁺ informa 8 moto",
+        "text": "Nos materiais comerciais cadastrados, Colchão Recovery⁺ informa 8 motores e 20 tipos de massagem; Elegance informa 6 motores e 20 massagens. Para as outras linhas, consulte os detalhes com a equipe."
       },
       {
         "key": "explorer-3",
@@ -589,36 +589,6 @@ export const pageDefaults: Record<"sobre"|"tecnologias"|"contato"|"explorer"|"ho
         "text": "Conheça nossas linhas"
       },
       {
-        "key": "home-2",
-        "label": "Seu ritmo.",
-        "text": "Seu ritmo."
-      },
-      {
-        "key": "home-3",
-        "label": "Uma escolha com tempo e atenção.",
-        "text": "Uma escolha com tempo e atenção."
-      },
-      {
-        "key": "home-4",
-        "label": "Seu espaço.",
-        "text": "Seu espaço."
-      },
-      {
-        "key": "home-5",
-        "label": "Inspiração para o seu quarto.",
-        "text": "Inspiração para o seu quarto."
-      },
-      {
-        "key": "home-6",
-        "label": "Sua escolha.",
-        "text": "Sua escolha."
-      },
-      {
-        "key": "home-7",
-        "label": "Conheça antes de conversar.",
-        "text": "Conheça antes de conversar."
-      },
-      {
         "key": "home-8",
         "label": "TECNOLOGIAS & EXPERIÊNCIAS",
         "text": "TECNOLOGIAS & EXPERIÊNCIAS"
@@ -639,41 +609,6 @@ export const pageDefaults: Record<"sobre"|"tecnologias"|"contato"|"explorer"|"ho
         "text": "/ EM PLANEJAMENTO"
       },
       {
-        "key": "home-12",
-        "label": "Mais pausa.",
-        "text": "Mais pausa."
-      },
-      {
-        "key": "home-13",
-        "label": "Mais presença.",
-        "text": "Mais presença."
-      },
-      {
-        "key": "home-14",
-        "label": "HORTOLEVE",
-        "text": "HORTOLEVE"
-      },
-      {
-        "key": "home-15",
-        "label": "A HORTOLEVE",
-        "text": "A HORTOLEVE"
-      },
-      {
-        "key": "home-16",
-        "label": "Espaço para uma nova história.",
-        "text": "Espaço para uma nova história."
-      },
-      {
-        "key": "home-17",
-        "label": "Uma nova apresentação digital começa aqui: mais espaço para conhecer a",
-        "text": "Uma nova apresentação digital começa aqui: mais espaço para conhecer a marca, explorar os produtos e conversar sobre o descanso."
-      },
-      {
-        "key": "home-18",
-        "label": "A trajetória e os marcos da Hortoleve serão apresentados após validaçã",
-        "text": "A trajetória e os marcos da Hortoleve serão apresentados após validação do conteúdo institucional."
-      },
-      {
         "key": "home-19",
         "label": "PODEMOS AJUDAR?",
         "text": "PODEMOS AJUDAR?"
@@ -687,11 +622,6 @@ export const pageDefaults: Record<"sobre"|"tecnologias"|"contato"|"explorer"|"ho
         "key": "home-21",
         "label": "UMA CONVERSA É UM BOM COMEÇO",
         "text": "UMA CONVERSA É UM BOM COMEÇO"
-      },
-      {
-        "key": "home-22",
-        "label": "O seu próximo descanso começa com uma escolha.",
-        "text": "O seu próximo descanso começa com uma escolha."
       },
       {
         "key": "home-23",

@@ -30,6 +30,222 @@ function loader(overrides = {}) {
 }
 const user = { id: "test-user", name: "Test", email: "test@example.test", role: "ADMIN", active: true, permissions: [] };
 
+test("Future e Cervical Orto Plus têm galerias independentes, materiais próprios e ficam fora da Home", () => {
+    const load = loader();
+    const { products, categories, productHref } = load("src/modules/catalog/data.ts");
+    const { presentations } = load("src/modules/catalog/presentations.ts");
+    const cases = [
+        ["future", "future", "future"],
+        ["cervical-orto-plus", "cervicalortoplus", "cervical"],
+    ];
+    for (const [line, folder, filename] of cases) {
+        const product = products.find(p => p.slug === "travesseiro-" + line);
+        const presentation = presentations[product.slug];
+        assert.equal(products.filter(p => p.slug === product.slug).length, 1);
+        assert.equal(categories.find(c => c.id === product.categoryId).parentId, "travesseiros");
+        assert.equal(productHref(product), `/produtos/linha-${line}/travesseiro-${line}`);
+        assert.equal(product.featured, false);
+        assert.equal(product.media[0].src, presentation.media[0].src);
+        assert.deepEqual(presentation.media.map(m => m.src), [1, 2, 3].map(n => `/travesseiros/${folder}/travesseiro_${filename}_${n}.png`));
+        assert.ok(presentation.specifications.some(s => s.value === "Malha"));
+        assert.ok(presentation.specifications.some(s => s.value === "Soft"));
+        assert.ok(!presentation.specifications.some(s => /garantia|densidade|certificação/i.test(s.label)));
+        assert.ok(presentation.media.every(m => m.width / m.height === 1.5));
+    }
+    assert.ok(presentations["travesseiro-future"].technologies.includes("Cerâmica Future"));
+    assert.ok(!presentations["travesseiro-cervical-orto-plus"].technologies.includes("Cerâmica Future"));
+    assert.ok(presentations["travesseiro-cervical-orto-plus"].technologies.includes("Formato ergonômico"));
+});
+
+test("Menu organiza oito categorias principais e linhas exclusivamente dentro dos pais", () => {
+    const load = loader();
+    const { categories } = load("src/modules/catalog/data.ts");
+    const { categoryNavigation } = load("src/modules/catalog/navigation.ts");
+    const tree = categoryNavigation(categories);
+    assert.deepEqual(tree.map(n => n.label), ["Colchões", "Poltronas", "Vibrocar", "Linha a Vácuo", "Cama Box", "Travesseiros", "Cabeceiras", "Dream Patch"]);
+    assert.deepEqual(tree.find(n => n.category.id === "poltronas").children.map(n => n.category.id), ["linha-divan", "linha-house"]);
+    assert.deepEqual(tree.find(n => n.category.id === "travesseiros").children.map(n => n.category.id), ["linha-viscoelastico", "linha-future", "linha-cervical-orto-plus"]);
+    assert.equal(tree.find(n => n.label === "Dream Patch").category.slug, "dream-pet");
+    const extra = { id: "future-line", parentId: "travesseiros", name: "Futura linha", slug: "future-line" };
+    assert.ok(categoryNavigation([...categories, extra]).find(n => n.category.id === "travesseiros").children.some(n => n.category.id === extra.id));
+});
+
+test("Viscoelástico preserva materiais documentados, ordem 1–3 e categoria Travesseiros", () => {
+    const load = loader();
+    const { products, categories, productHref, getCategoryProducts } = load("src/modules/catalog/data.ts");
+    const { presentations } = load("src/modules/catalog/presentations.ts");
+    const product = products.find(p => p.id === "travesseiro-viscoelastico");
+    const p = presentations[product.slug];
+    assert.equal(categories.find(c => c.id === product.categoryId).parentId, "travesseiros");
+    assert.equal(getCategoryProducts("travesseiros").length, 3);
+    assert.equal(product.featured, false);
+    assert.equal(productHref(product), "/produtos/linha-viscoelastico/travesseiro-viscoelastico");
+    assert.deepEqual(p.media.map(m => m.src), [1, 2, 3].map(n => `/travesseiros/viscoelastico/travesseiro_viscoelastico_${n}.png`));
+    assert.ok(p.technologies.includes("Espuma viscoelástica"));
+    assert.ok(p.specifications.some(s => s.value === "Tecido branco"));
+    assert.ok(!p.specifications.some(s => /garantia|densidade|certificação/i.test(s.label)));
+});
+
+test("House integra Poltronas, mantém galeria 1–2–3, cores e recursos sem inventar especificações", () => {
+    const load = loader();
+    const { products, categories, getCategoryProducts, productHref } = load("src/modules/catalog/data.ts");
+    const { presentations } = load("src/modules/catalog/presentations.ts");
+    const product = products.find(p => p.id === "house");
+    const p = presentations.house;
+    assert.equal(products.filter(p => p.id === "house").length, 1);
+    assert.equal(categories.find(c => c.id === product.categoryId).parentId, "poltronas");
+    assert.ok(getCategoryProducts("poltronas").some(p => p.id === "house"));
+    assert.ok(getCategoryProducts("poltronas").some(p => p.id === "divan"));
+    assert.equal(getCategoryProducts("linha-house").length, 1);
+    assert.equal(product.featured, false);
+    assert.equal(productHref(product), "/produtos/linha-house/house");
+    assert.equal(product.media[0].src, p.media[0].src);
+    assert.deepEqual(p.media.map(m => m.src), [1, 2, 3].map(n => `/poltronas/house/poltronahouse_${n}.png`));
+    assert.equal(p.technicalSheetId, p.media[1].id);
+    assert.ok(p.specifications.some(s => s.value === "Preto, bege e marrom"));
+    assert.ok(p.specifications.some(s => s.value === "Tecido suede"));
+    assert.ok(p.specifications.some(s => s.value === "Controle Vibro"));
+    assert.ok(!p.specifications.some(s => /garantia|capacidade|\bD\d{2}\b/i.test(s.label + s.value)));
+    assert.ok(!p.technologies.some(t => /magnético|infravermelho|cromoterapia/i.test(t)));
+});
+
+test("Divan preserva hierarquia Poltronas, galeria 1–3 e dados documentados sem entrar na Home", () => {
+    const load = loader();
+    const { products, categories, getCategoryProducts, productHref } = load("src/modules/catalog/data.ts");
+    const { presentations } = load("src/modules/catalog/presentations.ts");
+    const product = products.find(p => p.id === "divan");
+    assert.equal(categories.find(c => c.id === product.categoryId).parentId, "poltronas");
+    assert.equal(products.filter(p => p.id === "divan").length, 1);
+    assert.equal(product.featured, false);
+    assert.ok(getCategoryProducts("poltronas").includes(product));
+    assert.ok(getCategoryProducts("linha-divan").includes(product));
+    assert.equal(productHref(product), "/produtos/linha-divan/divan");
+    const p = presentations.divan;
+    assert.deepEqual(p.media.map(m => m.src.match(/-(\d)\.png$/)[1]), ["1", "2", "3"]);
+    assert.equal(product.media[0].src, p.media[0].src);
+    assert.equal(p.technicalSheetId, p.media[2].id);
+    assert.ok(p.specifications.some(s => s.value === "Preto e marrom"));
+    assert.ok(p.specifications.some(s => s.value === "Controle Vibro"));
+    assert.ok(!p.specifications.some(s => /garantia|capacidade|\bD\d{2}\b/i.test(s.label + s.value)));
+});
+
+test("Recovery Mais reutiliza apresentação premium, capa e cinco arquivos na ordem explícita", () => {
+    const load = loader();
+    const { presentations } = load("src/modules/catalog/presentations.ts");
+    const { products, productHref } = load("src/modules/catalog/data.ts");
+    const product = products.find(p => p.slug === "recover-mais");
+    const p = presentations[product.slug];
+    assert.equal(product.name, "Colchão Recovery⁺");
+    assert.equal(p.title, product.name);
+    assert.equal(p.displayName, product.name);
+    assert.ok(product.media[0].alt.includes("Colchão Recovery+"));
+    assert.ok(p.media.every(m => !/Recovery Mais|Recover Mais/.test(m.alt)));
+    const seo = load("src/modules/cms/initial-content.ts").initialContent.find(i => i.resource === "seo" && i.data.route === productHref(product));
+    assert.equal(seo.data.title, "Colchão Recovery+");
+    assert.equal(productHref(product), "/produtos/colchoes/recover-mais");
+    assert.equal(product.media[0].src, p.media[0].src);
+    assert.deepEqual(p.media.map(m => m.src), [1, 2, 3, 4, 5].map(n => `/recover+/${n}.png`));
+    for (const m of p.media) { assert.ok(fs.existsSync("public" + m.src)); assert.equal(m.width / m.height, 1.5); }
+    assert.equal(p.technicalSheetId, p.media[2].id);
+    assert.ok(!p.specifications.some(s => /garantia|capacidade/i.test(s.label)));
+});
+
+test("WhatsApp do formulário codifica dados, identifica origem e rejeita destinos falsos", () => {
+    const { leadWhatsappUrl } = loader()("src/modules/leads/whatsapp.ts");
+    const input = { name: "Cliente Teste", phone: "71999999999", email: "test@example.test", message: "Dúvida & conforto?", subject: "colchoes", line: "recover-mais", consent: true, website: "" };
+    const url = new URL(leadWhatsappUrl("https://wa.me/5571996461138", input, "Recovery Mais"));
+    assert.equal(url.origin + url.pathname, "https://wa.me/5571996461138");
+    const message = url.searchParams.get("text");
+    for (const value of [input.name, input.phone, input.email, input.message, "Recovery Mais", "Origem: Página Contato"]) assert.ok(message.includes(value));
+    assert.equal(leadWhatsappUrl("https://evil.test/5571996461138", input), null);
+    assert.equal(leadWhatsappUrl(null, input), null);
+    const { validateLead } = loader()("src/modules/leads/contracts.ts");
+    assert.ok(validateLead({ ...input, consent: false }, ["recover-mais"]).errors.consent);
+    assert.ok(validateLead({ ...input, website: "spam" }, ["recover-mais"]).errors.website);
+});
+
+test("Home preserva seis produtos e experiências verdes, com FAQ em seção própria", () => {
+    const card = () => null, faq = () => null;
+    const load = loader({
+        "@/components/HomeHero": { HomeHero: () => null },
+        "@/components/SectionHeading": { SectionHeading: () => null },
+        "@/components/ProductCard": { ProductCard: card },
+        "@/components/CTAWhatsApp": { CTAWhatsApp: () => null },
+        "@/components/FAQ": { FAQ: faq },
+        "@/components/site.module.css": { dark: "dark", section: "section", helpSection: "helpSection" },
+    });
+    const { products } = load("src/modules/catalog/data.ts");
+    const { ApprovedHome } = load("src/components/ApprovedHome.tsx");
+    const nodes = []; const visit = (node, parents = []) => {
+        if (!node || typeof node !== "object") return;
+        if (Array.isArray(node)) { node.forEach(n => visit(n, parents)); return; }
+        nodes.push({ node, parents }); visit(node.props?.children, [...parents, node]);
+    };
+    visit(ApprovedHome({ content: null, snapshot: { products } }));
+    const ids = nodes.filter(({ node }) => node.type === card).map(({ node }) => node.props.product.id);
+    assert.deepEqual(ids, ["recover-mais", "diamond", "elegance", "majestic", "comfort", "elite-azul"]);
+    assert.equal(new Set(ids).size, 6);
+    assert.equal(nodes.filter(({ node }) => node.props?.className === "dark").length, 1);
+    const faqParents = nodes.find(({ node }) => node.type === faq).parents;
+    assert.ok(!faqParents.some(node => node.props?.className === "dark"));
+    assert.ok(faqParents.some(node => node.props?.className === "section helpSection"));
+    assert.ok(nodes.some(({ node }) => node.props?.title === "Descubra novas possibilidades."));
+    const slots = load("src/modules/content/page-defaults.ts").pageDefaults.home.texts;
+    assert.ok(!slots.some(slot => /^home-(2|3|4|5|6|7|15|16|17|18|22)$/.test(slot.key)));
+    const published = [{ id: "published", question: "Conteúdo CMS", answer: "Preservar publicação existente" }];
+    nodes.length = 0;
+    visit(ApprovedHome({ content: { faq: published }, snapshot: { products } }));
+    assert.equal(nodes.find(({ node }) => node.type === faq).node.props.items, published);
+});
+
+test("FAQ contém os quatro textos comerciais e parágrafos fornecidos, sem promessa de teste", () => {
+    const load = loader(); const { faqs } = load("src/modules/content/data.ts");
+    assert.deepEqual(faqs.map(faq => faq.question), ["Os colchões apresentados estão disponíveis para compra?", "Como funciona o atendimento para escolher meu colchão?", "É possível conhecer melhor os modelos antes de decidir?", "Posso comprar meu colchão diretamente pelo site?"]);
+    assert.deepEqual(faqs.map(faq => faq.answer.split("\n\n").length), [2, 3, 3, 4]);
+    assert.ok(faqs[0].answer.includes("até 30 dias"));
+    assert.ok(faqs[1].answer.includes("mediante disponibilidade"));
+    assert.ok(!faqs.some(faq => /simulador|período de teste|teste gratuito/i.test(faq.question + faq.answer)));
+    const imported = load("src/modules/cms/initial-content.ts").initialContent.find(i => i.resource === "home");
+    assert.deepEqual(imported.data.faq, faqs);
+});
+
+test("Orbit muda de contraste somente ao cruzar o rodapé e restaura ao sair", () => {
+    const { footerOrbitPosition } = loader()("src/components/social-orbit-position.ts");
+    for (const size of [50, 56]) {
+        const icon = { left: 900, right: 900 + size, top: 700, bottom: 700 + size };
+        const footer = { left: 0, right: 1000, top: icon.bottom, bottom: 1600 };
+        assert.equal(footerOrbitPosition(icon, footer, []).overFooter, false);
+        assert.equal(footerOrbitPosition(icon, { ...footer, top: icon.bottom - 1 }, []).overFooter, true);
+        assert.equal(footerOrbitPosition(icon, { ...footer, top: 600 }, []).overFooter, true);
+        assert.equal(footerOrbitPosition(icon, { ...footer, top: 790 }, []).overFooter, false);
+        assert.equal(footerOrbitPosition(icon, { ...footer, left: 0, right: 800, top: 600 }, []).overFooter, false);
+    }
+});
+
+test("Orbit desvia de links do rodapé com deslocamento limitado e considera a posição final", () => {
+    const { footerOrbitPosition } = loader()("src/components/social-orbit-position.ts");
+    const icon = { left: 924, right: 980, top: 700, bottom: 756 };
+    const footer = { left: 0, right: 1000, top: 650, bottom: 1600 };
+    const link = { left: 910, right: 980, top: 730, bottom: 748 };
+    assert.deepEqual(footerOrbitPosition(icon, footer, [link]), { lift: 34, overFooter: true });
+    assert.deepEqual(footerOrbitPosition(icon, { ...footer, top: 745 }, [{ ...link, top: 750 }]), { lift: 14, overFooter: false });
+    assert.equal(footerOrbitPosition(icon, footer, [link], 20).lift, 0);
+});
+
+test("WhatsApp comercial usa configuração única e redes sem perfil continuam sem destino", () => {
+    const load = loader(); const { site, whatsappUrl } = load("src/config/site.ts");
+    const { socialChannels, socialChannelUrl } = load("src/config/social.ts");
+    assert.equal(site.whatsapp, "5571996461138");
+    const link = new URL(whatsappUrl("Olá! Quero conhecer o Elite Azul."));
+    assert.equal(link.hostname, "wa.me"); assert.equal(link.pathname, "/" + site.whatsapp);
+    assert.equal(link.searchParams.get("text"), "Olá! Quero conhecer o Elite Azul.");
+    assert.equal(whatsappUrl("", site.whatsapp), "https://wa.me/" + site.whatsapp);
+    assert.equal(whatsappUrl("Teste", null), null);
+    assert.equal(whatsappUrl("Teste", "número inválido"), null);
+    assert.ok(socialChannelUrl(socialChannels.find(channel => channel.id === "whatsapp")));
+    for (const channel of socialChannels.filter(channel => channel.id !== "whatsapp")) assert.equal(socialChannelUrl(channel), null);
+});
+
 test("conteúdo inicial é validável, único e preserva cards, galerias e páginas reais", () => {
     const load = loader();
     const { initialContent } = load("src/modules/cms/initial-content.ts");
@@ -43,11 +259,11 @@ test("conteúdo inicial é validável, único e preserva cards, galerias e pági
             assert.deepEqual(validated.gallery.map(m => m.src), item.data.gallery.map(m => m.src));
         }
     }
-    assert.equal(initialContent.filter(i => i.resource === "produtos").length, 5);
-    assert.equal(initialContent.filter(i => i.resource === "categorias").length, 8);
+    assert.equal(initialContent.filter(i => i.resource === "produtos").length, 12);
+    assert.equal(initialContent.filter(i => i.resource === "categorias").length, 13);
     assert.equal(initialContent.find(i => i.resource === "home").data.banners.length, 3);
     assert.equal(initialContent.find(i => i.resource === "paginas" && i.id === "tecnologias").data.slides.length, 1);
-    assert.equal(initialContent.filter(i => i.resource === "seo").length, 18);
+    assert.equal(initialContent.filter(i => i.resource === "seo").length, 30);
     for (const asset of initialContent.filter(i => i.resource === "midia")) {
         let directory = "public";
         for (const segment of asset.data.src.split("/").filter(Boolean)) {
@@ -73,7 +289,7 @@ test("pré-importação exibe fonte sem gravar e bloqueia edição implícita", 
     const tx = { $queryRaw: async () => [], siteSetting: { findMany: async () => [], findUnique: async () => null, upsert: async () => { writes++; } } };
     const repo = loader({ "@/modules/admin/database": { getDatabase: () => ({ ...tx, $transaction: async fn => fn(tx) }) } })("src/modules/cms/repository.ts");
     const records = await repo.listDocuments("produtos");
-    assert.equal(records.length, 5); assert.ok(records.every(r => r.source === "static"));
+    assert.equal(records.length, 12); assert.ok(records.every(r => r.source === "static"));
     await assert.rejects(repo.saveDocument({ ...user, role: "OWNER" }, "produtos", records[0].draft, records[0].id, 0, true), /importação inicial exige autorização/);
     assert.equal(writes, 0);
 });
@@ -451,7 +667,7 @@ test("CMS público desativado preserva catálogo sem consultar banco", async () 
     try {
         const pub = loader({ "next/server": { connection: async () => {} }, "@/modules/admin/database": { getDatabase: () => { throw Error("não consultar"); } } })("src/modules/cms/public.ts");
         const snapshot = await pub.getPublicSnapshot();
-        assert.equal(snapshot.enabled, false); assert.equal(snapshot.products.length, 5); assert.equal(snapshot.categories.length, 8);
+        assert.equal(snapshot.enabled, false); assert.equal(snapshot.products.length, 12); assert.equal(snapshot.categories.length, 13);
     } finally { if (previous === undefined) delete process.env.CMS_PUBLIC_ENABLED; else process.env.CMS_PUBLIC_ENABLED = previous; }
 });
 

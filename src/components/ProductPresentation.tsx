@@ -11,14 +11,16 @@ const icons = ["M4 8Q8 2 12 8T20 8M4 16Q8 10 12 16T20 16", "M4 5H20V19H4ZM4 10H2
 export async function ProductPresentation({ product, presentation: p }: { product: Product; presentation: Presentation }) {
     const { categories, settings } = await getPublicSnapshot();
     const category = categories.find(item => item.id === product.categoryId);
+    const parent = categories.find(item => item.id === category?.parentId);
+    const isMattress = product.categoryId === "colchoes" || product.categoryId === "linha-a-vacuo";
     const name = p.displayName ?? product.name;
-    const contact = whatsappUrl("Olá! Gostaria de consultar sobre a Linha " + name + ".", settings.whatsapp);
+    const contact = whatsappUrl("Olá! Gostaria de consultar sobre " + (isMattress || category?.parentId === "poltronas" ? "a Linha " : "") + name + ".", settings.whatsapp);
     const sheet = p.media.find(image => image.id === p.technicalSheetId);
     return <article className={s.page}>
-        <nav className={s.breadcrumbs} aria-label="Navegação estrutural"><Link href="/">Início</Link><span>/</span><Link href="/produtos">Produtos</Link><span>/</span>{category && <><Link href={"/produtos/" + category.slug}>{category.name}</Link><span>/</span></>}<span>/</span><span aria-current="page">{name}</span></nav>
+        <nav className={s.breadcrumbs} aria-label="Navegação estrutural"><Link href="/">Início</Link><span>/</span><Link href="/produtos">Produtos</Link><span>/</span>{parent && <><Link href={"/produtos/" + parent.slug}>{parent.name}</Link><span>/</span></>}{category && <><Link href={"/produtos/" + category.slug}>{category.name}</Link><span>/</span></>}<span>/</span><span aria-current="page">{name}</span></nav>
         <div className={s.introduction}>
             <ProductGallery media={p.media} interactive />
-            <div className={s.copy}><p className={s.eyebrow}>HORTOLEVE · LINHAS DE COLCHÕES</p><h1>{p.title}</h1><p className={s.subtitle}>{p.subtitle}</p>
+            <div className={s.copy}><p className={s.eyebrow}>{isMattress ? "HORTOLEVE · LINHAS DE COLCHÕES" : "HORTOLEVE · " + (parent?.name ?? category?.name ?? "PRODUTOS").toLocaleUpperCase("pt-BR")}</p><h1>{p.title}</h1><p className={s.subtitle}>{p.subtitle}</p>
                 {p.paragraphs.map(paragraph => <p key={paragraph}>{paragraph}</p>)}
                 <a className={s.contact} href={contact ?? "/contato?linha=" + product.slug} {...(contact ? { target: "_blank", rel: "noopener noreferrer" } : {})}>Consultar sobre a Linha {name}<span aria-hidden="true">↗</span></a>
             </div>
@@ -33,7 +35,7 @@ export async function ProductPresentation({ product, presentation: p }: { produc
             {sheet && <section className={s.sheet} aria-labelledby="sheet-title"><h2 id="sheet-title">Ficha técnica ilustrada</h2><p>Consulte a apresentação completa e amplie para ver os detalhes.</p><ProductGallery media={[sheet]} interactive compact /></section>}
         </div>
         <section className={s.section} aria-labelledby="sizes-title"><p className={s.eyebrow}>ENCONTRE A SUA MEDIDA</p><h2 id="sizes-title">Tamanhos da linha</h2>
-            <ul className={s.sizes}>{p.sizes.map(size => <li key={size.name}><span className={s.bed} aria-hidden="true" /><h3>{size.name}</h3><p>{size.dimensions}</p></li>)}</ul>
+            <ul className={s.sizes}>{p.sizes.map(size => <li key={size.name}>{isMattress && <span className={s.bed} aria-hidden="true" />}<h3>{size.name}</h3><p>{size.dimensions}</p></li>)}</ul>
         </section>
     </article>;
 }

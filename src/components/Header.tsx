@@ -2,13 +2,14 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { usePublicConfig } from "./PublicConfig";
+import { usePublicConfig, publicWhatsapp } from "./PublicConfig";
 import { ProductsNavigation } from "./ProductsNavigation";
 import { BrandLogo } from "./BrandLogo";
 import styles from "./site.module.css";
 const links = [["/tecnologias", "Tecnologias"], ["/sobre", "A Hortoleve"], ["/contato", "Contato"]];
 export function Header() {
-    const { categories } = usePublicConfig();
+    const { categories, settings } = usePublicConfig();
+    const contact = publicWhatsapp(settings.whatsapp, "Olá! Gostaria de conhecer as linhas da Hortoleve.");
     const [compact, setCompact] = useState(false);
     useEffect(() => {
         let frame = 0;
@@ -18,4 +19,4 @@ export function Header() {
         window.addEventListener("scroll", onScroll, { passive: true });
         return () => { window.removeEventListener("scroll", onScroll); cancelAnimationFrame(frame); };
     }, []);
-    return <div className={styles.headerShell}><header className={styles.header} data-compact={compact}><Link className={styles.brand} href="/" aria-label="Hortoleve — início"><BrandLogo /></Link><nav className={styles.desktopNav} aria-label="Principal"><ProductsNavigation categories={categories} />{links.map(([href, label]) => <Link key={href} href={href}>{label}</Link>)}</nav><Link className={styles.headerContact} href="/contato">Vamos conversar ↗</Link><details className={styles.mobileNav} onKeyDown={event => { if (event.key === "Escape") { event.preventDefault(); event.currentTarget.open = false; event.currentTarget.querySelector("summary")?.focus(); } }}><summary>Menu</summary><nav aria-label="Principal móvel" onClick={event => { if ((event.target as HTMLElement).closest("a")) event.currentTarget.closest("details")?.removeAttribute("open"); }}><ProductsNavigation categories={categories} mobile />{links.map(([href, label]) => <Link key={href} href={href}>{label}</Link>)}</nav></details></header></div>; }
+    return <div className={styles.headerShell}><header className={styles.header} data-compact={compact}><Link className={styles.brand} href="/" aria-label="Hortoleve — início"><BrandLogo /></Link><nav className={styles.desktopNav} aria-label="Principal"><ProductsNavigation categories={categories} />{links.map(([href, label]) => <Link key={href} href={href}>{label}</Link>)}</nav>{contact ? <a className={styles.headerContact} href={contact} target="_blank" rel="noopener noreferrer">Vamos conversar ↗</a> : <Link className={styles.headerContact} href="/contato">Vamos conversar ↗</Link>}<details className={styles.mobileNav} onKeyDown={event => { if (event.key === "Escape") { event.preventDefault(); event.currentTarget.open = false; event.currentTarget.querySelector("summary")?.focus(); } }}><summary>Menu</summary><nav aria-label="Principal móvel" onClick={event => { if ((event.target as HTMLElement).closest("a")) event.currentTarget.closest("details")?.removeAttribute("open"); }}><ProductsNavigation categories={categories} mobile />{links.map(([href, label]) => <Link key={href} href={href}>{label}</Link>)}{contact && <a href={contact} target="_blank" rel="noopener noreferrer">WhatsApp ↗</a>}</nav></details></header></div>; }

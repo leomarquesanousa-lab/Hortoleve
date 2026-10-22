@@ -28,9 +28,6 @@
 .textLink{display:inline-block;font-size:12px;border-bottom:1px solid var(--gold);padding:8px 0;margin-top:20px}
 .heroLinks{display:flex;align-items:center;gap:25px;flex-wrap:wrap}
 .heroLinks .textLink{margin:0}
-.strip{display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1px solid #d9d2c6;padding:30px 6%;gap:25px;max-width:1440px;margin:auto}
-.strip p{font-size:12px}
-.strip span{display:block;font-family:var(--font-display),serif;font-size:25px;margin-bottom:4px}
 .sectionTop{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:35px}
 .sectionTop .heading{margin:0}
 .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:40px}
@@ -46,20 +43,15 @@
 .experience h3{margin:25px 0 18px;font-size:32px}
 .experience p{font-size:13px;color:inherit;opacity:.85}
 .status{font-size:9px;letter-spacing:1.7px;text-transform:uppercase;border:1px solid currentColor;padding:5px 8px;display:inline-block}
-.story{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
-.storyVisual{min-height:400px;background:var(--sand);display:grid;place-content:center;padding:55px;text-align:center}
-.storyVisual span{font-family:var(--font-display),serif;font-size:clamp(3rem,5vw,5rem);line-height:1}
-.storyVisual small{margin-top:25px;letter-spacing:3px;font-size:10px}
-.story p{margin:25px 0;color:var(--graphite)}
-.faq details{border-top:1px solid #d6ccbd;padding:23px 0}
-.faq details:last-child{border-bottom:1px solid #d6ccbd}
-.faq summary{display:flex;justify-content:space-between;gap:25px;font-size:14px;list-style:none}
+.faq details{border-top:1px solid #c2a67566;padding:20px 0}
+.faq details:last-child{border-bottom:1px solid #c2a67566}
+.faq summary{display:flex;align-items:center;justify-content:space-between;gap:24px;min-height:44px;font-size:15px;line-height:1.6;list-style:none}
 .faq summary::-webkit-details-marker{display:none}
+.faq summary span{display:grid;place-items:center;flex:none;width:24px;height:24px;color:#C2A675;font-size:24px;transition:transform .22s}
 .faq details[open] summary span{transform:rotate(45deg)}
-.faq details p{font-size:13px;color:var(--graphite);padding-top:18px}
-.cta{background:#e8e0d3;text-align:center;padding:70px 6%}
-.cta h2{max-width:650px;margin:0 auto 25px}
-.cta p{margin:0 auto 25px}
+.faq details p{max-width:80ch;font-size:14px;line-height:1.85;color:#2A2A2A;padding-top:16px}
+.faq details[open] p{animation:faqReveal .22s ease-out}
+@keyframes faqReveal{from{opacity:0;transform:translateY(-3px)}to{opacity:1;transform:none}}
 .footer{max-width:1440px;margin:auto;padding:60px 6% 25px;display:grid;grid-template-columns:1fr 1fr;gap:35px}
 .footer p{font-size:12px;margin-top:20px}
 .footer nav{display:flex;gap:25px;justify-content:flex-end;align-items:center;font-size:12px}
@@ -85,7 +77,6 @@
 .hero{min-height:400px}
 .heroCopy{padding:32px 8%}
 .heroCopy h1{font-size:3.4rem}
-.story{gap:35px}
 .experienceGrid{gap:20px}
 .footer nav{flex-wrap:wrap}
 .detail{gap:30px}
@@ -101,20 +92,15 @@
 .heroCopy{padding:32px 6%}
 .heroCopy h1{font-size:3.3rem;max-width:400px}
 .heroArt{height:240px}
-.strip{grid-template-columns:1fr;gap:18px;padding:28px 6%}
-.strip p{display:flex;align-items:center;gap:20px}
-.strip span{font-size:24px;min-width:120px;margin:0}
 .section{padding:60px 6%}
 .sectionTop{display:block}
 .sectionTop>a{margin-top:20px}
-.grid,.story,.experienceGrid,.detail{grid-template-columns:1fr}
+.grid,.experienceGrid,.detail{grid-template-columns:1fr}
 .grid{gap:35px}
 .experienceGrid{gap:35px}
-.storyVisual{min-height:300px}
 .footer{grid-template-columns:1fr;padding-top:40px}
 .footer nav{justify-content:flex-start;gap:18px}
 .intro{padding-top:45px}
-.cta{padding:55px 6%}
 }
 
 
@@ -124,15 +110,23 @@
 .header .brand{flex-shrink:0}
 .header a:focus-visible,.header summary:focus-visible{outline-color:var(--cream)}
 .linesSection{padding-top:48px;padding-bottom:48px}
-.linesGrid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:32px 28px;align-items:stretch}
-.linesGrid>article{grid-column:span 2}
+.linesGrid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:0 28px;align-items:stretch;min-width:0}
+.linesGrid>article{grid-column:span 2;margin-bottom:32px}
 .linesGrid>article:nth-child(4){grid-column:2/span 2}
 .linesGrid>article:nth-child(5){grid-column:4/span 2}
+.homeLinesGrid>article:nth-child(n){grid-column:span 2}
+.helpSection{margin:0 auto;padding-block:48px 52px;background:#F7F4EF;color:#2A2A2A}
+.helpSection .heading{margin-bottom:28px}
+.helpSection .eyebrow{color:#7d6745}
+.helpContact{margin-top:32px;padding-top:28px;border-top:1px solid #c2a67566}
+.helpContact p{margin-bottom:18px}
 .productPlaceholder{aspect-ratio:1.4;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;background:linear-gradient(135deg,#eee8de,#e2d8c9);color:var(--green);text-align:center;padding:22px;font-size:12px}
 .placeholderMark{font-family:var(--font-display),Georgia,serif;font-size:48px;line-height:1.1;border-bottom:1px solid var(--gold);padding:0 16px 12px;margin-bottom:8px}
 .productPlaceholder small{font-size:10px;color:var(--graphite)}
 @media(min-width:641px) and (max-width:1100px){.linesGrid{grid-template-columns:repeat(2,minmax(0,1fr))}.linesGrid>article:nth-child(n){grid-column:auto}}
-@media(max-width:640px){.linesGrid{grid-template-columns:1fr;gap:30px}.linesGrid>article:nth-child(n){grid-column:auto}.linesSection{padding-top:36px;padding-bottom:36px}.heroCopy>p:not(:first-child){margin-bottom:24px}.heroLinks{gap:16px}.hero .eyebrow{margin-bottom:16px}}
+@media(max-width:640px){.linesGrid{grid-template-columns:1fr;gap:0 24px}.linesGrid>article:nth-child(n){grid-column:auto}.linesSection{padding-top:36px;padding-bottom:36px}.heroCopy>p:not(:first-child){margin-bottom:24px}.heroLinks{gap:16px}.hero .eyebrow{margin-bottom:16px}}
+@media(min-width:641px) and (max-width:1100px){.homeLinesGrid>article:nth-child(n){grid-column:auto}}
+@media(max-width:640px){.homeLinesGrid>article:nth-child(n){grid-column:auto}.helpSection{padding-block:36px 40px}.faq summary{font-size:14px;gap:16px}.helpContact{margin-top:26px;padding-top:24px}}
 
 .heroCopy>.eyebrow{margin-bottom:14px}
 @media(min-width:641px) and (max-width:760px){.header{position:relative}.desktopNav{display:none}.mobileNav{display:block}.mobileNav summary{padding:10px;font-size:13px}.mobileNav nav{position:absolute;top:100%;left:0;right:0;background:var(--green);color:var(--cream);padding:24px 6%;display:grid;gap:20px;max-height:calc(100dvh - 100px);overflow-y:auto;z-index:40;border-bottom:1px solid var(--gold)}}
