@@ -14,7 +14,9 @@ export function localStoragePath() {
 export async function storageRoot() {
     const directory = localStoragePath();
     if (!directory) throw new Error("Configure um caminho absoluto para CMS_STORAGE_PATH.");
-    const resolved = await realpath(directory);
+    // Storage externo existe somente no servidor; não deve entrar no bundle.
+    // O comentário afeta apenas o tracing, mantendo realpath e todas as validações.
+    const resolved = await realpath(/* turbopackIgnore: true */ directory);
     const application = await realpath(process.cwd());
     const relative = path.relative(application, resolved);
     if (!relative || (!relative.startsWith(".." + path.sep) && relative !== ".." && !path.isAbsolute(relative))) throw new Error("Storage deve ficar fora da pasta da aplicação.");

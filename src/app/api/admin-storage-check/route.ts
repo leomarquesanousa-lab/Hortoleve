@@ -2,7 +2,6 @@ import { currentAdmin } from "@/modules/admin/session";
 import { adminEnvironment } from "@/modules/admin/environment";
 import { probeLocalStorage } from "@/modules/cms/local-storage";
 
-export const runtime = "nodejs";
 const headers = { "Cache-Control": "no-store" };
 
 export async function POST(request: Request) {
