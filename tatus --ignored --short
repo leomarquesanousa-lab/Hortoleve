@@ -1,0 +1,80 @@
+warning: in the working copy of '.env.example', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'next.config.ts', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'package-lock.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'package.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/app/admin/(protected)/[module]/page.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/app/admin/(protected)/layout.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/app/admin/(protected)/page.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/app/admin/admin.module.css', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/app/api/leads/route.ts', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/app/contato/page.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/app/layout.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/app/page.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/app/produtos/[categoria]/[slug]/page.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/app/produtos/[categoria]/page.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/app/produtos/page.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/app/robots.ts', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/app/sitemap.ts', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/app/sobre/page.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/app/tecnologias/page.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/components/BrandLogo.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/components/CTAWhatsApp.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/components/Footer.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/components/Header.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/components/HomeHero.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/components/SiteChrome.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/components/SocialOrbit.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/config/site.ts', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/modules/admin/modules.ts', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/modules/catalog/data.ts', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/modules/catalog/technology-comparison.ts', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/modules/catalog/types.ts', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/modules/leads/delivery.ts', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'tests/admin-foundation.test.mjs', LF will be replaced by CRLF the next time Git touches it
+.env.example
+next.config.ts
+package-lock.json
+package.json
+public/confort/1.png
+public/confort/2.png
+public/confort/3.png
+public/diamond/1.png
+public/diamond/2.png
+public/diamond/3.png
+public/elegance/1.png
+public/elegance/2.png
+public/elegance/3.png
+public/majestic/2.png
+public/majestic/3.png
+public/majestic/4.png
+src/app/admin/(protected)/[module]/page.tsx
+src/app/admin/(protected)/layout.tsx
+src/app/admin/(protected)/page.tsx
+src/app/admin/admin.module.css
+src/app/api/leads/route.ts
+src/app/contato/page.tsx
+src/app/layout.tsx
+src/app/page.tsx
+src/app/produtos/[categoria]/[slug]/page.tsx
+src/app/produtos/[categoria]/page.tsx
+src/app/produtos/page.tsx
+src/app/robots.ts
+src/app/sitemap.ts
+src/app/sobre/page.tsx
+src/app/tecnologias/page.tsx
+src/components/BrandLogo.tsx
+src/components/CTAWhatsApp.tsx
+src/components/Footer.tsx
+src/components/Header.tsx
+src/components/HomeHero.tsx
+src/components/ProductCard.tsx
+src/components/ProductPresentation.tsx
+src/components/SiteChrome.tsx
+src/components/SocialOrbit.tsx
+src/config/site.ts
+src/modules/admin/modules.ts
+src/modules/catalog/data.ts
+src/modules/catalog/technology-comparison.ts
+src/modules/catalog/types.ts
+src/modules/leads/delivery.ts
+tests/admin-foundation.test.mjs

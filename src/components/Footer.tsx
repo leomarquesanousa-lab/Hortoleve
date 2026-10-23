@@ -1,14 +1,13 @@
 "use client";
 import Link from "next/link";
 import { productHref } from "@/modules/catalog/data";
-import { presentations } from "@/modules/catalog/presentations";
 import { usePublicConfig, publicWhatsapp } from "./PublicConfig";
 import { BrandLogo } from "./BrandLogo";
 import styles from "./Footer.module.css";
 import type { Data } from "@/modules/cms/contracts";
 
 export function Footer() {
-    const { settings: site, products } = usePublicConfig();
+    const { settings: site, products, presentations } = usePublicConfig();
     const whatsapp = publicWhatsapp(site.whatsapp, "Olá! Gostaria de conhecer as linhas da Hortoleve.");
     return <footer className={styles.footer}>
         <div className={styles.inner}>

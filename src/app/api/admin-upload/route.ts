@@ -12,7 +12,7 @@ export async function POST(request: Request) {
         const user = await currentAdmin(); if (!user) throw new CmsError("Sessão expirada.", 401);
         authorize(user, "midia");
         if (request.headers.get("origin") !== adminEnvironment()?.baseURL) throw new CmsError("Origem não autorizada.", 403);
-        if (!storageConfig()) throw new CmsError("Configure storage persistente S3/R2 antes de enviar arquivos.", 503);
+        if (!storageConfig()) throw new CmsError("Configure o armazenamento persistente antes de enviar arquivos.", 503);
         // Contém limite real do stream, sem confiar apenas no Content-Length.
         const reader = request.body?.getReader(); const chunks: Uint8Array[] = []; let size = 0;
         if (reader) while (true) { const r = await reader.read(); if (r.done) break; size += r.value.byteLength; if (size > 24000000) { await reader.cancel(); throw new CmsError("Limite total: 24 MB por envio.", 413); } chunks.push(r.value); }
@@ -23,7 +23,7 @@ export async function POST(request: Request) {
         if (replacement && !await getDatabase().siteSetting.findUnique({ where: { key: cmsKey("midia", String(replacement)) } })) throw new CmsError("Mídia para substituir não encontrada.");
         const prepared = [];
         for (const file of files) {
-            if (!(file instanceof File) || file.size > 6000000 || !["image/png", "image/jpeg", "image/webp"].includes(file.type)) throw new CmsError("Use PNG, JPEG ou WebP, até 6 MB por arquivo.");
+            if (!(file instanceof File) || !/\.(png|jpe?g|webp)$/i.test(file.name) || file.size > 6000000 || !["image/png", "image/jpeg", "image/webp"].includes(file.type)) throw new CmsError("Use PNG, JPEG ou WebP, até 6 MB por arquivo.");
             const image = sharp(Buffer.from(await file.arrayBuffer()), { limitInputPixels: 40000000, animated: false });
             const meta = await image.metadata();
             if (!["png", "jpeg", "webp"].includes(meta.format ?? "") || !meta.width || !meta.height || meta.pages && meta.pages > 1) throw new CmsError("Arquivo inválido ou animado.");

@@ -26,7 +26,7 @@ function fields(input: unknown, schema: Field[]): Data {
         if ((f.required && !text) || text.length > (f.max ?? (f.type === "textarea" ? 16000 : 1000)) || /\u0000/.test(text)) throw new CmsError("Revise: " + f.label);
         if (f.type === "select" && !f.options?.includes(text)) throw new CmsError("Selecione: " + f.label);
         if (["slug", "categoryId"].includes(f.key) && text && !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(text)) throw new CmsError(f.label + ": use letras minúsculas, números e hífens.");
-        if (["src", "image", "logo", "ogImage", "cardImage"].includes(f.key) && text && !mediaPath(text)) throw new CmsError(f.label + ": caminho de imagem inválido.");
+        if (["src", "image", "logo", "ogImage", "cardImage", "seoImage"].includes(f.key) && text && !mediaPath(text)) throw new CmsError(f.label + ": caminho de imagem inválido.");
         if (["href", "url"].includes(f.key) && text && !safeLink(text)) throw new CmsError(f.label + ": URL inválida.");
         if (["route", "canonical"].includes(f.key) && text && (!safeLink(text) || !text.startsWith("/") || text.includes("?") || text.startsWith("/admin") || text.startsWith("/api"))) throw new CmsError(f.label + ": use uma rota pública local.");
         result[f.key] = text;
@@ -43,6 +43,13 @@ export function validateData(resource: Resource, input: unknown): Data {
     if (resource === "configuracoes" && data.whatsapp && !/^\d{10,15}$/.test(String(data.whatsapp))) throw new CmsError("WhatsApp precisa de DDI e DDD, com 10 a 15 dígitos.");
     if (resource === "redes-sociais" && data.url && !socialChannelUrl({ id: data.channel as "facebook", name: String(data.name), url: String(data.url), visible: true, order: 0 })) throw new CmsError("Informe a URL oficial correspondente à plataforma.");
     if (resource === "produtos" && data.published && !(data.gallery as unknown[])?.length) throw new CmsError("Inclua uma imagem com texto alternativo antes de publicar.");
+    if (resource === "produtos") {
+        data.title ||= data.name;
+        data.paragraphs ||= data.description;
+        const gallery = data.gallery as Data[];
+        if (new Set(gallery.map(image => image.id)).size !== gallery.length) throw new CmsError("As imagens da galeria precisam ter identificadores únicos.");
+        if (data.technicalSheetId && !gallery.some(image => image.id === data.technicalSheetId)) throw new CmsError("Selecione uma ficha técnica existente na galeria ou limpe o campo.");
+    }
     return data;
 }
 export function lines(value: unknown): string[] { return typeof value === "string" ? value.split(/\r?\n/).map(s => s.trim()).filter(Boolean) : []; }

@@ -12,6 +12,7 @@
     "db:deploy": "prisma migrate deploy",
     "admin:first-owner": "node scripts/create-owner.mts",
     "cms:import": "node scripts/import-content.mts",
+    "cms:media-migrate": "node scripts/migrate-product-images.mts",
     "test:admin": "node --test --test-isolation=none tests/admin-foundation.test.mjs"
   },
   "dependencies": {

@@ -1,0 +1,317 @@
+{
+  "version": 1,
+  "productsStatic": 12,
+  "cmsInspected": false,
+  "productsCMS": null,
+  "uniqueFiles": 43,
+  "assets": [
+    {
+      "source": "/a vacuo/elite/Cinza/CINZA.png",
+      "filename": "f7b5561c6a0181e49d57ea5af840c6d242eb17db8cd012ae059dbaa9437d84c7.png",
+      "sha256": "f7b5561c6a0181e49d57ea5af840c6d242eb17db8cd012ae059dbaa9437d84c7",
+      "bytes": 2429070,
+      "target": "/media/products/f7b5561c6a0181e49d57ea5af840c6d242eb17db8cd012ae059dbaa9437d84c7.png"
+    },
+    {
+      "source": "/a vacuo/elite/Cinza/Cama Cinza.png",
+      "filename": "534ee2d70258f8b7682ea8cfbc711ba6222a58f0931ad91da0d0093e536c5a68.png",
+      "sha256": "534ee2d70258f8b7682ea8cfbc711ba6222a58f0931ad91da0d0093e536c5a68",
+      "bytes": 3824457,
+      "target": "/media/products/534ee2d70258f8b7682ea8cfbc711ba6222a58f0931ad91da0d0093e536c5a68.png"
+    },
+    {
+      "source": "/a vacuo/elite/Cinza/Colchão Elite a Vácuo Hortoleve Linha cinza.png",
+      "filename": "cbb843259ad273197f8dc34c6e527d819e1bb59d11f756e91dc583b50d0c612f.png",
+      "sha256": "cbb843259ad273197f8dc34c6e527d819e1bb59d11f756e91dc583b50d0c612f",
+      "bytes": 1980244,
+      "target": "/media/products/cbb843259ad273197f8dc34c6e527d819e1bb59d11f756e91dc583b50d0c612f.png"
+    },
+    {
+      "source": "/a vacuo/elite/Cinza/Infográfico Colchão Elite a Vácuo.png",
+      "filename": "2111baf68d70700eb75a2a6cfa6911198acbfb2ecaf01f4d5b9b334b5313b478.png",
+      "sha256": "2111baf68d70700eb75a2a6cfa6911198acbfb2ecaf01f4d5b9b334b5313b478",
+      "bytes": 2256920,
+      "target": "/media/products/2111baf68d70700eb75a2a6cfa6911198acbfb2ecaf01f4d5b9b334b5313b478.png"
+    },
+    {
+      "source": "/a vacuo/elite/azul/Anúncio Colchão Elite a Vácuo Linha Azul.png",
+      "filename": "84843c1d0ad3156b71878a0fea05db6106dc41aa17999ddeecfcad1d068d3abb.png",
+      "sha256": "84843c1d0ad3156b71878a0fea05db6106dc41aa17999ddeecfcad1d068d3abb",
+      "bytes": 2014712,
+      "target": "/media/products/84843c1d0ad3156b71878a0fea05db6106dc41aa17999ddeecfcad1d068d3abb.png"
+    },
+    {
+      "source": "/a vacuo/elite/azul/Infográfico Colchão Elite a Vácuo.png",
+      "filename": "2111baf68d70700eb75a2a6cfa6911198acbfb2ecaf01f4d5b9b334b5313b478.png",
+      "sha256": "2111baf68d70700eb75a2a6cfa6911198acbfb2ecaf01f4d5b9b334b5313b478",
+      "bytes": 2256920,
+      "target": "/media/products/2111baf68d70700eb75a2a6cfa6911198acbfb2ecaf01f4d5b9b334b5313b478.png"
+    },
+    {
+      "source": "/a vacuo/elite/azul/Linha Azul.png",
+      "filename": "ea47819bd4606a851e1fa18582bcca9427134ba46cadb910e101c88f697b3adf.png",
+      "sha256": "ea47819bd4606a851e1fa18582bcca9427134ba46cadb910e101c88f697b3adf",
+      "bytes": 2120336,
+      "target": "/media/products/ea47819bd4606a851e1fa18582bcca9427134ba46cadb910e101c88f697b3adf.png"
+    },
+    {
+      "source": "/a vacuo/elite/azul/Quarto Luxuoso com Colchão Hortoleve Azul.png",
+      "filename": "c8b9dafcc83f1d824c808f6e24ee946d22899c71bfa749c8a809abfd66325724.png",
+      "sha256": "c8b9dafcc83f1d824c808f6e24ee946d22899c71bfa749c8a809abfd66325724",
+      "bytes": 2667690,
+      "target": "/media/products/c8b9dafcc83f1d824c808f6e24ee946d22899c71bfa749c8a809abfd66325724.png"
+    },
+    {
+      "source": "/confort/1.png",
+      "filename": "1628978cdade03bca7a91ebb7989a4779ec9b3d2bed9d4f47b86abe5f8856281.png",
+      "sha256": "1628978cdade03bca7a91ebb7989a4779ec9b3d2bed9d4f47b86abe5f8856281",
+      "bytes": 2905913,
+      "target": "/media/products/1628978cdade03bca7a91ebb7989a4779ec9b3d2bed9d4f47b86abe5f8856281.png"
+    },
+    {
+      "source": "/confort/2.png",
+      "filename": "296a405fbfccf4aef7f12c79879e55866238c983dc6750eabff5d06422471cf7.png",
+      "sha256": "296a405fbfccf4aef7f12c79879e55866238c983dc6750eabff5d06422471cf7",
+      "bytes": 2782173,
+      "target": "/media/products/296a405fbfccf4aef7f12c79879e55866238c983dc6750eabff5d06422471cf7.png"
+    },
+    {
+      "source": "/confort/3.png",
+      "filename": "3f86565429cbeae59ed2a2a2108970d5665fb705665f1fe791b3367473f73339.png",
+      "sha256": "3f86565429cbeae59ed2a2a2108970d5665fb705665f1fe791b3367473f73339",
+      "bytes": 2694516,
+      "target": "/media/products/3f86565429cbeae59ed2a2a2108970d5665fb705665f1fe791b3367473f73339.png"
+    },
+    {
+      "source": "/confort/4.png",
+      "filename": "583452cd887a6653f2a8dbdaff682a0f53ac4bde404aa95cd24bc7626c88df62.png",
+      "sha256": "583452cd887a6653f2a8dbdaff682a0f53ac4bde404aa95cd24bc7626c88df62",
+      "bytes": 2336345,
+      "target": "/media/products/583452cd887a6653f2a8dbdaff682a0f53ac4bde404aa95cd24bc7626c88df62.png"
+    },
+    {
+      "source": "/diamond/1.png",
+      "filename": "6f883a2a7381f2ed234c7e235b6f5b986a8c577773f640b4f420dc41f9cf5927.png",
+      "sha256": "6f883a2a7381f2ed234c7e235b6f5b986a8c577773f640b4f420dc41f9cf5927",
+      "bytes": 2656881,
+      "target": "/media/products/6f883a2a7381f2ed234c7e235b6f5b986a8c577773f640b4f420dc41f9cf5927.png"
+    },
+    {
+      "source": "/diamond/2.png",
+      "filename": "53170c63cb28809dfea28932ad39fe6cd8082c4061fb2a83dca6893047d059fc.png",
+      "sha256": "53170c63cb28809dfea28932ad39fe6cd8082c4061fb2a83dca6893047d059fc",
+      "bytes": 2579363,
+      "target": "/media/products/53170c63cb28809dfea28932ad39fe6cd8082c4061fb2a83dca6893047d059fc.png"
+    },
+    {
+      "source": "/diamond/3.png",
+      "filename": "0c4d9b87f0ada21f1ee8c6eddbd0defec7cfacbe69292fc72668edfad55ae693.png",
+      "sha256": "0c4d9b87f0ada21f1ee8c6eddbd0defec7cfacbe69292fc72668edfad55ae693",
+      "bytes": 2557006,
+      "target": "/media/products/0c4d9b87f0ada21f1ee8c6eddbd0defec7cfacbe69292fc72668edfad55ae693.png"
+    },
+    {
+      "source": "/diamond/4.png",
+      "filename": "1dcc7717b8e88e25d9e151039d18516cc17b21f015b1de2a7c4c3247c1bddff7.png",
+      "sha256": "1dcc7717b8e88e25d9e151039d18516cc17b21f015b1de2a7c4c3247c1bddff7",
+      "bytes": 1728818,
+      "target": "/media/products/1dcc7717b8e88e25d9e151039d18516cc17b21f015b1de2a7c4c3247c1bddff7.png"
+    },
+    {
+      "source": "/elegance/1.png",
+      "filename": "75f48df0ea874de819e6713e83df1e186df24f52c90748907737bd90a531dd37.png",
+      "sha256": "75f48df0ea874de819e6713e83df1e186df24f52c90748907737bd90a531dd37",
+      "bytes": 2778827,
+      "target": "/media/products/75f48df0ea874de819e6713e83df1e186df24f52c90748907737bd90a531dd37.png"
+    },
+    {
+      "source": "/elegance/2.png",
+      "filename": "80567c9e0b616e249b38a57de1ec8101a9dcf19d24f1326fe8821b9f1338a5bb.png",
+      "sha256": "80567c9e0b616e249b38a57de1ec8101a9dcf19d24f1326fe8821b9f1338a5bb",
+      "bytes": 2775188,
+      "target": "/media/products/80567c9e0b616e249b38a57de1ec8101a9dcf19d24f1326fe8821b9f1338a5bb.png"
+    },
+    {
+      "source": "/elegance/3.png",
+      "filename": "89673d794399457329b5cea1361bec6eaaeba94f1762eea7c79a269ea34b07a3.png",
+      "sha256": "89673d794399457329b5cea1361bec6eaaeba94f1762eea7c79a269ea34b07a3",
+      "bytes": 2711979,
+      "target": "/media/products/89673d794399457329b5cea1361bec6eaaeba94f1762eea7c79a269ea34b07a3.png"
+    },
+    {
+      "source": "/elegance/4.png",
+      "filename": "ec40a9951bb0a4f7b2ac31df6774127f6488e7c0f3420d6a25630b4991f874f2.png",
+      "sha256": "ec40a9951bb0a4f7b2ac31df6774127f6488e7c0f3420d6a25630b4991f874f2",
+      "bytes": 1663689,
+      "target": "/media/products/ec40a9951bb0a4f7b2ac31df6774127f6488e7c0f3420d6a25630b4991f874f2.png"
+    },
+    {
+      "source": "/majestic/1.png",
+      "filename": "53a0c02502581ab01810b22b5f360c66202ded415915f9c539b44338481aaec6.png",
+      "sha256": "53a0c02502581ab01810b22b5f360c66202ded415915f9c539b44338481aaec6",
+      "bytes": 1705352,
+      "target": "/media/products/53a0c02502581ab01810b22b5f360c66202ded415915f9c539b44338481aaec6.png"
+    },
+    {
+      "source": "/majestic/2.png",
+      "filename": "c083e55e3085a0dff77715b054cba8aa34a390de4066ad90de9f42847bd442b6.png",
+      "sha256": "c083e55e3085a0dff77715b054cba8aa34a390de4066ad90de9f42847bd442b6",
+      "bytes": 2531383,
+      "target": "/media/products/c083e55e3085a0dff77715b054cba8aa34a390de4066ad90de9f42847bd442b6.png"
+    },
+    {
+      "source": "/majestic/3.png",
+      "filename": "a17665ec59318c501e729a06284d84c19fd7cef7b8c6e5bd148808d8d400d56b.png",
+      "sha256": "a17665ec59318c501e729a06284d84c19fd7cef7b8c6e5bd148808d8d400d56b",
+      "bytes": 2505071,
+      "target": "/media/products/a17665ec59318c501e729a06284d84c19fd7cef7b8c6e5bd148808d8d400d56b.png"
+    },
+    {
+      "source": "/majestic/4.png",
+      "filename": "005a20ec072d5e56066230cd2b74c2879929ee47ac26bd1d43a50000e2e69ebf.png",
+      "sha256": "005a20ec072d5e56066230cd2b74c2879929ee47ac26bd1d43a50000e2e69ebf",
+      "bytes": 2644421,
+      "target": "/media/products/005a20ec072d5e56066230cd2b74c2879929ee47ac26bd1d43a50000e2e69ebf.png"
+    },
+    {
+      "source": "/poltronas/divan/ChatGPT Image Oct 21, 2026, 08_36_16 PM-1.png",
+      "filename": "9506d9635b4e3bac8583bd1a73cb6a4d5010556a0804eaebffefbaeb7e6dd8cd.png",
+      "sha256": "9506d9635b4e3bac8583bd1a73cb6a4d5010556a0804eaebffefbaeb7e6dd8cd",
+      "bytes": 2462285,
+      "target": "/media/products/9506d9635b4e3bac8583bd1a73cb6a4d5010556a0804eaebffefbaeb7e6dd8cd.png"
+    },
+    {
+      "source": "/poltronas/divan/ChatGPT Image Oct 21, 2026, 08_36_17 PM-2.png",
+      "filename": "4954a901edf0498731c4c09bf3a048f2c313bf1e28471ea9e31956038d80280a.png",
+      "sha256": "4954a901edf0498731c4c09bf3a048f2c313bf1e28471ea9e31956038d80280a",
+      "bytes": 2622567,
+      "target": "/media/products/4954a901edf0498731c4c09bf3a048f2c313bf1e28471ea9e31956038d80280a.png"
+    },
+    {
+      "source": "/poltronas/divan/ChatGPT Image Oct 21, 2026, 08_36_17 PM-3.png",
+      "filename": "c2bf2fbb06042b6df9e2a64fe374fd5528ec6d9e9c46afebd7e38f335de70873.png",
+      "sha256": "c2bf2fbb06042b6df9e2a64fe374fd5528ec6d9e9c46afebd7e38f335de70873",
+      "bytes": 2294769,
+      "target": "/media/products/c2bf2fbb06042b6df9e2a64fe374fd5528ec6d9e9c46afebd7e38f335de70873.png"
+    },
+    {
+      "source": "/poltronas/house/poltronahouse_1.png",
+      "filename": "fec2b685df5d3699e7ecdfbff480addabfcb7c9c19164a009cd9b52368b7e93f.png",
+      "sha256": "fec2b685df5d3699e7ecdfbff480addabfcb7c9c19164a009cd9b52368b7e93f",
+      "bytes": 2551317,
+      "target": "/media/products/fec2b685df5d3699e7ecdfbff480addabfcb7c9c19164a009cd9b52368b7e93f.png"
+    },
+    {
+      "source": "/poltronas/house/poltronahouse_2.png",
+      "filename": "7a8c5a729472bdf64228e1bcb03cff1abe74fdfd53a4d49333d6e88f44526e3d.png",
+      "sha256": "7a8c5a729472bdf64228e1bcb03cff1abe74fdfd53a4d49333d6e88f44526e3d",
+      "bytes": 2368197,
+      "target": "/media/products/7a8c5a729472bdf64228e1bcb03cff1abe74fdfd53a4d49333d6e88f44526e3d.png"
+    },
+    {
+      "source": "/poltronas/house/poltronahouse_3.png",
+      "filename": "b164e4a3e332c58ae231b4fbafd12cf009532c7da76221a422e0085a275faddc.png",
+      "sha256": "b164e4a3e332c58ae231b4fbafd12cf009532c7da76221a422e0085a275faddc",
+      "bytes": 2500581,
+      "target": "/media/products/b164e4a3e332c58ae231b4fbafd12cf009532c7da76221a422e0085a275faddc.png"
+    },
+    {
+      "source": "/recover+/1.png",
+      "filename": "03e4da484aa4c9b0cd9055e3e701ad7d6223772a34d0ad566ddaedd0702e3396.png",
+      "sha256": "03e4da484aa4c9b0cd9055e3e701ad7d6223772a34d0ad566ddaedd0702e3396",
+      "bytes": 3202683,
+      "target": "/media/products/03e4da484aa4c9b0cd9055e3e701ad7d6223772a34d0ad566ddaedd0702e3396.png"
+    },
+    {
+      "source": "/recover+/2.png",
+      "filename": "58ac92ec42ccb3a19e744d36cc59d06c4cc1d62b85bc5bbdddf11dbb03f1505d.png",
+      "sha256": "58ac92ec42ccb3a19e744d36cc59d06c4cc1d62b85bc5bbdddf11dbb03f1505d",
+      "bytes": 2993371,
+      "target": "/media/products/58ac92ec42ccb3a19e744d36cc59d06c4cc1d62b85bc5bbdddf11dbb03f1505d.png"
+    },
+    {
+      "source": "/recover+/3.png",
+      "filename": "46171d8a27eb780c8623a08dd46f977a045a69aaa500a3561c6c4cdf5ca795e2.png",
+      "sha256": "46171d8a27eb780c8623a08dd46f977a045a69aaa500a3561c6c4cdf5ca795e2",
+      "bytes": 2379625,
+      "target": "/media/products/46171d8a27eb780c8623a08dd46f977a045a69aaa500a3561c6c4cdf5ca795e2.png"
+    },
+    {
+      "source": "/recover+/4.png",
+      "filename": "a39362765b188efb91a017d0d98b49e265ff3fbc61d663c4ab6848646fc6c25a.png",
+      "sha256": "a39362765b188efb91a017d0d98b49e265ff3fbc61d663c4ab6848646fc6c25a",
+      "bytes": 2447148,
+      "target": "/media/products/a39362765b188efb91a017d0d98b49e265ff3fbc61d663c4ab6848646fc6c25a.png"
+    },
+    {
+      "source": "/recover+/5.png",
+      "filename": "2d320e27c902852a8eb5d55da40514dbc4a33e2854253d97f1f6770636fa98e4.png",
+      "sha256": "2d320e27c902852a8eb5d55da40514dbc4a33e2854253d97f1f6770636fa98e4",
+      "bytes": 2452055,
+      "target": "/media/products/2d320e27c902852a8eb5d55da40514dbc4a33e2854253d97f1f6770636fa98e4.png"
+    },
+    {
+      "source": "/travesseiros/cervicalortoplus/travesseiro_cervical_1.png",
+      "filename": "74eb0a9a92b20300456b17f032ffb425627da0db7ca09de9d66963e476dc3329.png",
+      "sha256": "74eb0a9a92b20300456b17f032ffb425627da0db7ca09de9d66963e476dc3329",
+      "bytes": 2208604,
+      "target": "/media/products/74eb0a9a92b20300456b17f032ffb425627da0db7ca09de9d66963e476dc3329.png"
+    },
+    {
+      "source": "/travesseiros/cervicalortoplus/travesseiro_cervical_2.png",
+      "filename": "16a39bb2f3339482972cbec447aff7d8fc768033d1dbbd862b0e2933b75ec1c0.png",
+      "sha256": "16a39bb2f3339482972cbec447aff7d8fc768033d1dbbd862b0e2933b75ec1c0",
+      "bytes": 2226375,
+      "target": "/media/products/16a39bb2f3339482972cbec447aff7d8fc768033d1dbbd862b0e2933b75ec1c0.png"
+    },
+    {
+      "source": "/travesseiros/cervicalortoplus/travesseiro_cervical_3.png",
+      "filename": "02ccfdfc0416203693c82d6d936613d9dc43ad649e6e9491078df050a3e2acc5.png",
+      "sha256": "02ccfdfc0416203693c82d6d936613d9dc43ad649e6e9491078df050a3e2acc5",
+      "bytes": 2187375,
+      "target": "/media/products/02ccfdfc0416203693c82d6d936613d9dc43ad649e6e9491078df050a3e2acc5.png"
+    },
+    {
+      "source": "/travesseiros/future/travesseiro_future_1.png",
+      "filename": "2f65b4524eaebeb52c0e92c44eeb87c4da20ace54189f845f9f11ee5e3310345.png",
+      "sha256": "2f65b4524eaebeb52c0e92c44eeb87c4da20ace54189f845f9f11ee5e3310345",
+      "bytes": 2145213,
+      "target": "/media/products/2f65b4524eaebeb52c0e92c44eeb87c4da20ace54189f845f9f11ee5e3310345.png"
+    },
+    {
+      "source": "/travesseiros/future/travesseiro_future_2.png",
+      "filename": "e0359f0b0619386a1bdfa071e2d60830e59df551f64359b827cd6d5d2c576a06.png",
+      "sha256": "e0359f0b0619386a1bdfa071e2d60830e59df551f64359b827cd6d5d2c576a06",
+      "bytes": 2106756,
+      "target": "/media/products/e0359f0b0619386a1bdfa071e2d60830e59df551f64359b827cd6d5d2c576a06.png"
+    },
+    {
+      "source": "/travesseiros/future/travesseiro_future_3.png",
+      "filename": "b547bd2889353660c22c15e855be314febf9c059abe717a06da5a9fe43e505fe.png",
+      "sha256": "b547bd2889353660c22c15e855be314febf9c059abe717a06da5a9fe43e505fe",
+      "bytes": 2201005,
+      "target": "/media/products/b547bd2889353660c22c15e855be314febf9c059abe717a06da5a9fe43e505fe.png"
+    },
+    {
+      "source": "/travesseiros/viscoelastico/travesseiro_viscoelastico_1.png",
+      "filename": "06dceaedd7c0cab03ec734be30c64f2ac413b1763715c59f41f143619674e667.png",
+      "sha256": "06dceaedd7c0cab03ec734be30c64f2ac413b1763715c59f41f143619674e667",
+      "bytes": 2079869,
+      "target": "/media/products/06dceaedd7c0cab03ec734be30c64f2ac413b1763715c59f41f143619674e667.png"
+    },
+    {
+      "source": "/travesseiros/viscoelastico/travesseiro_viscoelastico_2.png",
+      "filename": "fbdb72ea4dda5c3de76e23334b80fb015c2bef566d93472f862a522bbd02430a.png",
+      "sha256": "fbdb72ea4dda5c3de76e23334b80fb015c2bef566d93472f862a522bbd02430a",
+      "bytes": 2188224,
+      "target": "/media/products/fbdb72ea4dda5c3de76e23334b80fb015c2bef566d93472f862a522bbd02430a.png"
+    },
+    {
+      "source": "/travesseiros/viscoelastico/travesseiro_viscoelastico_3.png",
+      "filename": "f2c05e6d09e8e04524ff6d668f740e8e80745fc68d5389459ad1e87a0c4339fa.png",
+      "sha256": "f2c05e6d09e8e04524ff6d668f740e8e80745fc68d5389459ad1e87a0c4339fa",
+      "bytes": 2101927,
+      "target": "/media/products/f2c05e6d09e8e04524ff6d668f740e8e80745fc68d5389459ad1e87a0c4339fa.png"
+    }
+  ]
+}

@@ -1,15 +1,18 @@
 import "server-only";
 import { createHash, createHmac, randomUUID } from "node:crypto";
+import { localStoragePath, writeLocalMedia } from "./local-storage";
 export function storageConfig() {
+    if (process.env.CMS_STORAGE_PATH) return localStoragePath() ? { driver: "local" as const, directory: localStoragePath() } : null;
     const { CMS_STORAGE_ENDPOINT: endpoint, CMS_STORAGE_BUCKET: bucket, CMS_STORAGE_ACCESS_KEY: key, CMS_STORAGE_SECRET_KEY: secret, CMS_STORAGE_PUBLIC_URL: publicURL } = process.env;
     if (!endpoint || !bucket || !key || !secret || !publicURL) return null;
     try { const a = new URL(endpoint), b = new URL(publicURL); if (a.protocol !== "https:" || b.protocol !== "https:" || a.username || b.username || a.password || b.password || a.search || b.search) return null; } catch { return null; }
-    return { endpoint: endpoint.replace(/\/$/, ""), bucket, key, secret, publicURL: publicURL.replace(/\/$/, ""), region: process.env.CMS_STORAGE_REGION || "auto" };
+    return { driver: "s3" as const, endpoint: endpoint.replace(/\/$/, ""), bucket, key, secret, publicURL: publicURL.replace(/\/$/, ""), region: process.env.CMS_STORAGE_REGION || "auto" };
 }
 const sha = (value: string | Buffer) => createHash("sha256").update(value).digest("hex");
 const hmac = (key: string | Buffer, value: string) => createHmac("sha256", key).update(value).digest();
 export async function putMedia(buffer: Buffer) {
     const config = storageConfig(); if (!config) throw new Error("Storage não configurado");
+    if (config.driver === "local") return writeLocalMedia(buffer);
     const key = "hortoleve/" + randomUUID() + ".webp";
     const url = new URL(config.endpoint + "/" + encodeURIComponent(config.bucket) + "/" + key);
     const date = new Date().toISOString().replace(/[:-]|\.\d{3}/g, ""), day = date.slice(0, 8);

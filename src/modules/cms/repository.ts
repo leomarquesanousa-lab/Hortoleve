@@ -22,10 +22,10 @@ export async function listDocuments(resource: Resource): Promise<Document[]> {
         return leads.map(l => ({ id: l.id, resource, revision: l.updatedAt.getTime(), published: null, draft: { name: l.name, phone: l.phone, email: l.email ?? "", subject: l.subject, message: l.message ?? "", status: l.status, productId: l.productId, createdAt: l.createdAt.toISOString(), source: String((notes.find(n => n.key === "lead-notes:" + l.id)?.value as Data)?.source ?? "Não informado"), interest: String((notes.find(n => n.key === "lead-notes:" + l.id)?.value as Data)?.interest ?? ""), notes: String((notes.find(n => n.key === "lead-notes:" + l.id)?.value as Data)?.text ?? "") } }));
     }
     const saved = (await db.siteSetting.findMany({ where: { key: { startsWith: `cms:${resource}:` } }, orderBy: { key: "asc" } })).map(r => document(r.value));
-    const initial: Document[] = initialContent.filter(i => i.resource === resource && !saved.some(d => d.id === i.id)).map(i => ({ id: i.id, resource, revision: 0, draft: structuredClone(i.data), published: i.published ? structuredClone(i.data) : null, source: "static" }));
+    const deleted = await db.siteSetting.findMany({ where: { key: { startsWith: `cms-deleted:${resource}:` } } });
+    const initial: Document[] = initialContent.filter(i => i.resource === resource && !saved.some(d => d.id === i.id) && !deleted.some(row => row.key === `cms-deleted:${resource}:${i.id}`)).map(i => ({ id: i.id, resource, revision: 0, draft: structuredClone(i.data), published: i.published ? structuredClone(i.data) : null, source: "static" }));
     // Fonte real do site visível antes da importação; nenhuma escrita implícita.
-    const imported = await db.siteSetting.findUnique({ where: { key: "cms-import-completed" } });
-    return imported?.value === true ? saved : [...saved, ...initial];
+    return [...saved, ...initial];
 }
 export async function allDocuments() { return (await getDatabase().siteSetting.findMany({ where: { key: { startsWith: "cms:" } } })).map(r => document(r.value)); }
 function replaceRoute(from: string, to: string) { return { from, to }; }
@@ -81,10 +81,22 @@ export async function saveDocument(user: AdminIdentity, resource: Resource, raw:
         if ((previous?.revision ?? 0) !== revision) throw new CmsError("Conteúdo alterado por outro operador. Atualize antes de salvar.", 409);
         const docs = (await tx.siteSetting.findMany({ where: { key: { startsWith: `cms:${resource}:` } } })).map(r => document(r.value));
         const unique = resource === "redes-sociais" ? "channel" : resource === "seo" ? "route" : "slug";
-        if (data[unique] && docs.some(d => d.id !== id && (d.draft[unique] === data[unique] || d.published?.[unique] === data[unique]) && (resource !== "produtos" || d.draft.categoryId === data.categoryId))) throw new CmsError("Slug, rota ou canal já cadastrado.");
+        if (data[unique] && docs.some(d => d.id !== id && (d.draft[unique] === data[unique] || d.published?.[unique] === data[unique]))) throw new CmsError("Slug, rota ou canal já cadastrado.");
         if (resource === "produtos") {
             if (!await tx.category.findUnique({ where: { id: String(data.categoryId) } })) throw new CmsError("Cadastre e publique a categoria antes do produto.");
             for (const technology of lines(data.technologyIds)) if (!await tx.siteSetting.findUnique({ where: { key: cmsKey("tecnologias", technology) } })) throw new CmsError("ID de tecnologia não cadastrado: " + technology);
+        }
+        if (resource === "categorias" && data.parentId) {
+            const parents = (await tx.siteSetting.findMany({ where: { key: { startsWith: "cms:categorias:" } } })).map(r => document(r.value));
+            let current = String(data.parentId);
+            const seen = new Set([id!]);
+            while (current) {
+                if (seen.has(current)) throw new CmsError("A hierarquia de categorias não pode formar um ciclo.");
+                seen.add(current);
+                const parent = parents.find(c => c.id === current)?.published;
+                if (!parent) throw new CmsError("Selecione uma categoria superior publicada.");
+                current = String(parent.parentId ?? "");
+            }
         }
         const next: Document = { id: id!, resource, revision: (previous?.revision ?? 0) + 1, draft: data, published: publish ? (data.published === false ? null : data) : previous?.published ?? null };
         // Documentos guardam rascunho e apresentação rica; models relacionais espelham a versão publicada.
@@ -105,6 +117,7 @@ export async function saveDocument(user: AdminIdentity, resource: Resource, raw:
         }
         if (publish && resource === "categorias") {
             const old = await tx.category.findUnique({ where: { id } });
+            if (!next.published && (docs.some(c => c.published?.parentId === id) || await tx.product.count({ where: { categoryId: id, status: "PUBLISHED" } }))) throw new CmsError("Despublique ou mova os produtos e subcategorias vinculados antes desta categoria.");
             const values = { name: String(data.name), slug: String(data.slug), description: String(data.description), order: Number(data.order), active: !!next.published };
             await tx.category.upsert({ where: { id }, create: { id, ...values }, update: values });
             if (old?.active && old.slug !== data.slug) {
@@ -147,6 +160,7 @@ export async function removeDocument(user: AdminIdentity, resource: Resource, id
         if (resource === "categorias") await tx.category.deleteMany({ where: { id } });
         // Arquivos originais e objetos S3 não são apagados: exclusão da biblioteca só após checar referências.
         await tx.siteSetting.delete({ where: { key } });
+        await tx.siteSetting.upsert({ where: { key: `cms-deleted:${resource}:${id}` }, create: { key: `cms-deleted:${resource}:${id}`, value: true }, update: { value: true } });
         await tx.auditLog.create({ data: { userId: user.id, action: "CONTENT_DELETED", entity: resource, recordId: id } });
     });
 }

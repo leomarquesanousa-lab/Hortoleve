@@ -30,6 +30,126 @@ function loader(overrides = {}) {
 }
 const user = { id: "test-user", name: "Test", email: "test@example.test", role: "ADMIN", active: true, permissions: [] };
 
+function syncDatabase() {
+    const rows = new Map(), categories = [], products = [], media = [];
+    let writes = 0;
+    const tx = {
+        $queryRaw: async () => [],
+        siteSetting: {
+            findMany: async () => [...rows].map(([key, value]) => ({ key, value })),
+            create: async ({ data }) => { assert.ok(!rows.has(data.key)); rows.set(data.key, data.value); writes++; },
+            upsert: async ({ where, create, update }) => { rows.set(where.key, rows.has(where.key) ? update.value : create.value); writes++; },
+        },
+        category: { findMany: async () => categories, create: async ({ data }) => { categories.push(data); writes++; } },
+        product: { findMany: async () => products, create: async ({ data }) => { products.push(data); writes++; } },
+        productMedia: { createMany: async ({ data }) => { media.push(...data); writes++; } },
+        auditLog: { create: async () => { writes++; } },
+    };
+    return { tx, rows, categories, products, media, writes: () => writes };
+}
+
+test("Importação preserva ícones e apresentação; novos produtos recebem o template premium", () => {
+    const load = loader({ "@/modules/admin/database": { getDatabase: () => { throw Error("Banco não deve ser consultado neste teste"); } } });
+    const { initialContent } = load("src/modules/cms/initial-content.ts");
+    const { validateData } = load("src/modules/cms/validation.ts");
+    const { toPresentation } = load("src/modules/cms/public.ts");
+    const { presentations } = load("src/modules/catalog/presentations.ts");
+    for (const item of initialContent.filter(i => i.resource === "produtos")) {
+        const source = presentations[item.data.slug];
+        const restored = toPresentation(validateData("produtos", item.data));
+        assert.deepEqual(restored.media, source.media);
+        assert.deepEqual(restored.technologyIcons, source.technologyIcons ?? {});
+        assert.deepEqual(restored.technologyDescriptions, source.technologyDescriptions ?? {});
+    }
+    const source = initialContent.find(i => i.resource === "produtos").data;
+    const fresh = validateData("produtos", { ...source, title: "", paragraphs: "", name: "Novo produto", description: "Descrição completa" });
+    assert.equal(fresh.title, "Novo produto"); assert.equal(fresh.paragraphs, "Descrição completa");
+    assert.throws(() => validateData("produtos", { ...source, gallery: [source.gallery[0], source.gallery[0]] }), /únicos/);
+});
+
+test("Categorias recusam ciclos no servidor antes de gravar", async () => {
+    const tx = {
+        $queryRaw: async () => [],
+        siteSetting: { findUnique: async () => null, findMany: async () => [{ value: { id: "b", resource: "categorias", draft: {}, published: { parentId: "a" } } }] },
+    };
+    const repo = loader({ "@/modules/admin/database": { getDatabase: () => ({ $transaction: fn => fn(tx) }) } })("src/modules/cms/repository.ts");
+    await assert.rejects(repo.saveDocument({ ...user, role: "OWNER" }, "categorias", { name: "Categoria A", slug: "a", parentId: "b", published: true }, "a", 0, true), /ciclo/);
+});
+
+test("SEO editado no produto reflete a publicação sem expor o rascunho", async () => {
+    const old = process.env.CMS_PUBLIC_ENABLED; process.env.CMS_PUBLIC_ENABLED = "true";
+    const rows = [
+        { value: { id: "category", resource: "categorias", draft: {}, published: { name: "Categoria", slug: "categoria" } } },
+        { value: { id: "product", resource: "produtos", draft: { seoTitle: "Privado" }, published: { name: "Produto", categoryId: "category", slug: "produto", gallery: [], seoTitle: "Título SEO atualizado", seoDescription: "Descrição SEO atualizada" } } },
+        { value: { id: "seo", resource: "seo", draft: {}, published: { route: "/produtos/categoria/produto", title: "SEO anterior", description: "Anterior", canonical: "/produtos/categoria/produto", indexable: false } } },
+    ];
+    try {
+        const pub = loader({ "next/server": { connection: async () => {} }, "@/modules/admin/database": { getDatabase: () => ({ siteSetting: { findUnique: async () => ({ value: true }), findMany: async () => rows } }) } })("src/modules/cms/public.ts");
+        const metadata = await pub.seoMetadata("/produtos/categoria/produto", { title: "Fallback" });
+        assert.equal(metadata.title, "Título SEO atualizado");
+        assert.equal(metadata.description, "Descrição SEO atualizada");
+        assert.equal(metadata.openGraph.title, "Título SEO atualizado");
+        assert.ok(!JSON.stringify(metadata).includes("Privado"));
+    } finally { if (old === undefined) delete process.env.CMS_PUBLIC_ENABLED; else process.env.CMS_PUBLIC_ENABLED = old; }
+});
+
+test("Sincronização faz prévia sem escrita e importa todo o catálogo sem duplicar ou sobrescrever edições", async () => {
+    const db = syncDatabase(), load = loader();
+    const { synchronizeContent } = load("src/modules/cms/synchronize.ts");
+    const { products, categories } = load("src/modules/catalog/data.ts");
+    const { presentations } = load("src/modules/catalog/presentations.ts");
+    const plan = await synchronizeContent(db.tx);
+    assert.equal(plan.create.produtos, products.length); assert.equal(db.writes(), 0);
+    const applied = await synchronizeContent(db.tx, true, "owner-id");
+    assert.equal(applied.applied, true);
+    assert.equal(db.products.length, products.length); assert.equal(db.categories.length, categories.length);
+    for (const p of products) {
+        const imported = db.rows.get("cms:produtos:" + p.id);
+        assert.equal(imported.published.slug, p.slug);
+        assert.deepEqual(imported.published.gallery, presentations[p.slug]?.media ?? p.media);
+    }
+    const first = db.rows.get("cms:produtos:" + products[0].id);
+    first.draft.name = first.published.name = "Edição do cliente";
+    const again = await synchronizeContent(db.tx, true);
+    assert.deepEqual(again.create, {});
+    assert.equal(db.products.length, products.length);
+    assert.equal(first.published.name, "Edição do cliente");
+});
+
+test("Sincronização preserva exclusões registradas e bloqueia conflitos sem gravação parcial", async () => {
+    const load = loader(); const { synchronizeContent } = load("src/modules/cms/synchronize.ts");
+    const db = syncDatabase(); db.rows.set("cms-deleted:produtos:elite-azul", true);
+    await synchronizeContent(db.tx, true);
+    assert.ok(!db.products.some(p => p.id === "elite-azul"));
+    const conflict = syncDatabase(); conflict.categories.push({ id: "other-id", slug: "colchoes", active: true });
+    const result = await synchronizeContent(conflict.tx, true);
+    assert.ok(result.conflicts.length); assert.equal(result.applied, false); assert.equal(conflict.writes(), 0);
+});
+
+test("Sincronização administrativa exige OWNER ativo e origem válida antes de consultar o banco", async () => {
+    let identity = null, calls = 0;
+    const route = loader({
+        "@/modules/admin/session": { currentAdmin: async () => identity },
+        "@/modules/admin/environment": { adminEnvironment: () => ({ baseURL: "https://hortoleve.com.br" }) },
+        "@/modules/admin/database": { getDatabase: () => { calls++; throw Error("not expected"); } },
+    })("src/app/api/admin-catalog-sync/route.ts");
+    const get = new Request("https://hortoleve.com.br/api/admin-catalog-sync");
+    assert.equal((await route.GET(get)).status, 401);
+    identity = user; assert.equal((await route.GET(get)).status, 403);
+    identity = { ...user, role: "OWNER", active: false }; assert.equal((await route.GET(get)).status, 401);
+    identity = { ...user, role: "OWNER" };
+    assert.equal((await route.POST(new Request(get.url, { method: "POST", headers: { origin: "https://evil.test" } }))).status, 403);
+    assert.equal(calls, 0);
+});
+
+test("Painel continua mostrando novos itens estáticos após importação, sem ressuscitar exclusões", async () => {
+    const rows = [{ key: "cms-deleted:produtos:elite-azul", value: true }];
+    const repo = loader({ "@/modules/admin/database": { getDatabase: () => ({ siteSetting: { findMany: async ({ where }) => rows.filter(r => r.key.startsWith(where.key.startsWith)), findUnique: async () => ({ value: true }) } }) } })("src/modules/cms/repository.ts");
+    const records = await repo.listDocuments("produtos");
+    assert.ok(records.some(r => r.id === "travesseiro-future" && r.source === "static"));
+    assert.ok(!records.some(r => r.id === "elite-azul"));
+});
+
 test("Future e Cervical Orto Plus têm galerias independentes, materiais próprios e ficam fora da Home", () => {
     const load = loader();
     const { products, categories, productHref } = load("src/modules/catalog/data.ts");
@@ -712,4 +832,88 @@ test("upload real de PNG é decodificado e convertido; SVG é rejeitado antes do
     assert.equal(response.status, 200); assert.equal(writes, 1);
     assert.ok(saved[0].key.length > "cms:midia:".length);
     assert.equal(saved[0].value.draft.width, 16);
+});
+
+test("storage local grava e le; bloqueia caminhos invalidos", async () => {
+    const os = require("node:os");
+    const directory = fs.mkdtempSync(path.join(os.tmpdir(), "hortoleve-storage-"));
+    const previous = process.env.CMS_STORAGE_PATH;
+    try {
+        process.env.CMS_STORAGE_PATH = directory;
+        const storage = loader()("src/modules/cms/local-storage.ts");
+        assert.deepEqual(await storage.probeLocalStorage(), { readable: true, writable: true });
+        assert.deepEqual(fs.readdirSync(directory), []);
+        const first = await storage.writeLocalMedia(Buffer.from("test-image"));
+        const second = await storage.writeLocalMedia(Buffer.from("other-image"));
+        assert.notEqual(first.src, second.src);
+        assert.equal((await storage.readLocalMedia(first.objectKey)).toString(), "test-image");
+        await assert.rejects(storage.readLocalMedia("../.env"));
+        const route = loader()("src/app/media/products/[filename]/route.ts");
+        const response = await route.GET(new Request("https://example.test" + first.src), { params: Promise.resolve({ filename: first.objectKey }) });
+        assert.equal(response.status, 200);
+        assert.equal(response.headers.get("content-type"), "image/webp");
+        assert.equal((await route.GET(new Request("https://example.test"), { params: Promise.resolve({ filename: "bad.svg" }) })).status, 404);
+        process.env.CMS_STORAGE_PATH = process.cwd();
+        await assert.rejects(storage.writeLocalMedia(Buffer.from("blocked")));
+    } finally {
+        if (previous === undefined) delete process.env.CMS_STORAGE_PATH; else process.env.CMS_STORAGE_PATH = previous;
+        fs.rmSync(directory, { recursive: true, force: true });
+    }
+});
+
+test("checagem de disco exige OWNER ativo e Origin correto", async () => {
+    let identity = null, probes = 0;
+    const route = loader({
+        "@/modules/admin/session": { currentAdmin: async () => identity },
+        "@/modules/admin/environment": { adminEnvironment: () => ({ baseURL: "https://example.test" }) },
+        "@/modules/cms/local-storage": { probeLocalStorage: async () => { probes++; return { readable: true, writable: true }; } },
+    })("src/app/api/admin-storage-check/route.ts");
+    const request = (origin = "https://example.test") => new Request("https://example.test/api/admin-storage-check", { method: "POST", headers: { origin } });
+    assert.equal((await route.POST(request())).status, 401);
+    identity = user;
+    assert.equal((await route.POST(request())).status, 403);
+    identity = { ...user, role: "OWNER" };
+    assert.equal((await route.POST(request("https://evil.test"))).status, 403);
+    assert.equal(probes, 0);
+    assert.equal((await route.POST(request())).status, 200);
+    assert.equal(probes, 1);
+});
+
+test("migracao copia bytes originais, deduplica e preserva referencias e ordem", async () => {
+    const os = require("node:os");
+    const sharp = require("sharp");
+    const temporary = fs.mkdtempSync(path.join(os.tmpdir(), "hortoleve-migration-"));
+    const original = process.env.CMS_STORAGE_PATH;
+    try {
+        const publicDirectory = path.join(temporary, "public"), destination = path.join(temporary, "storage");
+        fs.mkdirSync(publicDirectory); fs.mkdirSync(destination);
+        process.env.CMS_STORAGE_PATH = destination;
+        const image = await sharp({ create: { width: 12, height: 8, channels: 3, background: "blue" } }).png().toBuffer();
+        fs.writeFileSync(path.join(publicDirectory, "one.png"), image);
+        fs.writeFileSync(path.join(publicDirectory, "two.png"), image);
+        const migration = loader()("src/modules/cms/media-migration.ts");
+        const items = [{ resource: "produtos", data: { cardImage: "/one.png", gallery: [{ id: "a", src: "/two.png" }] } }, { resource: "configuracoes", data: { logo: "/logo.png" } }];
+        assert.deepEqual(migration.productImagePaths(items), ["/one.png", "/two.png"]);
+        const assets = await migration.inventoryImages(publicDirectory, migration.productImagePaths(items));
+        assert.equal(assets[0].filename, assets[1].filename);
+        assert.equal(await migration.copyImages(publicDirectory, assets), 1);
+        assert.equal(await migration.copyImages(publicDirectory, assets), 0);
+        assert.deepEqual(fs.readFileSync(path.join(destination, assets[0].filename)), image);
+        const map = new Map(assets.map(a => [a.source, "/media/products/" + a.filename]));
+        const changed = migration.replaceImageReferences(items, map);
+        assert.equal(changed[0].data.gallery[0].id, "a");
+        assert.equal(changed[1].data.logo, "/logo.png");
+        assert.deepEqual(migration.replaceImageReferences({ text: "Veja /one.png aqui" }, map), { text: "Veja /one.png aqui" });
+        const route = loader()("src/app/media/products/[filename]/route.ts");
+        const response = await route.GET(new Request("https://example.test"), { params: Promise.resolve({ filename: assets[0].filename }) });
+        assert.equal(response.headers.get("content-type"), "image/png");
+        assert.deepEqual(Buffer.from(await response.arrayBuffer()), image);
+        fs.writeFileSync(path.join(destination, assets[0].filename), "corrupt");
+        await assert.rejects(migration.copyImages(publicDirectory, assets));
+        assert.deepEqual(fs.readFileSync(path.join(publicDirectory, "one.png")), image);
+        await assert.rejects(migration.inventoryImages(publicDirectory, ["/../outside.png"]));
+    } finally {
+        if (original === undefined) delete process.env.CMS_STORAGE_PATH; else process.env.CMS_STORAGE_PATH = original;
+        fs.rmSync(temporary, { recursive: true, force: true });
+    }
 });

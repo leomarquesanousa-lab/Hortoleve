@@ -20,7 +20,8 @@ export function toProduct(id: string, d: Data): Product {
 }
 export function toPresentation(d: Data): ProductPresentation | undefined {
     if (!d.title) return;
-    return { ...(d.displayName ? { displayName: String(d.displayName) } : {}), title: String(d.title), subtitle: String(d.subtitle ?? ""), paragraphs: lines(d.paragraphs).length ? lines(d.paragraphs) : [String(d.description)], media: (d.gallery ?? []) as ProductMedia[], technicalSheetId: String(d.technicalSheetId ?? ""), technologies: lines(d.technologies), specifications: (d.specifications ?? []) as ProductPresentation["specifications"], sizes: (d.sizes ?? []) as ProductPresentation["sizes"] };
+    const details = (d.technologyDetails ?? []) as Data[];
+    return { ...(d.displayName ? { displayName: String(d.displayName) } : {}), title: String(d.title), subtitle: String(d.subtitle ?? ""), paragraphs: lines(d.paragraphs).length ? lines(d.paragraphs) : [String(d.description)], media: (d.gallery ?? []) as ProductMedia[], technicalSheetId: String(d.technicalSheetId ?? ""), technologies: lines(d.technologies), technologyIcons: Object.fromEntries(details.filter(t => t.icon).map(t => [String(t.name), String(t.icon)])), technologyDescriptions: Object.fromEntries(details.filter(t => t.description).map(t => [String(t.name), String(t.description)])), specifications: (d.specifications ?? []) as ProductPresentation["specifications"], sizes: (d.sizes ?? []) as ProductPresentation["sizes"] };
 }
 export const getPublicSnapshot = cache(async (): Promise<Snapshot> => {
     const fallback: Snapshot = { enabled: false, products: originalProducts, categories: originalCategories, presentations: originalPresentations, settings: { ...site }, socials: socialChannels, documents: [] };
@@ -40,7 +41,7 @@ export const getPublicSnapshot = cache(async (): Promise<Snapshot> => {
                 const ids = lines(d.published!.technologyIds);
                 const technologies = ids.flatMap(id => entries("tecnologias").filter(t => t.id === id));
                 if (ids.length) p.technologies = technologies.map(t => String(t.published!.name));
-                p.technologyDescriptions = Object.fromEntries(technologies.map(t => [String(t.published!.name), String(t.published!.description ?? "")]));
+                p.technologyDescriptions = { ...Object.fromEntries(technologies.map(t => [String(t.published!.name), String(t.published!.description ?? "")])), ...p.technologyDescriptions };
                 presentations[String(d.published!.slug)] = p;
             }
         }
@@ -54,8 +55,10 @@ export async function publicDocument(resource: Resource, slug?: string) { return
 export async function seoMetadata(route: string, fallback: Metadata): Promise<Metadata> {
     const snapshot = await getPublicSnapshot();
     const seo = snapshot.documents.find(d => d.resource === "seo" && d.published?.route === route)?.published;
-    if (!seo) return fallback;
-    return { ...fallback, title: String(seo.title), description: String(seo.description), alternates: { canonical: String(seo.canonical || route) }, robots: { index: !!seo.indexable && snapshot.settings.indexingEnabled, follow: !!seo.indexable && snapshot.settings.indexingEnabled }, openGraph: { ...fallback.openGraph, title: String(seo.title), description: String(seo.description), url: route, ...(seo.ogImage ? { images: [{ url: String(seo.ogImage) }] } : {}) } };
+    const product = snapshot.documents.find(d => d.resource === "produtos" && snapshot.products.some(p => p.id === d.id && `/produtos/${p.categorySlug}/${p.slug}` === route))?.published;
+    const base = seo ? { ...fallback, title: String(seo.title), description: String(seo.description), alternates: { canonical: String(seo.canonical || route) }, robots: { index: !!seo.indexable && snapshot.settings.indexingEnabled, follow: !!seo.indexable && snapshot.settings.indexingEnabled }, openGraph: { ...fallback.openGraph, title: String(seo.title), description: String(seo.description), url: route, ...(seo.ogImage ? { images: [{ url: String(seo.ogImage) }] } : {}) } } : fallback;
+    if (!product?.seoTitle && !product?.seoDescription && !product?.seoImage) return base;
+    return { ...base, ...(product.seoTitle ? { title: String(product.seoTitle) } : {}), ...(product.seoDescription ? { description: String(product.seoDescription) } : {}), openGraph: { ...base.openGraph, ...(product.seoTitle ? { title: String(product.seoTitle) } : {}), ...(product.seoDescription ? { description: String(product.seoDescription) } : {}), ...(product.seoImage ? { images: [{ url: String(product.seoImage) }] } : {}) } };
 }
 export async function savedRedirect(from: string) {
     if (!(await getPublicSnapshot()).enabled) return null;
