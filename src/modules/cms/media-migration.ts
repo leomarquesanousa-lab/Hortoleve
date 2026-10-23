@@ -3,6 +3,7 @@ import { open, realpath, readFile } from "node:fs/promises";
 import path from "node:path";
 import sharp from "sharp";
 import { readLocalMedia, storageRoot } from "./local-storage.ts";
+import { originalImageURLs } from "../catalog/storage-images.ts";
 
 export type Asset = { source: string; filename: string; sha256: string; bytes: number };
 export const digest = (bytes: Buffer | string) => createHash("sha256").update(bytes).digest("hex");
@@ -13,6 +14,7 @@ export function productImagePaths(items: { resource: string; data: Record<string
     for (const { resource, data } of items) {
         if (resource !== "produtos") continue;
         for (const value of [data.cardImage, data.seoImage, ...[data.gallery, data.media].flatMap(images => Array.isArray(images) ? images.map(image => image.src) : [])]) {
+            if (typeof value === "string" && value.startsWith("/media/")) for (const original of originalImageURLs(value)) paths.add(original);
             if (typeof value === "string" && value.startsWith("/") && !value.startsWith("//") && !value.startsWith("/media/")) paths.add(value);
         }
     }

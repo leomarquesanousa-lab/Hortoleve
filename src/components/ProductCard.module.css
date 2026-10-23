@@ -24,6 +24,11 @@
 .consult{display:inline-flex;align-items:center;min-height:44px;font-size:12px;text-decoration:underline;text-decoration-color:var(--gold);text-underline-offset:5px}
 .consult:hover{text-decoration-color:var(--green)}
 .imageLink:focus-visible{outline-offset:-6px}
+.imageLink[data-line="sense-pro"],.imageLink[data-line="dream"]{aspect-ratio:3/2}
+.imageLink[data-line^="box-tatame-"]{aspect-ratio:16/9}
+.imageLink[data-line="sense-pro"] img,.imageLink[data-line="dream"] img,.imageLink[data-line^="box-tatame-"] img{object-fit:contain;object-position:center}
+.imageLink[data-line="car"],.imageLink[data-line="pillow-top"],.imageLink[data-line="box-tatame"],.imageLink[data-line^="cama-box"],.imageLink[data-line="dream-pet"]{aspect-ratio:3/2}
+.imageLink[data-line="car"] img,.imageLink[data-line="pillow-top"] img,.imageLink[data-line="box-tatame"] img,.imageLink[data-line^="cama-box"] img,.imageLink[data-line="dream-pet"] img{object-fit:contain;object-position:center}
 @media(max-width:640px){.content{padding:18px}.content h3{font-size:1.85rem}}
 @media(prefers-reduced-motion:reduce){.card,.primaryAction{transition:none}.card:hover{transform:none}}
 

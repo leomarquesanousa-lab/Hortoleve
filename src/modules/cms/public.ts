@@ -1,4 +1,5 @@
 import "server-only";
+import { withStorageImages } from "../catalog/storage-images";
 import { cache } from "react";
 import { connection } from "next/server";
 import type { Metadata } from "next";
@@ -14,11 +15,13 @@ import { lines } from "./validation";
 
 export interface Snapshot { enabled: boolean; products: Product[]; categories: Category[]; presentations: Partial<Record<string, ProductPresentation>>; settings: typeof site & Data; socials: SocialChannel[]; documents: Document[] }
 export function toProduct(id: string, d: Data): Product {
+    d = withStorageImages(d);
     const gallery = (d.gallery ?? []) as ProductMedia[];
     const media = d.cardImage ? [{ id: id + "-cover", src: String(d.cardImage), alt: String(d.cardAlt || d.name), width: Number(d.cardWidth) || gallery[0]?.width || 900, height: Number(d.cardHeight) || gallery[0]?.height || 600 }] : gallery;
     return { id, categoryId: String(d.categoryId), slug: String(d.slug), name: String(d.name), summary: String(d.summary), description: String(d.description), highlights: [...lines(d.highlights), ...lines(d.benefits), ...lines(d.materials)], technologyIds: lines(d.technologyIds), featured: d.featured === true, media, specifications: (d.specifications ?? []) as Product["specifications"], status: "published", isDemo: false };
 }
 export function toPresentation(d: Data): ProductPresentation | undefined {
+    d = withStorageImages(d);
     if (!d.title) return;
     const details = (d.technologyDetails ?? []) as Data[];
     return { ...(d.displayName ? { displayName: String(d.displayName) } : {}), title: String(d.title), subtitle: String(d.subtitle ?? ""), paragraphs: lines(d.paragraphs).length ? lines(d.paragraphs) : [String(d.description)], media: (d.gallery ?? []) as ProductMedia[], technicalSheetId: String(d.technicalSheetId ?? ""), technologies: lines(d.technologies), technologyIcons: Object.fromEntries(details.filter(t => t.icon).map(t => [String(t.name), String(t.icon)])), technologyDescriptions: Object.fromEntries(details.filter(t => t.description).map(t => [String(t.name), String(t.description)])), specifications: (d.specifications ?? []) as ProductPresentation["specifications"], sizes: (d.sizes ?? []) as ProductPresentation["sizes"] };
@@ -30,7 +33,7 @@ export const getPublicSnapshot = cache(async (): Promise<Snapshot> => {
     try {
         const db = getDatabase();
         if ((await db.siteSetting.findUnique({ where: { key: "cms-import-completed" } }))?.value !== true) return fallback;
-        const documents = (await db.siteSetting.findMany({ where: { key: { startsWith: "cms:" } } })).map(r => r.value as unknown as Document).filter(d => d.published).map(d => ({ ...d, draft: {}, published: d.published }));
+        const documents = (await db.siteSetting.findMany({ where: { key: { startsWith: "cms:" } } })).map(r => withStorageImages(r.value as unknown as Document)).filter(d => d.published).map(d => ({ ...d, draft: {}, published: d.published }));
         const entries = (resource: Resource) => documents.filter(d => d.resource === resource).sort((a, b) => Number(a.published?.order ?? 0) - Number(b.published?.order ?? 0));
         const categories: Category[] = entries("categorias").map(d => ({ id: d.id, ...(d.published!.parentId ? { parentId: String(d.published!.parentId) } : {}), slug: String(d.published!.slug), name: String(d.published!.name), description: String(d.published!.description ?? ""), icon: String(d.published!.icon ?? "M3 9H21V19H3Z"), image: String(d.published!.image ?? "") }));
         const products = entries("produtos").map(d => toProduct(d.id, d.published!)).filter(p => categories.some(c => c.id === p.categoryId)).map(p => ({ ...p, categorySlug: categories.find(c => c.id === p.categoryId)!.slug }));
@@ -54,8 +57,8 @@ export const getPublicSnapshot = cache(async (): Promise<Snapshot> => {
 export async function publicDocument(resource: Resource, slug?: string) { return (await getPublicSnapshot()).documents.find(d => d.resource === resource && (!slug || d.published?.slug === slug))?.published ?? null; }
 export async function seoMetadata(route: string, fallback: Metadata): Promise<Metadata> {
     const snapshot = await getPublicSnapshot();
-    const seo = snapshot.documents.find(d => d.resource === "seo" && d.published?.route === route)?.published;
-    const product = snapshot.documents.find(d => d.resource === "produtos" && snapshot.products.some(p => p.id === d.id && `/produtos/${p.categorySlug}/${p.slug}` === route))?.published;
+    const seo = withStorageImages(snapshot.documents.find(d => d.resource === "seo" && d.published?.route === route)?.published);
+    const product = withStorageImages(snapshot.documents.find(d => d.resource === "produtos" && snapshot.products.some(p => p.id === d.id && `/produtos/${p.categorySlug}/${p.slug}` === route))?.published);
     const base = seo ? { ...fallback, title: String(seo.title), description: String(seo.description), alternates: { canonical: String(seo.canonical || route) }, robots: { index: !!seo.indexable && snapshot.settings.indexingEnabled, follow: !!seo.indexable && snapshot.settings.indexingEnabled }, openGraph: { ...fallback.openGraph, title: String(seo.title), description: String(seo.description), url: route, ...(seo.ogImage ? { images: [{ url: String(seo.ogImage) }] } : {}) } } : fallback;
     if (!product?.seoTitle && !product?.seoDescription && !product?.seoImage) return base;
     return { ...base, ...(product.seoTitle ? { title: String(product.seoTitle) } : {}), ...(product.seoDescription ? { description: String(product.seoDescription) } : {}), openGraph: { ...base.openGraph, ...(product.seoTitle ? { title: String(product.seoTitle) } : {}), ...(product.seoDescription ? { description: String(product.seoDescription) } : {}), ...(product.seoImage ? { images: [{ url: String(product.seoImage) }] } : {}) } };

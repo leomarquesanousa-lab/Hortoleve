@@ -13,7 +13,7 @@ export async function ProductCard({ product }: { product: Product }) {
     const contact = whatsappUrl("Olá! Gostaria de conhecer a linha " + product.name + " da Hortoleve.", (await getPublicSnapshot()).settings.whatsapp);
     return <article className={styles.card} aria-labelledby={product.id + "-title"}>
         <Link className={styles.imageLink} href={href} data-line={product.slug} aria-label={"Conhecer linha " + product.name}>
-            {image ? <Image src={image.src} alt={image.alt} width={image.width} height={image.height}
+            {image ? <Image unoptimized={product.slug === "divan" || image.src.startsWith("/poltronas/divan/")} src={image.src} alt={image.alt} width={image.width} height={image.height}
                 sizes="(max-width: 640px) 88vw, (max-width: 1100px) 43vw, 400px" /> : <ProductPlaceholder />}
         </Link>
         <div className={styles.content}>

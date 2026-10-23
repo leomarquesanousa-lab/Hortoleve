@@ -29,3 +29,7 @@
 .main[data-image^="house-"]{aspect-ratio:3/2}
 .main[data-image^="viscoelastico-"]{aspect-ratio:3/2}
 .main[data-image^="future-"],.main[data-image^="cervical-orto-plus-"]{aspect-ratio:3/2}
+.main[data-image^="corpo-white-"],.main[data-image^="corpo-magnetico-"]{aspect-ratio:3/2}
+.main[data-image^="sense-pro-"],.main[data-image^="dream-"],.main[data-image^="box-tatame-japones-"]{aspect-ratio:3/2}
+.main[data-image^="box-tatame-elegance-"]{aspect-ratio:1672/941}
+.main[data-image^="car-"],.main[data-image^="pillow-top-"],.main[data-image^="box-tatame-"]:not([data-image^="box-tatame-elegance-"]),.main[data-image^="cama-box-"],.main[data-image^="dream-pet-"]{aspect-ratio:3/2}

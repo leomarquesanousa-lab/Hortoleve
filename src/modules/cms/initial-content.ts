@@ -1,8 +1,9 @@
 import { createHash } from "node:crypto";
-import { products, categories, productHref } from "../catalog/data.ts";
-import { presentations } from "../catalog/presentations.ts";
+import { sourceProducts as products, categories, productHref } from "../catalog/data.ts";
+import { sourcePresentations as presentations } from "../catalog/presentations.ts";
+import { withStorageImages } from "../catalog/storage-images.ts";
 import { faqs, experiences } from "../content/data.ts";
-import { defaultHeroSlides } from "../cms/hero-defaults.ts";
+import { sourceHeroSlides as defaultHeroSlides } from "../cms/hero-defaults.ts";
 import { site } from "../../config/site.ts";
 import { pageDefaults } from "../content/page-defaults.ts";
 import { publicMedia } from "./public-media.generated.ts";
@@ -16,7 +17,8 @@ products.forEach((p, order) => {
 });
 const technologyNames = [...new Set(Object.values(presentations).flatMap(p => p?.technologies ?? []))];
 const slug = (value: string) => value.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
-technologyNames.forEach((name, order) => add("tecnologias", slug(name), { name, slug: slug(name), description: "", image: "", order }));
+// Variações de caixa/acentos podem gerar o mesmo ID: manter o primeiro registro.
+technologyNames.filter((name, index) => technologyNames.findIndex(other => slug(other) === slug(name)) === index).forEach((name, order) => add("tecnologias", slug(name), { name, slug: slug(name), description: "", image: "", order }));
 for (const item of initialContent.filter(i => i.resource === "produtos")) item.data.technologyIds = String(item.data.technologies).split("\n").filter(Boolean).map(slug).join("\n");
 add("configuracoes", "principal", { ...site, phone: "", hours: "", logo: "/logo/logo-offwhite.PNG", footerText: "Um novo olhar para o seu descanso. Conheça nossas linhas de colchões e encontre inspiração para o seu espaço.", footerLinks: [{ title: "Sobre a marca", href: "/sobre" }, { title: "Produtos", href: "/produtos" }, { title: "Tecnologias", href: "/tecnologias" }, { title: "Contato", href: "/contato" }] });
 for (const [index, channel] of ["facebook", "tiktok", "instagram", "whatsapp"].entries()) add("redes-sociais", channel, { channel, name: ["Facebook", "TikTok", "Instagram", "WhatsApp"][index], url: "", visible: true, order: index + 1 });
@@ -40,3 +42,6 @@ for (const media of publicMedia) {
     if (existing) existing.data = { ...existing.data, ...media };
     else add("midia", id, media);
 }
+
+// Preserva IDs derivados das URLs originais; apenas os dados de imagem usam o storage.
+for (const item of initialContent) item.data = withStorageImages(item.data);

@@ -2,7 +2,6 @@ import type { Permission } from "./contracts";
 export const adminModules: { slug: string; name: string; permission: Permission }[] = [
     { slug: "home", name: "Home e banners", permission: "content:write" },
     { slug: "tecnologias", name: "Tecnologias", permission: "content:write" },
-    { slug: "midia", name: "Biblioteca de mídia", permission: "content:write" },
     { slug: "paginas", name: "Páginas institucionais", permission: "content:write" },
     { slug: "produtos", name: "Produtos", permission: "content:write" },
     { slug: "categorias", name: "Categorias", permission: "content:write" },

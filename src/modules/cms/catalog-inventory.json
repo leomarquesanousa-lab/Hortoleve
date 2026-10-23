@@ -59,6 +59,71 @@
       "id": "travesseiro-cervical-orto-plus",
       "name": "Travesseiro Cervical Orto Plus",
       "categoryId": "linha-cervical-orto-plus"
+    },
+    {
+      "id": "travesseiro-corpo-white-fibra",
+      "name": "Corpo White Fibra",
+      "categoryId": "travesseiros"
+    },
+    {
+      "id": "travesseiro-corpo-magnetico",
+      "name": "Corpo Magnético",
+      "categoryId": "travesseiros"
+    },
+    {
+      "id": "sense-pro",
+      "name": "Colchão Sense Pro",
+      "categoryId": "linha-a-vacuo"
+    },
+    {
+      "id": "dream",
+      "name": "Colchão Dream",
+      "categoryId": "linha-a-vacuo"
+    },
+    {
+      "id": "box-tatame-elegance",
+      "name": "Box Tatame Elegance",
+      "categoryId": "camas-box"
+    },
+    {
+      "id": "box-tatame-japones",
+      "name": "Box Tatame Japonês",
+      "categoryId": "camas-box"
+    },
+    {
+      "id": "car",
+      "name": "Vibro Car",
+      "categoryId": "vibro-car"
+    },
+    {
+      "id": "pillow-top",
+      "name": "Pillow Top",
+      "categoryId": "colchoes"
+    },
+    {
+      "id": "box-tatame",
+      "name": "Box Tatame",
+      "categoryId": "camas-box"
+    },
+    {
+      "id": "cama-box",
+      "name": "Cama Box",
+      "categoryId": "camas-box"
+    },
+    {
+      "id": "cama-box-bau",
+      "name": "Cama Box Baú",
+      "categoryId": "camas-box"
+    },
+    {
+      "id": "cama-box-com-auxiliar",
+      "name": "Cama Box com Auxiliar",
+      "categoryId": "camas-box"
+    },
+    {
+      "id": "dream-pet",
+      "name": "Dream Pet",
+      "categoryId": "dream-pet"
     }
   ],
   "categories": [
@@ -70,7 +135,7 @@
     {
       "id": "linha-a-vacuo",
       "name": "Linha a Vácuo",
-      "parentId": null
+      "parentId": "colchoes"
     },
     {
       "id": "camas-box",
@@ -119,25 +184,675 @@
     },
     {
       "id": "vibro-car",
-      "name": "Vibro Car",
+      "name": "Automotivo",
       "parentId": null
     },
     {
       "id": "dream-pet",
-      "name": "Dream Pet",
+      "name": "Pet",
       "parentId": null
     }
   ],
-  "totalImages": 82,
-  "selectableImages": 76,
+  "totalImages": 145,
+  "selectableImages": 139,
   "byArea": {
-    "Sem associação publicada": 20,
-    "Produtos": 44,
+    "Produtos": 113,
+    "Sem associação publicada": 14,
     "Versões antigas": 13,
     "Identidade visual": 2,
     "Tecnologias": 3
   },
   "images": [
+    {
+      "src": "/Box Tatame Elegance/camabox-tatame1.png",
+      "name": "Box Tatame Elegance — Box Tatame Elegance / camabox-tatame1.png",
+      "alt": "Box Tatame Elegance — camabox-tatame1.png",
+      "width": 1672,
+      "height": 941,
+      "folder": "Box Tatame Elegance",
+      "area": "Produtos",
+      "productIds": "box-tatame-elegance",
+      "valid": true,
+      "references": [
+        "produtos:box-tatame-elegance",
+        "seo:783605999f22f652bd75e91c"
+      ]
+    },
+    {
+      "src": "/Box Tatame Elegance/camabox-tatame2.png",
+      "name": "Box Tatame Elegance — Box Tatame Elegance / camabox-tatame2.png",
+      "alt": "Box Tatame Elegance — camabox-tatame2.png",
+      "width": 1672,
+      "height": 941,
+      "folder": "Box Tatame Elegance",
+      "area": "Produtos",
+      "productIds": "box-tatame-elegance",
+      "valid": true,
+      "references": [
+        "produtos:box-tatame-elegance"
+      ]
+    },
+    {
+      "src": "/Box Tatame Elegance/camabox-tatame3.png",
+      "name": "Box Tatame Elegance — Box Tatame Elegance / camabox-tatame3.png",
+      "alt": "Box Tatame Elegance — camabox-tatame3.png",
+      "width": 1672,
+      "height": 941,
+      "folder": "Box Tatame Elegance",
+      "area": "Produtos",
+      "productIds": "box-tatame-elegance",
+      "valid": true,
+      "references": [
+        "produtos:box-tatame-elegance"
+      ]
+    },
+    {
+      "src": "/Box Tatame Elegance/camabox-tatame4.png",
+      "name": "Box Tatame Elegance — Box Tatame Elegance / camabox-tatame4.png",
+      "alt": "Box Tatame Elegance — camabox-tatame4.png",
+      "width": 1672,
+      "height": 941,
+      "folder": "Box Tatame Elegance",
+      "area": "Produtos",
+      "productIds": "box-tatame-elegance",
+      "valid": true,
+      "references": [
+        "produtos:box-tatame-elegance"
+      ]
+    },
+    {
+      "src": "/Box Tatame Elegance/camabox-tatame5.png",
+      "name": "Box Tatame Elegance — Box Tatame Elegance / camabox-tatame5.png",
+      "alt": "Box Tatame Elegance — camabox-tatame5.png",
+      "width": 1672,
+      "height": 941,
+      "folder": "Box Tatame Elegance",
+      "area": "Produtos",
+      "productIds": "box-tatame-elegance",
+      "valid": true,
+      "references": [
+        "produtos:box-tatame-elegance"
+      ]
+    },
+    {
+      "src": "/Box Tatame Elegance/camabox-tatame6.png",
+      "name": "Box Tatame Elegance — Box Tatame Elegance / camabox-tatame6.png",
+      "alt": "Box Tatame Elegance — camabox-tatame6.png",
+      "width": 1672,
+      "height": 941,
+      "folder": "Box Tatame Elegance",
+      "area": "Produtos",
+      "productIds": "box-tatame-elegance",
+      "valid": true,
+      "references": [
+        "produtos:box-tatame-elegance"
+      ]
+    },
+    {
+      "src": "/Box Tatame Elegance/camabox-tatame7.png",
+      "name": "Box Tatame Elegance — Box Tatame Elegance / camabox-tatame7.png",
+      "alt": "Box Tatame Elegance — camabox-tatame7.png",
+      "width": 1672,
+      "height": 941,
+      "folder": "Box Tatame Elegance",
+      "area": "Produtos",
+      "productIds": "box-tatame-elegance",
+      "valid": true,
+      "references": [
+        "produtos:box-tatame-elegance"
+      ]
+    },
+    {
+      "src": "/Box Tatame Japonês/camabox-tatame1.png",
+      "name": "Box Tatame Japonês — Box Tatame Japonês / camabox-tatame1.png",
+      "alt": "Box Tatame Japonês — camabox-tatame1.png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "Box Tatame Japonês",
+      "area": "Produtos",
+      "productIds": "box-tatame-japones",
+      "valid": true,
+      "references": [
+        "produtos:box-tatame-japones"
+      ]
+    },
+    {
+      "src": "/Box Tatame Japonês/camabox-tatame2.png",
+      "name": "Box Tatame Japonês — Box Tatame Japonês / camabox-tatame2.png",
+      "alt": "Box Tatame Japonês — camabox-tatame2.png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "Box Tatame Japonês",
+      "area": "Produtos",
+      "productIds": "box-tatame-japones",
+      "valid": true,
+      "references": [
+        "produtos:box-tatame-japones"
+      ]
+    },
+    {
+      "src": "/Box Tatame Japonês/camabox-tatame3.png",
+      "name": "Box Tatame Japonês — Box Tatame Japonês / camabox-tatame3.png",
+      "alt": "Box Tatame Japonês — camabox-tatame3.png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "Box Tatame Japonês",
+      "area": "Produtos",
+      "productIds": "box-tatame-japones",
+      "valid": true,
+      "references": [
+        "produtos:box-tatame-japones"
+      ]
+    },
+    {
+      "src": "/Box Tatame Japonês/camabox-tatame4.png",
+      "name": "Box Tatame Japonês — Box Tatame Japonês / camabox-tatame4.png",
+      "alt": "Box Tatame Japonês — camabox-tatame4.png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "Box Tatame Japonês",
+      "area": "Produtos",
+      "productIds": "box-tatame-japones",
+      "valid": true,
+      "references": [
+        "produtos:box-tatame-japones"
+      ]
+    },
+    {
+      "src": "/Box Tatame Japonês/camabox-tatame5.png",
+      "name": "Box Tatame Japonês — Box Tatame Japonês / camabox-tatame5.png",
+      "alt": "Box Tatame Japonês — camabox-tatame5.png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "Box Tatame Japonês",
+      "area": "Produtos",
+      "productIds": "box-tatame-japones",
+      "valid": true,
+      "references": [
+        "produtos:box-tatame-japones"
+      ]
+    },
+    {
+      "src": "/Box Tatame Japonês/camabox-tatame6.png",
+      "name": "Box Tatame Japonês — Box Tatame Japonês / camabox-tatame6.png",
+      "alt": "Box Tatame Japonês — camabox-tatame6.png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "Box Tatame Japonês",
+      "area": "Produtos",
+      "productIds": "box-tatame-japones",
+      "valid": true,
+      "references": [
+        "produtos:box-tatame-japones"
+      ]
+    },
+    {
+      "src": "/Box Tatame Japonês/camabox-tatame7.png",
+      "name": "Box Tatame Japonês — Box Tatame Japonês / camabox-tatame7.png",
+      "alt": "Box Tatame Japonês — camabox-tatame7.png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "Box Tatame Japonês",
+      "area": "Produtos",
+      "productIds": "box-tatame-japones",
+      "valid": true,
+      "references": [
+        "produtos:box-tatame-japones"
+      ]
+    },
+    {
+      "src": "/Box Tatame Japonês/camabox-tatame8.png",
+      "name": "Box Tatame Japonês — Box Tatame Japonês / camabox-tatame8.png",
+      "alt": "Box Tatame Japonês — camabox-tatame8.png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "Box Tatame Japonês",
+      "area": "Produtos",
+      "productIds": "box-tatame-japones",
+      "valid": true,
+      "references": [
+        "produtos:box-tatame-japones",
+        "seo:bec5465f0fe3f5e28574e4a0"
+      ]
+    },
+    {
+      "src": "/Box Tatame/camaboxtatame (1).png",
+      "name": "Box Tatame — Box Tatame / camaboxtatame (1).png",
+      "alt": "Box Tatame — camaboxtatame (1).png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "Box Tatame",
+      "area": "Produtos",
+      "productIds": "box-tatame",
+      "valid": true,
+      "references": [
+        "produtos:box-tatame",
+        "seo:80244011b44161e525e4f21d"
+      ]
+    },
+    {
+      "src": "/Box Tatame/camaboxtatame (2).png",
+      "name": "Box Tatame — Box Tatame / camaboxtatame (2).png",
+      "alt": "Box Tatame — camaboxtatame (2).png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "Box Tatame",
+      "area": "Produtos",
+      "productIds": "box-tatame",
+      "valid": true,
+      "references": [
+        "produtos:box-tatame"
+      ]
+    },
+    {
+      "src": "/Box Tatame/camaboxtatame (3).png",
+      "name": "Box Tatame — Box Tatame / camaboxtatame (3).png",
+      "alt": "Box Tatame — camaboxtatame (3).png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "Box Tatame",
+      "area": "Produtos",
+      "productIds": "box-tatame",
+      "valid": true,
+      "references": [
+        "produtos:box-tatame"
+      ]
+    },
+    {
+      "src": "/Box Tatame/camaboxtatame (4).png",
+      "name": "Box Tatame — Box Tatame / camaboxtatame (4).png",
+      "alt": "Box Tatame — camaboxtatame (4).png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "Box Tatame",
+      "area": "Produtos",
+      "productIds": "box-tatame",
+      "valid": true,
+      "references": [
+        "produtos:box-tatame"
+      ]
+    },
+    {
+      "src": "/Box Tatame/camaboxtatame (5).png",
+      "name": "Box Tatame — Box Tatame / camaboxtatame (5).png",
+      "alt": "Box Tatame — camaboxtatame (5).png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "Box Tatame",
+      "area": "Produtos",
+      "productIds": "box-tatame",
+      "valid": true,
+      "references": [
+        "produtos:box-tatame"
+      ]
+    },
+    {
+      "src": "/Box Tatame/camaboxtatame (6).png",
+      "name": "Box Tatame — Box Tatame / camaboxtatame (6).png",
+      "alt": "Box Tatame — camaboxtatame (6).png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "Box Tatame",
+      "area": "Produtos",
+      "productIds": "box-tatame",
+      "valid": true,
+      "references": [
+        "produtos:box-tatame"
+      ]
+    },
+    {
+      "src": "/Box Tatame/camaboxtatame (7).png",
+      "name": "Box Tatame — Box Tatame / camaboxtatame (7).png",
+      "alt": "Box Tatame — camaboxtatame (7).png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "Box Tatame",
+      "area": "Produtos",
+      "productIds": "box-tatame",
+      "valid": true,
+      "references": [
+        "produtos:box-tatame"
+      ]
+    },
+    {
+      "src": "/Box Tatame/camaboxtatame (8).png",
+      "name": "Box Tatame — Box Tatame / camaboxtatame (8).png",
+      "alt": "Box Tatame — camaboxtatame (8).png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "Box Tatame",
+      "area": "Produtos",
+      "productIds": "box-tatame",
+      "valid": true,
+      "references": [
+        "produtos:box-tatame"
+      ]
+    },
+    {
+      "src": "/Cama Box Baú/camaboxbau (1).png",
+      "name": "Cama Box Baú — Cama Box Baú / camaboxbau (1).png",
+      "alt": "Cama Box Baú — camaboxbau (1).png",
+      "width": 3000,
+      "height": 2000,
+      "folder": "Cama Box Baú",
+      "area": "Produtos",
+      "productIds": "cama-box-bau",
+      "valid": true,
+      "references": [
+        "produtos:cama-box-bau"
+      ]
+    },
+    {
+      "src": "/Cama Box Baú/camaboxbau (2).png",
+      "name": "Cama Box Baú — Cama Box Baú / camaboxbau (2).png",
+      "alt": "Cama Box Baú — camaboxbau (2).png",
+      "width": 3000,
+      "height": 2000,
+      "folder": "Cama Box Baú",
+      "area": "Produtos",
+      "productIds": "cama-box-bau",
+      "valid": true,
+      "references": [
+        "produtos:cama-box-bau"
+      ]
+    },
+    {
+      "src": "/Cama Box Baú/camaboxbau (3).png",
+      "name": "Cama Box Baú — Cama Box Baú / camaboxbau (3).png",
+      "alt": "Cama Box Baú — camaboxbau (3).png",
+      "width": 3000,
+      "height": 2000,
+      "folder": "Cama Box Baú",
+      "area": "Produtos",
+      "productIds": "cama-box-bau",
+      "valid": true,
+      "references": [
+        "produtos:cama-box-bau"
+      ]
+    },
+    {
+      "src": "/Cama Box Baú/camaboxbau (4).png",
+      "name": "Cama Box Baú — Cama Box Baú / camaboxbau (4).png",
+      "alt": "Cama Box Baú — camaboxbau (4).png",
+      "width": 3000,
+      "height": 2000,
+      "folder": "Cama Box Baú",
+      "area": "Produtos",
+      "productIds": "cama-box-bau",
+      "valid": true,
+      "references": [
+        "produtos:cama-box-bau"
+      ]
+    },
+    {
+      "src": "/Cama Box Baú/camaboxbau (5).png",
+      "name": "Cama Box Baú — Cama Box Baú / camaboxbau (5).png",
+      "alt": "Cama Box Baú — camaboxbau (5).png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "Cama Box Baú",
+      "area": "Produtos",
+      "productIds": "cama-box-bau",
+      "valid": true,
+      "references": [
+        "produtos:cama-box-bau"
+      ]
+    },
+    {
+      "src": "/Cama Box Baú/camaboxbau (6).png",
+      "name": "Cama Box Baú — Cama Box Baú / camaboxbau (6).png",
+      "alt": "Cama Box Baú — camaboxbau (6).png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "Cama Box Baú",
+      "area": "Produtos",
+      "productIds": "cama-box-bau",
+      "valid": true,
+      "references": [
+        "produtos:cama-box-bau"
+      ]
+    },
+    {
+      "src": "/Cama Box Baú/camaboxbau (7).png",
+      "name": "Cama Box Baú — Cama Box Baú / camaboxbau (7).png",
+      "alt": "Cama Box Baú — camaboxbau (7).png",
+      "width": 3000,
+      "height": 2000,
+      "folder": "Cama Box Baú",
+      "area": "Produtos",
+      "productIds": "cama-box-bau",
+      "valid": true,
+      "references": [
+        "produtos:cama-box-bau",
+        "seo:e39031e24066d1ac4e2b20b6"
+      ]
+    },
+    {
+      "src": "/Cama Box com Auxiliar/camaboxcomauxiliar (1).png",
+      "name": "Cama Box com Auxiliar — Cama Box com Auxiliar / camaboxcomauxiliar (1).png",
+      "alt": "Cama Box com Auxiliar — camaboxcomauxiliar (1).png",
+      "width": 3000,
+      "height": 2000,
+      "folder": "Cama Box com Auxiliar",
+      "area": "Produtos",
+      "productIds": "cama-box-com-auxiliar",
+      "valid": true,
+      "references": [
+        "produtos:cama-box-com-auxiliar",
+        "seo:2397af7a5a8f9b7e517a1de6"
+      ]
+    },
+    {
+      "src": "/Cama Box com Auxiliar/camaboxcomauxiliar (2).png",
+      "name": "Cama Box com Auxiliar — Cama Box com Auxiliar / camaboxcomauxiliar (2).png",
+      "alt": "Cama Box com Auxiliar — camaboxcomauxiliar (2).png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "Cama Box com Auxiliar",
+      "area": "Produtos",
+      "productIds": "cama-box-com-auxiliar",
+      "valid": true,
+      "references": [
+        "produtos:cama-box-com-auxiliar"
+      ]
+    },
+    {
+      "src": "/Cama Box com Auxiliar/camaboxcomauxiliar (3).png",
+      "name": "Cama Box com Auxiliar — Cama Box com Auxiliar / camaboxcomauxiliar (3).png",
+      "alt": "Cama Box com Auxiliar — camaboxcomauxiliar (3).png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "Cama Box com Auxiliar",
+      "area": "Produtos",
+      "productIds": "cama-box-com-auxiliar",
+      "valid": true,
+      "references": [
+        "produtos:cama-box-com-auxiliar"
+      ]
+    },
+    {
+      "src": "/Cama Box com Auxiliar/camaboxcomauxiliar (4).png",
+      "name": "Cama Box com Auxiliar — Cama Box com Auxiliar / camaboxcomauxiliar (4).png",
+      "alt": "Cama Box com Auxiliar — camaboxcomauxiliar (4).png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "Cama Box com Auxiliar",
+      "area": "Produtos",
+      "productIds": "cama-box-com-auxiliar",
+      "valid": true,
+      "references": [
+        "produtos:cama-box-com-auxiliar"
+      ]
+    },
+    {
+      "src": "/Cama Box com Auxiliar/camaboxcomauxiliar (5).png",
+      "name": "Cama Box com Auxiliar — Cama Box com Auxiliar / camaboxcomauxiliar (5).png",
+      "alt": "Cama Box com Auxiliar — camaboxcomauxiliar (5).png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "Cama Box com Auxiliar",
+      "area": "Produtos",
+      "productIds": "cama-box-com-auxiliar",
+      "valid": true,
+      "references": [
+        "produtos:cama-box-com-auxiliar"
+      ]
+    },
+    {
+      "src": "/Cama Box com Auxiliar/camaboxcomauxiliar (6).png",
+      "name": "Cama Box com Auxiliar — Cama Box com Auxiliar / camaboxcomauxiliar (6).png",
+      "alt": "Cama Box com Auxiliar — camaboxcomauxiliar (6).png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "Cama Box com Auxiliar",
+      "area": "Produtos",
+      "productIds": "cama-box-com-auxiliar",
+      "valid": true,
+      "references": [
+        "produtos:cama-box-com-auxiliar"
+      ]
+    },
+    {
+      "src": "/Cama Box com Auxiliar/camaboxcomauxiliar (7).png",
+      "name": "Cama Box com Auxiliar — Cama Box com Auxiliar / camaboxcomauxiliar (7).png",
+      "alt": "Cama Box com Auxiliar — camaboxcomauxiliar (7).png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "Cama Box com Auxiliar",
+      "area": "Produtos",
+      "productIds": "cama-box-com-auxiliar",
+      "valid": true,
+      "references": [
+        "produtos:cama-box-com-auxiliar"
+      ]
+    },
+    {
+      "src": "/Cama Box com Auxiliar/camaboxcomauxiliar (8).png",
+      "name": "Cama Box com Auxiliar — Cama Box com Auxiliar / camaboxcomauxiliar (8).png",
+      "alt": "Cama Box com Auxiliar — camaboxcomauxiliar (8).png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "Cama Box com Auxiliar",
+      "area": "Produtos",
+      "productIds": "cama-box-com-auxiliar",
+      "valid": true,
+      "references": [
+        "produtos:cama-box-com-auxiliar"
+      ]
+    },
+    {
+      "src": "/Cama Box/camabox (1).png",
+      "name": "Cama Box — Cama Box / camabox (1).png",
+      "alt": "Cama Box — camabox (1).png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "Cama Box",
+      "area": "Produtos",
+      "productIds": "cama-box",
+      "valid": true,
+      "references": [
+        "produtos:cama-box"
+      ]
+    },
+    {
+      "src": "/Cama Box/camabox (2).png",
+      "name": "Cama Box — Cama Box / camabox (2).png",
+      "alt": "Cama Box — camabox (2).png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "Cama Box",
+      "area": "Produtos",
+      "productIds": "cama-box",
+      "valid": true,
+      "references": [
+        "produtos:cama-box"
+      ]
+    },
+    {
+      "src": "/Cama Box/camabox (3).png",
+      "name": "Cama Box — Cama Box / camabox (3).png",
+      "alt": "Cama Box — camabox (3).png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "Cama Box",
+      "area": "Produtos",
+      "productIds": "cama-box",
+      "valid": true,
+      "references": [
+        "produtos:cama-box"
+      ]
+    },
+    {
+      "src": "/Cama Box/camabox (4).png",
+      "name": "Cama Box — Cama Box / camabox (4).png",
+      "alt": "Cama Box — camabox (4).png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "Cama Box",
+      "area": "Produtos",
+      "productIds": "cama-box",
+      "valid": true,
+      "references": [
+        "produtos:cama-box"
+      ]
+    },
+    {
+      "src": "/Cama Box/camabox (5).png",
+      "name": "Cama Box — Cama Box / camabox (5).png",
+      "alt": "Cama Box — camabox (5).png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "Cama Box",
+      "area": "Produtos",
+      "productIds": "cama-box",
+      "valid": true,
+      "references": [
+        "produtos:cama-box"
+      ]
+    },
+    {
+      "src": "/Cama Box/camabox (6).png",
+      "name": "Cama Box — Cama Box / camabox (6).png",
+      "alt": "Cama Box — camabox (6).png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "Cama Box",
+      "area": "Produtos",
+      "productIds": "cama-box",
+      "valid": true,
+      "references": [
+        "produtos:cama-box"
+      ]
+    },
+    {
+      "src": "/Cama Box/camabox (7).png",
+      "name": "Cama Box — Cama Box / camabox (7).png",
+      "alt": "Cama Box — camabox (7).png",
+      "width": 3000,
+      "height": 2000,
+      "folder": "Cama Box",
+      "area": "Produtos",
+      "productIds": "cama-box",
+      "valid": true,
+      "references": [
+        "produtos:cama-box",
+        "seo:264847e1673be0b52f8c700d"
+      ]
+    },
+    {
+      "src": "/Cama Box/camabox (8).png",
+      "name": "Cama Box — Cama Box / camabox (8).png",
+      "alt": "Cama Box — camabox (8).png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "Cama Box",
+      "area": "Produtos",
+      "productIds": "cama-box",
+      "valid": true,
+      "references": [
+        "produtos:cama-box"
+      ]
+    },
     {
       "src": "/Sensepro/ChatGPT Image Oct 20, 2026, 09_49_13 PM-1.png",
       "name": "Sem associação publicada — Sensepro / ChatGPT Image Oct 20, 2026, 09_49_13 PM-1.png",
@@ -173,6 +888,134 @@
       "productIds": "",
       "valid": true,
       "references": []
+    },
+    {
+      "src": "/a vacuo/Dream/Anúncio Elegante de Colchão Dream a Vácuo.png",
+      "name": "Colchão Dream — a vacuo/Dream / Anúncio Elegante de Colchão Dream a Vácuo.png",
+      "alt": "Colchão Dream — Anúncio Elegante de Colchão Dream a Vácuo.png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "a vacuo/Dream",
+      "area": "Produtos",
+      "productIds": "dream",
+      "valid": true,
+      "references": [
+        "produtos:dream"
+      ]
+    },
+    {
+      "src": "/a vacuo/Dream/Colchão DREAM HortoLeve_ Conforto e Tecnologia.png",
+      "name": "Colchão Dream — a vacuo/Dream / Colchão DREAM HortoLeve_ Conforto e Tecnologia.png",
+      "alt": "Colchão Dream — Colchão DREAM HortoLeve_ Conforto e Tecnologia.png",
+      "width": 1535,
+      "height": 1024,
+      "folder": "a vacuo/Dream",
+      "area": "Produtos",
+      "productIds": "dream",
+      "valid": true,
+      "references": [
+        "produtos:dream"
+      ]
+    },
+    {
+      "src": "/a vacuo/Dream/Colchão Dream.png",
+      "name": "Colchão Dream — a vacuo/Dream / Colchão Dream.png",
+      "alt": "Colchão Dream — Colchão Dream.png",
+      "width": 3000,
+      "height": 2000,
+      "folder": "a vacuo/Dream",
+      "area": "Produtos",
+      "productIds": "dream",
+      "valid": true,
+      "references": [
+        "produtos:dream",
+        "seo:ccff7c0b6370968171bc440f"
+      ]
+    },
+    {
+      "src": "/a vacuo/Sense Pro/colchão-sensepro1.png",
+      "name": "Colchão Sense Pro — a vacuo/Sense Pro / colchão-sensepro1.png",
+      "alt": "Colchão Sense Pro — colchão-sensepro1.png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "a vacuo/Sense Pro",
+      "area": "Produtos",
+      "productIds": "sense-pro",
+      "valid": true,
+      "references": [
+        "produtos:sense-pro",
+        "seo:d29be21dbc28771b363cb5aa"
+      ]
+    },
+    {
+      "src": "/a vacuo/Sense Pro/colchão-sensepro2.png",
+      "name": "Colchão Sense Pro — a vacuo/Sense Pro / colchão-sensepro2.png",
+      "alt": "Colchão Sense Pro — colchão-sensepro2.png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "a vacuo/Sense Pro",
+      "area": "Produtos",
+      "productIds": "sense-pro",
+      "valid": true,
+      "references": [
+        "produtos:sense-pro"
+      ]
+    },
+    {
+      "src": "/a vacuo/Sense Pro/colchão-sensepro3.png",
+      "name": "Colchão Sense Pro — a vacuo/Sense Pro / colchão-sensepro3.png",
+      "alt": "Colchão Sense Pro — colchão-sensepro3.png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "a vacuo/Sense Pro",
+      "area": "Produtos",
+      "productIds": "sense-pro",
+      "valid": true,
+      "references": [
+        "produtos:sense-pro"
+      ]
+    },
+    {
+      "src": "/a vacuo/Sense Pro/colchão-sensepro4.png",
+      "name": "Colchão Sense Pro — a vacuo/Sense Pro / colchão-sensepro4.png",
+      "alt": "Colchão Sense Pro — colchão-sensepro4.png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "a vacuo/Sense Pro",
+      "area": "Produtos",
+      "productIds": "sense-pro",
+      "valid": true,
+      "references": [
+        "produtos:sense-pro"
+      ]
+    },
+    {
+      "src": "/a vacuo/Sense Pro/colchão-sensepro5.png",
+      "name": "Colchão Sense Pro — a vacuo/Sense Pro / colchão-sensepro5.png",
+      "alt": "Colchão Sense Pro — colchão-sensepro5.png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "a vacuo/Sense Pro",
+      "area": "Produtos",
+      "productIds": "sense-pro",
+      "valid": true,
+      "references": [
+        "produtos:sense-pro"
+      ]
+    },
+    {
+      "src": "/a vacuo/Sense Pro/colchão-sensepro6.png",
+      "name": "Colchão Sense Pro — a vacuo/Sense Pro / colchão-sensepro6.png",
+      "alt": "Colchão Sense Pro — colchão-sensepro6.png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "a vacuo/Sense Pro",
+      "area": "Produtos",
+      "productIds": "sense-pro",
+      "valid": true,
+      "references": [
+        "produtos:sense-pro"
+      ]
     },
     {
       "src": "/a vacuo/elite/Cinza/CINZA.png",
@@ -219,15 +1062,16 @@
     },
     {
       "src": "/a vacuo/elite/Cinza/Infográfico Colchão Elite a Vácuo.png",
-      "name": "Colchão Elite Cinza — a vacuo/elite/Cinza / Infográfico Colchão Elite a Vácuo.png",
-      "alt": "Colchão Elite Cinza — Infográfico Colchão Elite a Vácuo.png",
+      "name": "Colchão Elite Azul / Colchão Elite Cinza — a vacuo/elite/Cinza / Infográfico Colchão Elite a Vácuo.png",
+      "alt": "Colchão Elite Azul / Colchão Elite Cinza — Infográfico Colchão Elite a Vácuo.png",
       "width": 1536,
       "height": 1024,
       "folder": "a vacuo/elite/Cinza",
       "area": "Produtos",
-      "productIds": "elite-cinza",
+      "productIds": "elite-azul\nelite-cinza",
       "valid": true,
       "references": [
+        "produtos:elite-azul",
         "produtos:elite-cinza"
       ]
     },
@@ -247,16 +1091,17 @@
     },
     {
       "src": "/a vacuo/elite/azul/Infográfico Colchão Elite a Vácuo.png",
-      "name": "Colchão Elite Azul — a vacuo/elite/azul / Infográfico Colchão Elite a Vácuo.png",
-      "alt": "Colchão Elite Azul — Infográfico Colchão Elite a Vácuo.png",
+      "name": "Colchão Elite Azul / Colchão Elite Cinza — a vacuo/elite/azul / Infográfico Colchão Elite a Vácuo.png",
+      "alt": "Colchão Elite Azul / Colchão Elite Cinza — Infográfico Colchão Elite a Vácuo.png",
       "width": 1536,
       "height": 1024,
       "folder": "a vacuo/elite/azul",
       "area": "Produtos",
-      "productIds": "elite-azul",
+      "productIds": "elite-azul\nelite-cinza",
       "valid": true,
       "references": [
-        "produtos:elite-azul"
+        "produtos:elite-azul",
+        "produtos:elite-cinza"
       ]
     },
     {
@@ -286,6 +1131,35 @@
       "references": [
         "produtos:elite-azul",
         "seo:80ff6be689b4587409051eec"
+      ]
+    },
+    {
+      "src": "/car/vibro-car1.png",
+      "name": "Vibro Car — car / vibro-car1.png",
+      "alt": "Vibro Car — vibro-car1.png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "car",
+      "area": "Produtos",
+      "productIds": "car",
+      "valid": true,
+      "references": [
+        "produtos:car",
+        "seo:ccf98a180d5cac5ae9f85a34"
+      ]
+    },
+    {
+      "src": "/car/vibrocar2.png",
+      "name": "Vibro Car — car / vibrocar2.png",
+      "alt": "Vibro Car — vibrocar2.png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "car",
+      "area": "Produtos",
+      "productIds": "car",
+      "valid": true,
+      "references": [
+        "produtos:car"
       ]
     },
     {
@@ -785,6 +1659,92 @@
       "references": []
     },
     {
+      "src": "/pet/colchao_pet1.png",
+      "name": "Dream Pet — pet / colchao_pet1.png",
+      "alt": "Dream Pet — colchao_pet1.png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "pet",
+      "area": "Produtos",
+      "productIds": "dream-pet",
+      "valid": true,
+      "references": [
+        "produtos:dream-pet",
+        "seo:bca3b2276159564b302aecd2"
+      ]
+    },
+    {
+      "src": "/pet/colchao_pet2.png",
+      "name": "Dream Pet — pet / colchao_pet2.png",
+      "alt": "Dream Pet — colchao_pet2.png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "pet",
+      "area": "Produtos",
+      "productIds": "dream-pet",
+      "valid": true,
+      "references": [
+        "produtos:dream-pet"
+      ]
+    },
+    {
+      "src": "/pet/colchao_pet3.png",
+      "name": "Dream Pet — pet / colchao_pet3.png",
+      "alt": "Dream Pet — colchao_pet3.png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "pet",
+      "area": "Produtos",
+      "productIds": "dream-pet",
+      "valid": true,
+      "references": [
+        "produtos:dream-pet"
+      ]
+    },
+    {
+      "src": "/pilow-top/pilow-top1.png",
+      "name": "Pillow Top — pilow-top / pilow-top1.png",
+      "alt": "Pillow Top — pilow-top1.png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "pilow-top",
+      "area": "Produtos",
+      "productIds": "pillow-top",
+      "valid": true,
+      "references": [
+        "produtos:pillow-top",
+        "seo:3da4d424952b1501454fd9d3"
+      ]
+    },
+    {
+      "src": "/pilow-top/pilow-top2.png",
+      "name": "Pillow Top — pilow-top / pilow-top2.png",
+      "alt": "Pillow Top — pilow-top2.png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "pilow-top",
+      "area": "Produtos",
+      "productIds": "pillow-top",
+      "valid": true,
+      "references": [
+        "produtos:pillow-top"
+      ]
+    },
+    {
+      "src": "/pilow-top/pilow-top3.png",
+      "name": "Pillow Top — pilow-top / pilow-top3.png",
+      "alt": "Pillow Top — pilow-top3.png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "pilow-top",
+      "area": "Produtos",
+      "productIds": "pillow-top",
+      "valid": true,
+      "references": [
+        "produtos:pillow-top"
+      ]
+    },
+    {
       "src": "/poltronas/divan/ChatGPT Image Oct 21, 2026, 08_36_16 PM-1.png",
       "name": "Poltrona Massageadora Divan — poltronas/divan / ChatGPT Image Oct 21, 2026, 08_36_16 PM-1.png",
       "alt": "Poltrona Massageadora Divan — ChatGPT Image Oct 21, 2026, 08_36_16 PM-1.png",
@@ -1055,75 +2015,89 @@
     },
     {
       "src": "/travesseiros/corpo-magnetico/travesseiro-corpo-magnetico1.png",
-      "name": "Sem associação publicada — travesseiros/corpo-magnetico / travesseiro-corpo-magnetico1.png",
-      "alt": "travesseiro-corpo-magnetico1.png",
+      "name": "Corpo Magnético — travesseiros/corpo-magnetico / travesseiro-corpo-magnetico1.png",
+      "alt": "Corpo Magnético — travesseiro-corpo-magnetico1.png",
       "width": 1536,
       "height": 1024,
       "folder": "travesseiros/corpo-magnetico",
-      "area": "Sem associação publicada",
-      "productIds": "",
+      "area": "Produtos",
+      "productIds": "travesseiro-corpo-magnetico",
       "valid": true,
-      "references": []
+      "references": [
+        "produtos:travesseiro-corpo-magnetico",
+        "seo:2dd94e3f3dcb957ebdb839c6"
+      ]
     },
     {
       "src": "/travesseiros/corpo-magnetico/travesseiro-corpo-magnetico2.png",
-      "name": "Sem associação publicada — travesseiros/corpo-magnetico / travesseiro-corpo-magnetico2.png",
-      "alt": "travesseiro-corpo-magnetico2.png",
+      "name": "Corpo Magnético — travesseiros/corpo-magnetico / travesseiro-corpo-magnetico2.png",
+      "alt": "Corpo Magnético — travesseiro-corpo-magnetico2.png",
       "width": 1536,
       "height": 1024,
       "folder": "travesseiros/corpo-magnetico",
-      "area": "Sem associação publicada",
-      "productIds": "",
+      "area": "Produtos",
+      "productIds": "travesseiro-corpo-magnetico",
       "valid": true,
-      "references": []
+      "references": [
+        "produtos:travesseiro-corpo-magnetico"
+      ]
     },
     {
       "src": "/travesseiros/corpo-magnetico/travesseiro-corpo-magnetico3.png",
-      "name": "Sem associação publicada — travesseiros/corpo-magnetico / travesseiro-corpo-magnetico3.png",
-      "alt": "travesseiro-corpo-magnetico3.png",
+      "name": "Corpo Magnético — travesseiros/corpo-magnetico / travesseiro-corpo-magnetico3.png",
+      "alt": "Corpo Magnético — travesseiro-corpo-magnetico3.png",
       "width": 1536,
       "height": 1024,
       "folder": "travesseiros/corpo-magnetico",
-      "area": "Sem associação publicada",
-      "productIds": "",
+      "area": "Produtos",
+      "productIds": "travesseiro-corpo-magnetico",
       "valid": true,
-      "references": []
+      "references": [
+        "produtos:travesseiro-corpo-magnetico"
+      ]
     },
     {
       "src": "/travesseiros/corpo-white-fibra/travesseiros_corpowhite1.png",
-      "name": "Sem associação publicada — travesseiros/corpo-white-fibra / travesseiros_corpowhite1.png",
-      "alt": "travesseiros_corpowhite1.png",
+      "name": "Corpo White Fibra — travesseiros/corpo-white-fibra / travesseiros_corpowhite1.png",
+      "alt": "Corpo White Fibra — travesseiros_corpowhite1.png",
       "width": 1536,
       "height": 1024,
       "folder": "travesseiros/corpo-white-fibra",
-      "area": "Sem associação publicada",
-      "productIds": "",
+      "area": "Produtos",
+      "productIds": "travesseiro-corpo-white-fibra",
       "valid": true,
-      "references": []
+      "references": [
+        "produtos:travesseiro-corpo-white-fibra",
+        "seo:448cf428c14db4b95d2f20c4"
+      ]
     },
     {
       "src": "/travesseiros/corpo-white-fibra/travesseiros_corpowhite2.png",
-      "name": "Sem associação publicada — travesseiros/corpo-white-fibra / travesseiros_corpowhite2.png",
-      "alt": "travesseiros_corpowhite2.png",
+      "name": "Corpo White Fibra — travesseiros/corpo-white-fibra / travesseiros_corpowhite2.png",
+      "alt": "Corpo White Fibra — travesseiros_corpowhite2.png",
       "width": 1536,
       "height": 1024,
       "folder": "travesseiros/corpo-white-fibra",
-      "area": "Sem associação publicada",
-      "productIds": "",
+      "area": "Produtos",
+      "productIds": "travesseiro-corpo-white-fibra",
       "valid": true,
-      "references": []
+      "references": [
+        "produtos:travesseiro-corpo-white-fibra"
+      ]
     },
     {
       "src": "/travesseiros/corpo-white-fibra/travesseiros_corpowhite3.png",
-      "name": "Sem associação publicada — travesseiros/corpo-white-fibra / travesseiros_corpowhite3.png",
-      "alt": "travesseiros_corpowhite3.png",
+      "name": "Corpo White Fibra — travesseiros/corpo-white-fibra / travesseiros_corpowhite3.png",
+      "alt": "Corpo White Fibra — travesseiros_corpowhite3.png",
       "width": 1536,
       "height": 1024,
       "folder": "travesseiros/corpo-white-fibra",
-      "area": "Sem associação publicada",
-      "productIds": "",
+      "area": "Produtos",
+      "productIds": "travesseiro-corpo-white-fibra",
       "valid": true,
-      "references": []
+      "references": [
+        "produtos:travesseiro-corpo-white-fibra"
+      ]
     },
     {
       "src": "/travesseiros/future/travesseiro_future_1.png",
@@ -1236,553 +2210,5 @@
       "references": []
     }
   ],
-  "cmsInspected": true,
-  "cms": {
-    "databaseIdentityConfirmed": true,
-    "products": [],
-    "categories": [],
-    "productDocuments": 0,
-    "missingProducts": [
-      {
-        "id": "recover-mais",
-        "name": "Colchão Recovery⁺",
-        "deleted": false
-      },
-      {
-        "id": "diamond",
-        "name": "Diamond",
-        "deleted": false
-      },
-      {
-        "id": "elegance",
-        "name": "Elegance",
-        "deleted": false
-      },
-      {
-        "id": "majestic",
-        "name": "Majestic",
-        "deleted": false
-      },
-      {
-        "id": "comfort",
-        "name": "Comfort Massageador",
-        "deleted": false
-      },
-      {
-        "id": "elite-azul",
-        "name": "Colchão Elite Azul",
-        "deleted": false
-      },
-      {
-        "id": "elite-cinza",
-        "name": "Colchão Elite Cinza",
-        "deleted": false
-      },
-      {
-        "id": "divan",
-        "name": "Poltrona Massageadora Divan",
-        "deleted": false
-      },
-      {
-        "id": "house",
-        "name": "Poltrona Massageadora House",
-        "deleted": false
-      },
-      {
-        "id": "travesseiro-viscoelastico",
-        "name": "Travesseiro Viscoelástico",
-        "deleted": false
-      },
-      {
-        "id": "travesseiro-future",
-        "name": "Travesseiro Future",
-        "deleted": false
-      },
-      {
-        "id": "travesseiro-cervical-orto-plus",
-        "name": "Travesseiro Cervical Orto Plus",
-        "deleted": false
-      }
-    ],
-    "missingCategories": [
-      {
-        "id": "colchoes",
-        "name": "Colchões",
-        "deleted": false
-      },
-      {
-        "id": "linha-a-vacuo",
-        "name": "Linha a Vácuo",
-        "deleted": false
-      },
-      {
-        "id": "camas-box",
-        "name": "Camas Box",
-        "deleted": false
-      },
-      {
-        "id": "cabeceiras",
-        "name": "Cabeceiras",
-        "deleted": false
-      },
-      {
-        "id": "travesseiros",
-        "name": "Travesseiros",
-        "deleted": false
-      },
-      {
-        "id": "poltronas",
-        "name": "Poltronas",
-        "deleted": false
-      },
-      {
-        "id": "linha-divan",
-        "name": "Linha Divan",
-        "deleted": false
-      },
-      {
-        "id": "linha-house",
-        "name": "Linha House",
-        "deleted": false
-      },
-      {
-        "id": "linha-viscoelastico",
-        "name": "Linha Viscoelástico",
-        "deleted": false
-      },
-      {
-        "id": "linha-future",
-        "name": "Linha Future",
-        "deleted": false
-      },
-      {
-        "id": "linha-cervical-orto-plus",
-        "name": "Linha Cervical Orto Plus",
-        "deleted": false
-      },
-      {
-        "id": "vibro-car",
-        "name": "Vibro Car",
-        "deleted": false
-      },
-      {
-        "id": "dream-pet",
-        "name": "Dream Pet",
-        "deleted": false
-      }
-    ],
-    "mediaDocuments": 0,
-    "missingImages": [
-      {
-        "src": "/Sensepro/ChatGPT Image Oct 20, 2026, 09_49_13 PM-1.png",
-        "area": "Sem associação publicada",
-        "selectable": true
-      },
-      {
-        "src": "/Sensepro/ChatGPT Image Oct 20, 2026, 09_49_13 PM-2.png",
-        "area": "Sem associação publicada",
-        "selectable": true
-      },
-      {
-        "src": "/Sensepro/ChatGPT Image Oct 20, 2026, 09_49_14 PM-3.png",
-        "area": "Sem associação publicada",
-        "selectable": true
-      },
-      {
-        "src": "/a vacuo/elite/Cinza/CINZA.png",
-        "area": "Produtos",
-        "selectable": true
-      },
-      {
-        "src": "/a vacuo/elite/Cinza/Cama Cinza.png",
-        "area": "Produtos",
-        "selectable": true
-      },
-      {
-        "src": "/a vacuo/elite/Cinza/Colchão Elite a Vácuo Hortoleve Linha cinza.png",
-        "area": "Produtos",
-        "selectable": true
-      },
-      {
-        "src": "/a vacuo/elite/Cinza/Infográfico Colchão Elite a Vácuo.png",
-        "area": "Produtos",
-        "selectable": true
-      },
-      {
-        "src": "/a vacuo/elite/azul/Anúncio Colchão Elite a Vácuo Linha Azul.png",
-        "area": "Produtos",
-        "selectable": true
-      },
-      {
-        "src": "/a vacuo/elite/azul/Infográfico Colchão Elite a Vácuo.png",
-        "area": "Produtos",
-        "selectable": true
-      },
-      {
-        "src": "/a vacuo/elite/azul/Linha Azul.png",
-        "area": "Produtos",
-        "selectable": true
-      },
-      {
-        "src": "/a vacuo/elite/azul/Quarto Luxuoso com Colchão Hortoleve Azul.png",
-        "area": "Produtos",
-        "selectable": true
-      },
-      {
-        "src": "/confort.webp",
-        "area": "Sem associação publicada",
-        "selectable": true
-      },
-      {
-        "src": "/confort/1.png",
-        "area": "Produtos",
-        "selectable": true
-      },
-      {
-        "src": "/confort/1_old.png",
-        "area": "Versões antigas",
-        "selectable": true
-      },
-      {
-        "src": "/confort/2.png",
-        "area": "Produtos",
-        "selectable": true
-      },
-      {
-        "src": "/confort/2_old.png",
-        "area": "Versões antigas",
-        "selectable": true
-      },
-      {
-        "src": "/confort/3.png",
-        "area": "Produtos",
-        "selectable": true
-      },
-      {
-        "src": "/confort/3_old.png",
-        "area": "Versões antigas",
-        "selectable": true
-      },
-      {
-        "src": "/confort/4.png",
-        "area": "Produtos",
-        "selectable": true
-      },
-      {
-        "src": "/diamond.webp",
-        "area": "Sem associação publicada",
-        "selectable": true
-      },
-      {
-        "src": "/diamond/1.png",
-        "area": "Produtos",
-        "selectable": true
-      },
-      {
-        "src": "/diamond/1_old.png",
-        "area": "Versões antigas",
-        "selectable": true
-      },
-      {
-        "src": "/diamond/2.png",
-        "area": "Produtos",
-        "selectable": true
-      },
-      {
-        "src": "/diamond/2_old.png",
-        "area": "Versões antigas",
-        "selectable": true
-      },
-      {
-        "src": "/diamond/3.png",
-        "area": "Produtos",
-        "selectable": true
-      },
-      {
-        "src": "/diamond/3_old.png",
-        "area": "Versões antigas",
-        "selectable": true
-      },
-      {
-        "src": "/diamond/4.png",
-        "area": "Produtos",
-        "selectable": true
-      },
-      {
-        "src": "/elegance.webp",
-        "area": "Sem associação publicada",
-        "selectable": true
-      },
-      {
-        "src": "/elegance/1.png",
-        "area": "Produtos",
-        "selectable": true
-      },
-      {
-        "src": "/elegance/1_old.png",
-        "area": "Versões antigas",
-        "selectable": true
-      },
-      {
-        "src": "/elegance/2.png",
-        "area": "Produtos",
-        "selectable": true
-      },
-      {
-        "src": "/elegance/2_old.png",
-        "area": "Versões antigas",
-        "selectable": true
-      },
-      {
-        "src": "/elegance/3.png",
-        "area": "Produtos",
-        "selectable": true
-      },
-      {
-        "src": "/elegance/3_old.png",
-        "area": "Versões antigas",
-        "selectable": true
-      },
-      {
-        "src": "/elegance/4.png",
-        "area": "Produtos",
-        "selectable": true
-      },
-      {
-        "src": "/favicom/Luxury Gold H Wave Emblem.png",
-        "area": "Identidade visual",
-        "selectable": true
-      },
-      {
-        "src": "/file.svg",
-        "area": "Sem associação publicada",
-        "selectable": false
-      },
-      {
-        "src": "/globe.svg",
-        "area": "Sem associação publicada",
-        "selectable": false
-      },
-      {
-        "src": "/images/bedroom.svg",
-        "area": "Sem associação publicada",
-        "selectable": false
-      },
-      {
-        "src": "/logo/logo-offwhite.PNG",
-        "area": "Identidade visual",
-        "selectable": true
-      },
-      {
-        "src": "/majestic.webp",
-        "area": "Sem associação publicada",
-        "selectable": true
-      },
-      {
-        "src": "/majestic/1.png",
-        "area": "Produtos",
-        "selectable": true
-      },
-      {
-        "src": "/majestic/2.png",
-        "area": "Produtos",
-        "selectable": true
-      },
-      {
-        "src": "/majestic/2_OLD.png",
-        "area": "Versões antigas",
-        "selectable": true
-      },
-      {
-        "src": "/majestic/3.png",
-        "area": "Produtos",
-        "selectable": true
-      },
-      {
-        "src": "/majestic/3_OLD.png",
-        "area": "Versões antigas",
-        "selectable": true
-      },
-      {
-        "src": "/majestic/4.png",
-        "area": "Produtos",
-        "selectable": true
-      },
-      {
-        "src": "/majestic/4_OLD.png",
-        "area": "Versões antigas",
-        "selectable": true
-      },
-      {
-        "src": "/next.svg",
-        "area": "Sem associação publicada",
-        "selectable": false
-      },
-      {
-        "src": "/poltronas/divan/ChatGPT Image Oct 21, 2026, 08_36_16 PM-1.png",
-        "area": "Produtos",
-        "selectable": true
-      },
-      {
-        "src": "/poltronas/divan/ChatGPT Image Oct 21, 2026, 08_36_17 PM-2.png",
-        "area": "Produtos",
-        "selectable": true
-      },
-      {
-        "src": "/poltronas/divan/ChatGPT Image Oct 21, 2026, 08_36_17 PM-3.png",
-        "area": "Produtos",
-        "selectable": true
-      },
-      {
-        "src": "/poltronas/house/poltronahouse_1.png",
-        "area": "Produtos",
-        "selectable": true
-      },
-      {
-        "src": "/poltronas/house/poltronahouse_2.png",
-        "area": "Produtos",
-        "selectable": true
-      },
-      {
-        "src": "/poltronas/house/poltronahouse_3.png",
-        "area": "Produtos",
-        "selectable": true
-      },
-      {
-        "src": "/recover+.webp",
-        "area": "Sem associação publicada",
-        "selectable": true
-      },
-      {
-        "src": "/recover+/1.png",
-        "area": "Produtos",
-        "selectable": true
-      },
-      {
-        "src": "/recover+/2.png",
-        "area": "Produtos",
-        "selectable": true
-      },
-      {
-        "src": "/recover+/3.png",
-        "area": "Produtos",
-        "selectable": true
-      },
-      {
-        "src": "/recover+/4.png",
-        "area": "Produtos",
-        "selectable": true
-      },
-      {
-        "src": "/recover+/5.png",
-        "area": "Produtos",
-        "selectable": true
-      },
-      {
-        "src": "/showroom/Luxury Bedding Showroom in Warm Green and Gold.png",
-        "area": "Versões antigas",
-        "selectable": true
-      },
-      {
-        "src": "/tecnologia/Smart Mattress Technology Showcase.png",
-        "area": "Tecnologias",
-        "selectable": true
-      },
-      {
-        "src": "/tecnologia/Tecnologias Hortoleve_ Conforto Inteligente.png",
-        "area": "Tecnologias",
-        "selectable": true
-      },
-      {
-        "src": "/tecnologia/cromoterapia e massagem.png",
-        "area": "Tecnologias",
-        "selectable": true
-      },
-      {
-        "src": "/travesseiros/cervicalortoplus/travesseiro_cervical_1.png",
-        "area": "Produtos",
-        "selectable": true
-      },
-      {
-        "src": "/travesseiros/cervicalortoplus/travesseiro_cervical_2.png",
-        "area": "Produtos",
-        "selectable": true
-      },
-      {
-        "src": "/travesseiros/cervicalortoplus/travesseiro_cervical_3.png",
-        "area": "Produtos",
-        "selectable": true
-      },
-      {
-        "src": "/travesseiros/corpo-magnetico/travesseiro-corpo-magnetico1.png",
-        "area": "Sem associação publicada",
-        "selectable": true
-      },
-      {
-        "src": "/travesseiros/corpo-magnetico/travesseiro-corpo-magnetico2.png",
-        "area": "Sem associação publicada",
-        "selectable": true
-      },
-      {
-        "src": "/travesseiros/corpo-magnetico/travesseiro-corpo-magnetico3.png",
-        "area": "Sem associação publicada",
-        "selectable": true
-      },
-      {
-        "src": "/travesseiros/corpo-white-fibra/travesseiros_corpowhite1.png",
-        "area": "Sem associação publicada",
-        "selectable": true
-      },
-      {
-        "src": "/travesseiros/corpo-white-fibra/travesseiros_corpowhite2.png",
-        "area": "Sem associação publicada",
-        "selectable": true
-      },
-      {
-        "src": "/travesseiros/corpo-white-fibra/travesseiros_corpowhite3.png",
-        "area": "Sem associação publicada",
-        "selectable": true
-      },
-      {
-        "src": "/travesseiros/future/travesseiro_future_1.png",
-        "area": "Produtos",
-        "selectable": true
-      },
-      {
-        "src": "/travesseiros/future/travesseiro_future_2.png",
-        "area": "Produtos",
-        "selectable": true
-      },
-      {
-        "src": "/travesseiros/future/travesseiro_future_3.png",
-        "area": "Produtos",
-        "selectable": true
-      },
-      {
-        "src": "/travesseiros/viscoelastico/travesseiro_viscoelastico_1.png",
-        "area": "Produtos",
-        "selectable": true
-      },
-      {
-        "src": "/travesseiros/viscoelastico/travesseiro_viscoelastico_2.png",
-        "area": "Produtos",
-        "selectable": true
-      },
-      {
-        "src": "/travesseiros/viscoelastico/travesseiro_viscoelastico_3.png",
-        "area": "Produtos",
-        "selectable": true
-      },
-      {
-        "src": "/vercel.svg",
-        "area": "Sem associação publicada",
-        "selectable": false
-      },
-      {
-        "src": "/window.svg",
-        "area": "Sem associação publicada",
-        "selectable": false
-      }
-    ]
-  }
+  "cmsInspected": false
 }

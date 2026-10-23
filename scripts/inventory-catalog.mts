@@ -4,6 +4,7 @@ import path from "node:path";
 import sharp from "sharp";
 import { Pool } from "pg";
 import { initialContent } from "../src/modules/cms/initial-content.ts";
+import { storageImageURL } from "../src/modules/catalog/storage-images.ts";
 
 env.loadEnvConfig(process.cwd());
 async function walk(directory: string): Promise<string[]> {
@@ -22,7 +23,7 @@ async function main() {
     const images: { src: string; name: string; alt: string; width: number; height: number; folder: string; area: string; productIds: string; valid: boolean; references: string[] }[] = [];
     for (const file of files) {
         const src = "/" + path.relative(path.resolve("public"), file).split(path.sep).join("/");
-        const references = items.filter(i => JSON.stringify(i.data).includes(JSON.stringify(src)));
+        const references = items.filter(i => [src, storageImageURL(src)].some(url => JSON.stringify(i.data).includes(JSON.stringify(url))));
         const products = references.filter(i => i.resource === "produtos");
         const legacy = /(?:_old|old\.)/i.test(src);
         const area = products.length ? "Produtos" : legacy ? "Versões antigas" : /^\/(logo|favicom|favicon)\//i.test(src) ? "Identidade visual" : /^\/tecnologia\//i.test(src) ? "Tecnologias" : references.length ? "Institucional e Home" : "Sem associação publicada";

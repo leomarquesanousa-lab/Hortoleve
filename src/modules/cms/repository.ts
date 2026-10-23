@@ -8,6 +8,7 @@ import { hashAdminPassword } from "@/modules/admin/password";
 import { definitions, type Data, type Resource } from "./contracts";
 import { CmsError, hasReference, lines, validateData } from "./validation";
 import { initialContent } from "./initial-content";
+import { withStorageImages } from "../catalog/storage-images";
 
 export interface Document { id: string; resource: Resource; revision: number; draft: Data; published: Data | null; source?: "static" }
 export const cmsKey = (resource: Resource, id: string) => `cms:${resource}:${id}`;
@@ -25,9 +26,9 @@ export async function listDocuments(resource: Resource): Promise<Document[]> {
     const deleted = await db.siteSetting.findMany({ where: { key: { startsWith: `cms-deleted:${resource}:` } } });
     const initial: Document[] = initialContent.filter(i => i.resource === resource && !saved.some(d => d.id === i.id) && !deleted.some(row => row.key === `cms-deleted:${resource}:${i.id}`)).map(i => ({ id: i.id, resource, revision: 0, draft: structuredClone(i.data), published: i.published ? structuredClone(i.data) : null, source: "static" }));
     // Fonte real do site visível antes da importação; nenhuma escrita implícita.
-    return [...saved, ...initial];
+    return withStorageImages([...saved, ...initial]);
 }
-export async function allDocuments() { return (await getDatabase().siteSetting.findMany({ where: { key: { startsWith: "cms:" } } })).map(r => document(r.value)); }
+export async function allDocuments() { return (await getDatabase().siteSetting.findMany({ where: { key: { startsWith: "cms:" } } })).map(r => withStorageImages(document(r.value))); }
 function replaceRoute(from: string, to: string) { return { from, to }; }
 export async function saveDocument(user: AdminIdentity, resource: Resource, raw: unknown, id: string | undefined, revision: number, publish: boolean) {
     authorize(user, resource);

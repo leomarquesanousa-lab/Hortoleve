@@ -1,10 +1,395 @@
 {
   "version": 1,
-  "productsStatic": 12,
+  "productsStatic": 25,
   "cmsInspected": false,
   "productsCMS": null,
-  "uniqueFiles": 43,
+  "uniqueFiles": 112,
   "assets": [
+    {
+      "source": "/Box Tatame Elegance/camabox-tatame1.png",
+      "filename": "27a26c1e490cbf8e205af26a0d904115053b5c314d89a5527d9e378da8ea4e9a.png",
+      "sha256": "27a26c1e490cbf8e205af26a0d904115053b5c314d89a5527d9e378da8ea4e9a",
+      "bytes": 1937613,
+      "target": "/media/products/27a26c1e490cbf8e205af26a0d904115053b5c314d89a5527d9e378da8ea4e9a.png"
+    },
+    {
+      "source": "/Box Tatame Elegance/camabox-tatame2.png",
+      "filename": "d2c4bd99b2a9e69ca7c75e9f41898b41b64e362bc2ed1f804708dccfced81e38.png",
+      "sha256": "d2c4bd99b2a9e69ca7c75e9f41898b41b64e362bc2ed1f804708dccfced81e38",
+      "bytes": 2005413,
+      "target": "/media/products/d2c4bd99b2a9e69ca7c75e9f41898b41b64e362bc2ed1f804708dccfced81e38.png"
+    },
+    {
+      "source": "/Box Tatame Elegance/camabox-tatame3.png",
+      "filename": "eabf815fda5a53263d9c5ae82d2e2f8cf1fe17c860bbe82adeaac2ec6be754e7.png",
+      "sha256": "eabf815fda5a53263d9c5ae82d2e2f8cf1fe17c860bbe82adeaac2ec6be754e7",
+      "bytes": 2176568,
+      "target": "/media/products/eabf815fda5a53263d9c5ae82d2e2f8cf1fe17c860bbe82adeaac2ec6be754e7.png"
+    },
+    {
+      "source": "/Box Tatame Elegance/camabox-tatame4.png",
+      "filename": "27c50d3e7f9aa26b6becc673ebce5dfeb27f190f635c216d6eb648c6a7213090.png",
+      "sha256": "27c50d3e7f9aa26b6becc673ebce5dfeb27f190f635c216d6eb648c6a7213090",
+      "bytes": 2017322,
+      "target": "/media/products/27c50d3e7f9aa26b6becc673ebce5dfeb27f190f635c216d6eb648c6a7213090.png"
+    },
+    {
+      "source": "/Box Tatame Elegance/camabox-tatame5.png",
+      "filename": "70c88b2bbcffa62653a08b9cb23ad38d8e24f6fea4e4888f78056d02ee5018b5.png",
+      "sha256": "70c88b2bbcffa62653a08b9cb23ad38d8e24f6fea4e4888f78056d02ee5018b5",
+      "bytes": 1976899,
+      "target": "/media/products/70c88b2bbcffa62653a08b9cb23ad38d8e24f6fea4e4888f78056d02ee5018b5.png"
+    },
+    {
+      "source": "/Box Tatame Elegance/camabox-tatame6.png",
+      "filename": "3225b2c171362a9af2a3e37711a74d231331ce59fa38949279a04ccc29d449d0.png",
+      "sha256": "3225b2c171362a9af2a3e37711a74d231331ce59fa38949279a04ccc29d449d0",
+      "bytes": 1957921,
+      "target": "/media/products/3225b2c171362a9af2a3e37711a74d231331ce59fa38949279a04ccc29d449d0.png"
+    },
+    {
+      "source": "/Box Tatame Elegance/camabox-tatame7.png",
+      "filename": "04579030fa9d61d0fa91f4a1e00e51954b705cc38579556f47aab0e6deba61b8.png",
+      "sha256": "04579030fa9d61d0fa91f4a1e00e51954b705cc38579556f47aab0e6deba61b8",
+      "bytes": 1962145,
+      "target": "/media/products/04579030fa9d61d0fa91f4a1e00e51954b705cc38579556f47aab0e6deba61b8.png"
+    },
+    {
+      "source": "/Box Tatame Japonês/camabox-tatame1.png",
+      "filename": "eb2a02ff122a8ae7e51289846b427f69ea420093e2713e32661e9d08190bf2ae.png",
+      "sha256": "eb2a02ff122a8ae7e51289846b427f69ea420093e2713e32661e9d08190bf2ae",
+      "bytes": 1638279,
+      "target": "/media/products/eb2a02ff122a8ae7e51289846b427f69ea420093e2713e32661e9d08190bf2ae.png"
+    },
+    {
+      "source": "/Box Tatame Japonês/camabox-tatame2.png",
+      "filename": "e0932969bbb5997d308ec269223b60fab9d9284b5fd045a1ae4c6d5a31ed15a1.png",
+      "sha256": "e0932969bbb5997d308ec269223b60fab9d9284b5fd045a1ae4c6d5a31ed15a1",
+      "bytes": 1481063,
+      "target": "/media/products/e0932969bbb5997d308ec269223b60fab9d9284b5fd045a1ae4c6d5a31ed15a1.png"
+    },
+    {
+      "source": "/Box Tatame Japonês/camabox-tatame3.png",
+      "filename": "1f64cfe7e0e0f07257f7ce4352ff7de5c66ffc2e3eb697fbe53ac35c73198d35.png",
+      "sha256": "1f64cfe7e0e0f07257f7ce4352ff7de5c66ffc2e3eb697fbe53ac35c73198d35",
+      "bytes": 1564081,
+      "target": "/media/products/1f64cfe7e0e0f07257f7ce4352ff7de5c66ffc2e3eb697fbe53ac35c73198d35.png"
+    },
+    {
+      "source": "/Box Tatame Japonês/camabox-tatame4.png",
+      "filename": "5e965ceb3f55b6664b7266f51e814ce0c027199d0aa5cde2f6bca77e26ed82f0.png",
+      "sha256": "5e965ceb3f55b6664b7266f51e814ce0c027199d0aa5cde2f6bca77e26ed82f0",
+      "bytes": 1669716,
+      "target": "/media/products/5e965ceb3f55b6664b7266f51e814ce0c027199d0aa5cde2f6bca77e26ed82f0.png"
+    },
+    {
+      "source": "/Box Tatame Japonês/camabox-tatame5.png",
+      "filename": "b7a7da888d880a7ebe0b3b23d2e30c2c9d52073138957dbb3aa84bf7cdabba6f.png",
+      "sha256": "b7a7da888d880a7ebe0b3b23d2e30c2c9d52073138957dbb3aa84bf7cdabba6f",
+      "bytes": 1551195,
+      "target": "/media/products/b7a7da888d880a7ebe0b3b23d2e30c2c9d52073138957dbb3aa84bf7cdabba6f.png"
+    },
+    {
+      "source": "/Box Tatame Japonês/camabox-tatame6.png",
+      "filename": "85a824718ffc5eb50191d803b68c0db5ae3ce030f7447be21af749a8f11457df.png",
+      "sha256": "85a824718ffc5eb50191d803b68c0db5ae3ce030f7447be21af749a8f11457df",
+      "bytes": 1737316,
+      "target": "/media/products/85a824718ffc5eb50191d803b68c0db5ae3ce030f7447be21af749a8f11457df.png"
+    },
+    {
+      "source": "/Box Tatame Japonês/camabox-tatame7.png",
+      "filename": "2ad4c1b5ff1cfc37936060d30fca80c572afd90b033edabfb6a3b873d704d3ce.png",
+      "sha256": "2ad4c1b5ff1cfc37936060d30fca80c572afd90b033edabfb6a3b873d704d3ce",
+      "bytes": 1463873,
+      "target": "/media/products/2ad4c1b5ff1cfc37936060d30fca80c572afd90b033edabfb6a3b873d704d3ce.png"
+    },
+    {
+      "source": "/Box Tatame Japonês/camabox-tatame8.png",
+      "filename": "c0e398f0cbd56063df16423d556771c6d89e00eeebcffe8862c6742632528265.png",
+      "sha256": "c0e398f0cbd56063df16423d556771c6d89e00eeebcffe8862c6742632528265",
+      "bytes": 2608844,
+      "target": "/media/products/c0e398f0cbd56063df16423d556771c6d89e00eeebcffe8862c6742632528265.png"
+    },
+    {
+      "source": "/Box Tatame/camaboxtatame (1).png",
+      "filename": "e8d886a5c6f1b4d9547d0d7748de4f7ad17dc3de51a4845a40a1e5e18b2e4803.png",
+      "sha256": "e8d886a5c6f1b4d9547d0d7748de4f7ad17dc3de51a4845a40a1e5e18b2e4803",
+      "bytes": 2496727,
+      "target": "/media/products/e8d886a5c6f1b4d9547d0d7748de4f7ad17dc3de51a4845a40a1e5e18b2e4803.png"
+    },
+    {
+      "source": "/Box Tatame/camaboxtatame (2).png",
+      "filename": "5dcde7aafba7f3ee574809942d74c85d73471c0c8e17a8e1fd61168c3027bc76.png",
+      "sha256": "5dcde7aafba7f3ee574809942d74c85d73471c0c8e17a8e1fd61168c3027bc76",
+      "bytes": 2289197,
+      "target": "/media/products/5dcde7aafba7f3ee574809942d74c85d73471c0c8e17a8e1fd61168c3027bc76.png"
+    },
+    {
+      "source": "/Box Tatame/camaboxtatame (3).png",
+      "filename": "890592205881f67bb1ffa84eb8c4de9c9091d25b0d0c800d123cbce890dde870.png",
+      "sha256": "890592205881f67bb1ffa84eb8c4de9c9091d25b0d0c800d123cbce890dde870",
+      "bytes": 2172086,
+      "target": "/media/products/890592205881f67bb1ffa84eb8c4de9c9091d25b0d0c800d123cbce890dde870.png"
+    },
+    {
+      "source": "/Box Tatame/camaboxtatame (4).png",
+      "filename": "d669fcaa986cac80a8ab2cd8c7da57cc32253d5e3d19fa94a8c76578cb6b5582.png",
+      "sha256": "d669fcaa986cac80a8ab2cd8c7da57cc32253d5e3d19fa94a8c76578cb6b5582",
+      "bytes": 2162492,
+      "target": "/media/products/d669fcaa986cac80a8ab2cd8c7da57cc32253d5e3d19fa94a8c76578cb6b5582.png"
+    },
+    {
+      "source": "/Box Tatame/camaboxtatame (5).png",
+      "filename": "65c5bda9682399c2430404105c4fd4a56b60a773021d81e2a8dffe08c0a931bb.png",
+      "sha256": "65c5bda9682399c2430404105c4fd4a56b60a773021d81e2a8dffe08c0a931bb",
+      "bytes": 2325109,
+      "target": "/media/products/65c5bda9682399c2430404105c4fd4a56b60a773021d81e2a8dffe08c0a931bb.png"
+    },
+    {
+      "source": "/Box Tatame/camaboxtatame (6).png",
+      "filename": "6d03688ad239999fe3f664a4094125d30a2309ecac69f586014f700e9fa34b2e.png",
+      "sha256": "6d03688ad239999fe3f664a4094125d30a2309ecac69f586014f700e9fa34b2e",
+      "bytes": 2342920,
+      "target": "/media/products/6d03688ad239999fe3f664a4094125d30a2309ecac69f586014f700e9fa34b2e.png"
+    },
+    {
+      "source": "/Box Tatame/camaboxtatame (7).png",
+      "filename": "b30d82bc7e91b9e3309646b9facf7ecbc30159d7b739914336b294c2b6d9e7b6.png",
+      "sha256": "b30d82bc7e91b9e3309646b9facf7ecbc30159d7b739914336b294c2b6d9e7b6",
+      "bytes": 2425333,
+      "target": "/media/products/b30d82bc7e91b9e3309646b9facf7ecbc30159d7b739914336b294c2b6d9e7b6.png"
+    },
+    {
+      "source": "/Box Tatame/camaboxtatame (8).png",
+      "filename": "78ba9497e1cf1d6289a3a5e650df15b59c994fab2e81015158fbb8164bd457bf.png",
+      "sha256": "78ba9497e1cf1d6289a3a5e650df15b59c994fab2e81015158fbb8164bd457bf",
+      "bytes": 2309986,
+      "target": "/media/products/78ba9497e1cf1d6289a3a5e650df15b59c994fab2e81015158fbb8164bd457bf.png"
+    },
+    {
+      "source": "/Cama Box Baú/camaboxbau (1).png",
+      "filename": "d7e810774d5196febd59346f319914f6e86dfd801b582d5e55ea5406931d5e23.png",
+      "sha256": "d7e810774d5196febd59346f319914f6e86dfd801b582d5e55ea5406931d5e23",
+      "bytes": 3635105,
+      "target": "/media/products/d7e810774d5196febd59346f319914f6e86dfd801b582d5e55ea5406931d5e23.png"
+    },
+    {
+      "source": "/Cama Box Baú/camaboxbau (2).png",
+      "filename": "64d0a5a9a7658522681ded33f4f2f2634bb85c639be99bb220aba871bbf96307.png",
+      "sha256": "64d0a5a9a7658522681ded33f4f2f2634bb85c639be99bb220aba871bbf96307",
+      "bytes": 3961704,
+      "target": "/media/products/64d0a5a9a7658522681ded33f4f2f2634bb85c639be99bb220aba871bbf96307.png"
+    },
+    {
+      "source": "/Cama Box Baú/camaboxbau (3).png",
+      "filename": "c47a8418c7d2b89abb91f566157b782a98a39d1f565cc6ad2b67ae269c96c43f.png",
+      "sha256": "c47a8418c7d2b89abb91f566157b782a98a39d1f565cc6ad2b67ae269c96c43f",
+      "bytes": 3634197,
+      "target": "/media/products/c47a8418c7d2b89abb91f566157b782a98a39d1f565cc6ad2b67ae269c96c43f.png"
+    },
+    {
+      "source": "/Cama Box Baú/camaboxbau (4).png",
+      "filename": "2eb4c34c799ca102538645fa53c5f6304d656627df1761c6e3db8994279de317.png",
+      "sha256": "2eb4c34c799ca102538645fa53c5f6304d656627df1761c6e3db8994279de317",
+      "bytes": 3962624,
+      "target": "/media/products/2eb4c34c799ca102538645fa53c5f6304d656627df1761c6e3db8994279de317.png"
+    },
+    {
+      "source": "/Cama Box Baú/camaboxbau (5).png",
+      "filename": "61667dbdfb755494e31a0b23a50adb8af58028b8d5d13e1eef47f158bb3a9f91.png",
+      "sha256": "61667dbdfb755494e31a0b23a50adb8af58028b8d5d13e1eef47f158bb3a9f91",
+      "bytes": 2090611,
+      "target": "/media/products/61667dbdfb755494e31a0b23a50adb8af58028b8d5d13e1eef47f158bb3a9f91.png"
+    },
+    {
+      "source": "/Cama Box Baú/camaboxbau (6).png",
+      "filename": "e750253b63149b030965fc6719ce9382a7f9fdfcb5ede361c0f37a93634c6252.png",
+      "sha256": "e750253b63149b030965fc6719ce9382a7f9fdfcb5ede361c0f37a93634c6252",
+      "bytes": 1881935,
+      "target": "/media/products/e750253b63149b030965fc6719ce9382a7f9fdfcb5ede361c0f37a93634c6252.png"
+    },
+    {
+      "source": "/Cama Box Baú/camaboxbau (7).png",
+      "filename": "71764c5c1d7d1d4ffa61a2b04a9f8830ac9775f90419361c041eebb0d79c07cf.png",
+      "sha256": "71764c5c1d7d1d4ffa61a2b04a9f8830ac9775f90419361c041eebb0d79c07cf",
+      "bytes": 11051618,
+      "target": "/media/products/71764c5c1d7d1d4ffa61a2b04a9f8830ac9775f90419361c041eebb0d79c07cf.png"
+    },
+    {
+      "source": "/Cama Box com Auxiliar/camaboxcomauxiliar (1).png",
+      "filename": "2ee2b6446e48cd37a38af0e421e0df2efdd260134351a5386e0cf9b135121003.png",
+      "sha256": "2ee2b6446e48cd37a38af0e421e0df2efdd260134351a5386e0cf9b135121003",
+      "bytes": 10279966,
+      "target": "/media/products/2ee2b6446e48cd37a38af0e421e0df2efdd260134351a5386e0cf9b135121003.png"
+    },
+    {
+      "source": "/Cama Box com Auxiliar/camaboxcomauxiliar (2).png",
+      "filename": "3339d55b684c81caf863d1d713491a4264fa532029840980f375208239d7b5e6.png",
+      "sha256": "3339d55b684c81caf863d1d713491a4264fa532029840980f375208239d7b5e6",
+      "bytes": 2429187,
+      "target": "/media/products/3339d55b684c81caf863d1d713491a4264fa532029840980f375208239d7b5e6.png"
+    },
+    {
+      "source": "/Cama Box com Auxiliar/camaboxcomauxiliar (3).png",
+      "filename": "c0723363534d5aded2d0b40ad33c4a512609042e15a2833983aa0078645af220.png",
+      "sha256": "c0723363534d5aded2d0b40ad33c4a512609042e15a2833983aa0078645af220",
+      "bytes": 2336016,
+      "target": "/media/products/c0723363534d5aded2d0b40ad33c4a512609042e15a2833983aa0078645af220.png"
+    },
+    {
+      "source": "/Cama Box com Auxiliar/camaboxcomauxiliar (4).png",
+      "filename": "a8bb74983a7a23acaab95083fcbaa421664b4e389fba824d5084b312a4efdfe7.png",
+      "sha256": "a8bb74983a7a23acaab95083fcbaa421664b4e389fba824d5084b312a4efdfe7",
+      "bytes": 2282756,
+      "target": "/media/products/a8bb74983a7a23acaab95083fcbaa421664b4e389fba824d5084b312a4efdfe7.png"
+    },
+    {
+      "source": "/Cama Box com Auxiliar/camaboxcomauxiliar (5).png",
+      "filename": "a31cebae9038b86f72336fc530df8e19319cc590d03e89eeb65f293a9376fe23.png",
+      "sha256": "a31cebae9038b86f72336fc530df8e19319cc590d03e89eeb65f293a9376fe23",
+      "bytes": 2315850,
+      "target": "/media/products/a31cebae9038b86f72336fc530df8e19319cc590d03e89eeb65f293a9376fe23.png"
+    },
+    {
+      "source": "/Cama Box com Auxiliar/camaboxcomauxiliar (6).png",
+      "filename": "8c357507e38d3fa923df140a4fc988e7be83782fec7799453aef37b1e0d59e79.png",
+      "sha256": "8c357507e38d3fa923df140a4fc988e7be83782fec7799453aef37b1e0d59e79",
+      "bytes": 2306183,
+      "target": "/media/products/8c357507e38d3fa923df140a4fc988e7be83782fec7799453aef37b1e0d59e79.png"
+    },
+    {
+      "source": "/Cama Box com Auxiliar/camaboxcomauxiliar (7).png",
+      "filename": "d1c6475bb14b3bac1e7db0560427b898835fb44a39a0cf4d474df2db2a7777a7.png",
+      "sha256": "d1c6475bb14b3bac1e7db0560427b898835fb44a39a0cf4d474df2db2a7777a7",
+      "bytes": 2355846,
+      "target": "/media/products/d1c6475bb14b3bac1e7db0560427b898835fb44a39a0cf4d474df2db2a7777a7.png"
+    },
+    {
+      "source": "/Cama Box com Auxiliar/camaboxcomauxiliar (8).png",
+      "filename": "23ea5bb69cc68c039783ecf9f33a34ddd2fd7cc92ec2f44aef3af9a1ba72f458.png",
+      "sha256": "23ea5bb69cc68c039783ecf9f33a34ddd2fd7cc92ec2f44aef3af9a1ba72f458",
+      "bytes": 2276648,
+      "target": "/media/products/23ea5bb69cc68c039783ecf9f33a34ddd2fd7cc92ec2f44aef3af9a1ba72f458.png"
+    },
+    {
+      "source": "/Cama Box/camabox (1).png",
+      "filename": "4e7994c3157e237608c964dbb9497de45b42a2a4964f40100022a46dc527be8d.png",
+      "sha256": "4e7994c3157e237608c964dbb9497de45b42a2a4964f40100022a46dc527be8d",
+      "bytes": 2136252,
+      "target": "/media/products/4e7994c3157e237608c964dbb9497de45b42a2a4964f40100022a46dc527be8d.png"
+    },
+    {
+      "source": "/Cama Box/camabox (2).png",
+      "filename": "60477b2741c63d6a696de3d8a3f44cfb65d865dd22ea487df62e59bdb985f9f5.png",
+      "sha256": "60477b2741c63d6a696de3d8a3f44cfb65d865dd22ea487df62e59bdb985f9f5",
+      "bytes": 2030045,
+      "target": "/media/products/60477b2741c63d6a696de3d8a3f44cfb65d865dd22ea487df62e59bdb985f9f5.png"
+    },
+    {
+      "source": "/Cama Box/camabox (3).png",
+      "filename": "0e670dbf0106ca8c211663194b9ce730a9571d4c20210563fa7bb4ca140ce8aa.png",
+      "sha256": "0e670dbf0106ca8c211663194b9ce730a9571d4c20210563fa7bb4ca140ce8aa",
+      "bytes": 2145606,
+      "target": "/media/products/0e670dbf0106ca8c211663194b9ce730a9571d4c20210563fa7bb4ca140ce8aa.png"
+    },
+    {
+      "source": "/Cama Box/camabox (4).png",
+      "filename": "877cb4235a1551bbab20b8008528b02b4081b64228bb99458e8c7e85f554a752.png",
+      "sha256": "877cb4235a1551bbab20b8008528b02b4081b64228bb99458e8c7e85f554a752",
+      "bytes": 2097746,
+      "target": "/media/products/877cb4235a1551bbab20b8008528b02b4081b64228bb99458e8c7e85f554a752.png"
+    },
+    {
+      "source": "/Cama Box/camabox (5).png",
+      "filename": "384fb93fe1adceefb78c3a8c9a0365adfb2723a72057dafc5297695b9f15e64f.png",
+      "sha256": "384fb93fe1adceefb78c3a8c9a0365adfb2723a72057dafc5297695b9f15e64f",
+      "bytes": 2079440,
+      "target": "/media/products/384fb93fe1adceefb78c3a8c9a0365adfb2723a72057dafc5297695b9f15e64f.png"
+    },
+    {
+      "source": "/Cama Box/camabox (6).png",
+      "filename": "a0b1714fbd34d1e5d63d7f3dc7ea17d58f299ea767ef96f886e8619396fa6628.png",
+      "sha256": "a0b1714fbd34d1e5d63d7f3dc7ea17d58f299ea767ef96f886e8619396fa6628",
+      "bytes": 2095739,
+      "target": "/media/products/a0b1714fbd34d1e5d63d7f3dc7ea17d58f299ea767ef96f886e8619396fa6628.png"
+    },
+    {
+      "source": "/Cama Box/camabox (7).png",
+      "filename": "84b4a124224bbd81979e6fce3a044f76a88db1ed3d21217d6a4e0ac4dc0ee4b8.png",
+      "sha256": "84b4a124224bbd81979e6fce3a044f76a88db1ed3d21217d6a4e0ac4dc0ee4b8",
+      "bytes": 9137037,
+      "target": "/media/products/84b4a124224bbd81979e6fce3a044f76a88db1ed3d21217d6a4e0ac4dc0ee4b8.png"
+    },
+    {
+      "source": "/Cama Box/camabox (8).png",
+      "filename": "d799840708702140876330f1a0854d2f583f13e0932bb4aff26f79d1d5af0b73.png",
+      "sha256": "d799840708702140876330f1a0854d2f583f13e0932bb4aff26f79d1d5af0b73",
+      "bytes": 2162003,
+      "target": "/media/products/d799840708702140876330f1a0854d2f583f13e0932bb4aff26f79d1d5af0b73.png"
+    },
+    {
+      "source": "/a vacuo/Dream/Anúncio Elegante de Colchão Dream a Vácuo.png",
+      "filename": "9b200280be735164ccf45928b59c6c00c44e9d7ff6bee9125027e090499889b0.png",
+      "sha256": "9b200280be735164ccf45928b59c6c00c44e9d7ff6bee9125027e090499889b0",
+      "bytes": 1794421,
+      "target": "/media/products/9b200280be735164ccf45928b59c6c00c44e9d7ff6bee9125027e090499889b0.png"
+    },
+    {
+      "source": "/a vacuo/Dream/Colchão DREAM HortoLeve_ Conforto e Tecnologia.png",
+      "filename": "26e5dd7e3fc53252f0215d3373d47ff760b576d51db3971dce26ff84f8398d89.png",
+      "sha256": "26e5dd7e3fc53252f0215d3373d47ff760b576d51db3971dce26ff84f8398d89",
+      "bytes": 1866366,
+      "target": "/media/products/26e5dd7e3fc53252f0215d3373d47ff760b576d51db3971dce26ff84f8398d89.png"
+    },
+    {
+      "source": "/a vacuo/Dream/Colchão Dream.png",
+      "filename": "2ae7fe67d07d070f356b8311a5a44b2df14c308433fd3a5d92af6293a1424fbf.png",
+      "sha256": "2ae7fe67d07d070f356b8311a5a44b2df14c308433fd3a5d92af6293a1424fbf",
+      "bytes": 9842216,
+      "target": "/media/products/2ae7fe67d07d070f356b8311a5a44b2df14c308433fd3a5d92af6293a1424fbf.png"
+    },
+    {
+      "source": "/a vacuo/Sense Pro/colchão-sensepro1.png",
+      "filename": "de34f8f99557be99688f612ebdee17d7f5192868acd83a94881fdd31a42fbbaf.png",
+      "sha256": "de34f8f99557be99688f612ebdee17d7f5192868acd83a94881fdd31a42fbbaf",
+      "bytes": 2223059,
+      "target": "/media/products/de34f8f99557be99688f612ebdee17d7f5192868acd83a94881fdd31a42fbbaf.png"
+    },
+    {
+      "source": "/a vacuo/Sense Pro/colchão-sensepro2.png",
+      "filename": "35ae06d60239b375c1e237fa2312bf1d0ba788ebbe466d5608e8bacf31b0b482.png",
+      "sha256": "35ae06d60239b375c1e237fa2312bf1d0ba788ebbe466d5608e8bacf31b0b482",
+      "bytes": 1523966,
+      "target": "/media/products/35ae06d60239b375c1e237fa2312bf1d0ba788ebbe466d5608e8bacf31b0b482.png"
+    },
+    {
+      "source": "/a vacuo/Sense Pro/colchão-sensepro3.png",
+      "filename": "93b1b44af1a187ef49e5a0eecdd66d5e6adad3a0b2a7fa4c39f83383f429fb05.png",
+      "sha256": "93b1b44af1a187ef49e5a0eecdd66d5e6adad3a0b2a7fa4c39f83383f429fb05",
+      "bytes": 1573462,
+      "target": "/media/products/93b1b44af1a187ef49e5a0eecdd66d5e6adad3a0b2a7fa4c39f83383f429fb05.png"
+    },
+    {
+      "source": "/a vacuo/Sense Pro/colchão-sensepro4.png",
+      "filename": "664158f0eddbdaf4ab99d0c739b15ca93446f941cf56944bf01e17e07d348367.png",
+      "sha256": "664158f0eddbdaf4ab99d0c739b15ca93446f941cf56944bf01e17e07d348367",
+      "bytes": 1643320,
+      "target": "/media/products/664158f0eddbdaf4ab99d0c739b15ca93446f941cf56944bf01e17e07d348367.png"
+    },
+    {
+      "source": "/a vacuo/Sense Pro/colchão-sensepro5.png",
+      "filename": "4736b0f7a21c0f36e38a6dd6332f7213347d46a518047ac370e8fd1597d132c6.png",
+      "sha256": "4736b0f7a21c0f36e38a6dd6332f7213347d46a518047ac370e8fd1597d132c6",
+      "bytes": 1634371,
+      "target": "/media/products/4736b0f7a21c0f36e38a6dd6332f7213347d46a518047ac370e8fd1597d132c6.png"
+    },
+    {
+      "source": "/a vacuo/Sense Pro/colchão-sensepro6.png",
+      "filename": "135bb6a9eb32ae5e7f8c1440112c157077947803b36ad473331aa415ee6cf58a.png",
+      "sha256": "135bb6a9eb32ae5e7f8c1440112c157077947803b36ad473331aa415ee6cf58a",
+      "bytes": 1798864,
+      "target": "/media/products/135bb6a9eb32ae5e7f8c1440112c157077947803b36ad473331aa415ee6cf58a.png"
+    },
     {
       "source": "/a vacuo/elite/Cinza/CINZA.png",
       "filename": "f7b5561c6a0181e49d57ea5af840c6d242eb17db8cd012ae059dbaa9437d84c7.png",
@@ -60,6 +445,20 @@
       "sha256": "c8b9dafcc83f1d824c808f6e24ee946d22899c71bfa749c8a809abfd66325724",
       "bytes": 2667690,
       "target": "/media/products/c8b9dafcc83f1d824c808f6e24ee946d22899c71bfa749c8a809abfd66325724.png"
+    },
+    {
+      "source": "/car/vibro-car1.png",
+      "filename": "6e0cae7e9a621ec4d8014b3eab80d7ddf5dd6187580251724f80b557bfcbb0b9.png",
+      "sha256": "6e0cae7e9a621ec4d8014b3eab80d7ddf5dd6187580251724f80b557bfcbb0b9",
+      "bytes": 2226079,
+      "target": "/media/products/6e0cae7e9a621ec4d8014b3eab80d7ddf5dd6187580251724f80b557bfcbb0b9.png"
+    },
+    {
+      "source": "/car/vibrocar2.png",
+      "filename": "f1c6cc13979417aab4068192b429b783a7e09c48df990622d776fff148d688f7.png",
+      "sha256": "f1c6cc13979417aab4068192b429b783a7e09c48df990622d776fff148d688f7",
+      "bytes": 2174860,
+      "target": "/media/products/f1c6cc13979417aab4068192b429b783a7e09c48df990622d776fff148d688f7.png"
     },
     {
       "source": "/confort/1.png",
@@ -174,6 +573,48 @@
       "target": "/media/products/005a20ec072d5e56066230cd2b74c2879929ee47ac26bd1d43a50000e2e69ebf.png"
     },
     {
+      "source": "/pet/colchao_pet1.png",
+      "filename": "acc6f997f677519a7d6566345d9d88819530ff57a1d13d1fe567a0d7b7d28d77.png",
+      "sha256": "acc6f997f677519a7d6566345d9d88819530ff57a1d13d1fe567a0d7b7d28d77",
+      "bytes": 2694025,
+      "target": "/media/products/acc6f997f677519a7d6566345d9d88819530ff57a1d13d1fe567a0d7b7d28d77.png"
+    },
+    {
+      "source": "/pet/colchao_pet2.png",
+      "filename": "40ff152129f84085f1571e9dcd647476e50181e52b3eb2be2f8699c804f0bdec.png",
+      "sha256": "40ff152129f84085f1571e9dcd647476e50181e52b3eb2be2f8699c804f0bdec",
+      "bytes": 2096284,
+      "target": "/media/products/40ff152129f84085f1571e9dcd647476e50181e52b3eb2be2f8699c804f0bdec.png"
+    },
+    {
+      "source": "/pet/colchao_pet3.png",
+      "filename": "b3331583126a1b5fcba7b650f2d675a24887ccb3e61c2688045d9dcb807f1f6f.png",
+      "sha256": "b3331583126a1b5fcba7b650f2d675a24887ccb3e61c2688045d9dcb807f1f6f",
+      "bytes": 2715160,
+      "target": "/media/products/b3331583126a1b5fcba7b650f2d675a24887ccb3e61c2688045d9dcb807f1f6f.png"
+    },
+    {
+      "source": "/pilow-top/pilow-top1.png",
+      "filename": "2c7bab7938a1568707ee296223b7fd79cd3a5094b77f15d74c22e2a2b129eabb.png",
+      "sha256": "2c7bab7938a1568707ee296223b7fd79cd3a5094b77f15d74c22e2a2b129eabb",
+      "bytes": 2828776,
+      "target": "/media/products/2c7bab7938a1568707ee296223b7fd79cd3a5094b77f15d74c22e2a2b129eabb.png"
+    },
+    {
+      "source": "/pilow-top/pilow-top2.png",
+      "filename": "9bae2fde93d27f124d2f6b1bef895e8915d675b922789293c3c7f4d55ee6e7b4.png",
+      "sha256": "9bae2fde93d27f124d2f6b1bef895e8915d675b922789293c3c7f4d55ee6e7b4",
+      "bytes": 2953853,
+      "target": "/media/products/9bae2fde93d27f124d2f6b1bef895e8915d675b922789293c3c7f4d55ee6e7b4.png"
+    },
+    {
+      "source": "/pilow-top/pilow-top3.png",
+      "filename": "c5e81c629bd455606637d49d5b02217c84607fe1e247ee64511dbbd0ea378c3b.png",
+      "sha256": "c5e81c629bd455606637d49d5b02217c84607fe1e247ee64511dbbd0ea378c3b",
+      "bytes": 2290453,
+      "target": "/media/products/c5e81c629bd455606637d49d5b02217c84607fe1e247ee64511dbbd0ea378c3b.png"
+    },
+    {
       "source": "/poltronas/divan/ChatGPT Image Oct 21, 2026, 08_36_16 PM-1.png",
       "filename": "9506d9635b4e3bac8583bd1a73cb6a4d5010556a0804eaebffefbaeb7e6dd8cd.png",
       "sha256": "9506d9635b4e3bac8583bd1a73cb6a4d5010556a0804eaebffefbaeb7e6dd8cd",
@@ -270,6 +711,48 @@
       "sha256": "02ccfdfc0416203693c82d6d936613d9dc43ad649e6e9491078df050a3e2acc5",
       "bytes": 2187375,
       "target": "/media/products/02ccfdfc0416203693c82d6d936613d9dc43ad649e6e9491078df050a3e2acc5.png"
+    },
+    {
+      "source": "/travesseiros/corpo-magnetico/travesseiro-corpo-magnetico1.png",
+      "filename": "19506df8b8f158a3761d85d03c3610a57fbf33de96ce918a68c8754c390e5133.png",
+      "sha256": "19506df8b8f158a3761d85d03c3610a57fbf33de96ce918a68c8754c390e5133",
+      "bytes": 2366768,
+      "target": "/media/products/19506df8b8f158a3761d85d03c3610a57fbf33de96ce918a68c8754c390e5133.png"
+    },
+    {
+      "source": "/travesseiros/corpo-magnetico/travesseiro-corpo-magnetico2.png",
+      "filename": "a7fd3c2098d6992735617d17255a305771310874a1415266df38826a8a8d5885.png",
+      "sha256": "a7fd3c2098d6992735617d17255a305771310874a1415266df38826a8a8d5885",
+      "bytes": 2593711,
+      "target": "/media/products/a7fd3c2098d6992735617d17255a305771310874a1415266df38826a8a8d5885.png"
+    },
+    {
+      "source": "/travesseiros/corpo-magnetico/travesseiro-corpo-magnetico3.png",
+      "filename": "d5b6a601d4e0b08629f51d1039edfa810266c9aff0dc4018cc0a590c82a3b4a5.png",
+      "sha256": "d5b6a601d4e0b08629f51d1039edfa810266c9aff0dc4018cc0a590c82a3b4a5",
+      "bytes": 2177399,
+      "target": "/media/products/d5b6a601d4e0b08629f51d1039edfa810266c9aff0dc4018cc0a590c82a3b4a5.png"
+    },
+    {
+      "source": "/travesseiros/corpo-white-fibra/travesseiros_corpowhite1.png",
+      "filename": "1fa3ea0ea3f8c2447df8767cc5721a34e9c6b09ada04add8ef2f226aeaac4c9e.png",
+      "sha256": "1fa3ea0ea3f8c2447df8767cc5721a34e9c6b09ada04add8ef2f226aeaac4c9e",
+      "bytes": 2351633,
+      "target": "/media/products/1fa3ea0ea3f8c2447df8767cc5721a34e9c6b09ada04add8ef2f226aeaac4c9e.png"
+    },
+    {
+      "source": "/travesseiros/corpo-white-fibra/travesseiros_corpowhite2.png",
+      "filename": "6d35a1e57309bae0d4999b4143078e453e7c0031e1ccc3fcae2566306ddf7832.png",
+      "sha256": "6d35a1e57309bae0d4999b4143078e453e7c0031e1ccc3fcae2566306ddf7832",
+      "bytes": 2425793,
+      "target": "/media/products/6d35a1e57309bae0d4999b4143078e453e7c0031e1ccc3fcae2566306ddf7832.png"
+    },
+    {
+      "source": "/travesseiros/corpo-white-fibra/travesseiros_corpowhite3.png",
+      "filename": "9d655dc8360f51aae344f5d4fafcda2e18ebee53c51abbecc55a2065ce9ca8c2.png",
+      "sha256": "9d655dc8360f51aae344f5d4fafcda2e18ebee53c51abbecc55a2065ce9ca8c2",
+      "bytes": 2150105,
+      "target": "/media/products/9d655dc8360f51aae344f5d4fafcda2e18ebee53c51abbecc55a2065ce9ca8c2.png"
     },
     {
       "source": "/travesseiros/future/travesseiro_future_1.png",

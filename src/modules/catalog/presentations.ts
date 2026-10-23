@@ -7,6 +7,10 @@ import { cervicalOrtoPlusPresentation } from "./cervical-orto-plus.ts";
 import { recoveryMaisPresentation } from "./recovery-mais.ts";
 import { eliteAzulPresentation } from "./elite-azul.ts";
 import { eliteCinzaPresentation } from "./elite-cinza.ts";
+import { corpoWhitePresentation, corpoMagneticoPresentation } from "./corpo.ts";
+import { sensePro, dream, boxTatameElegance, boxTatameJapones } from "./novas-linhas.ts";
+import { complementos } from "./complementos.ts";
+import { withStorageImages } from "./storage-images.ts";
 
 export interface ProductPresentation {
     displayName?: string;
@@ -23,11 +27,18 @@ export interface ProductPresentation {
 }
 
 // Conteúdo e dados comerciais fornecidos pelo cliente; nomes de tecnologias sem alegações clínicas.
-export const presentations: Partial<Record<string, ProductPresentation>> = {
+export const sourcePresentations: Partial<Record<string, ProductPresentation>> = {
     divan: divanPresentation,
     house: housePresentation,
     "travesseiro-viscoelastico": viscoelasticoPresentation,
     "travesseiro-future": futurePresentation,
+    "travesseiro-corpo-white-fibra": corpoWhitePresentation,
+    "travesseiro-corpo-magnetico": corpoMagneticoPresentation,
+    "sense-pro": sensePro.presentation,
+    "dream": dream.presentation,
+    "box-tatame-elegance": boxTatameElegance.presentation,
+    "box-tatame-japones": boxTatameJapones.presentation,
+    ...Object.fromEntries(complementos.map(item => [item.product.slug, item.presentation])),
     "travesseiro-cervical-orto-plus": cervicalOrtoPlusPresentation,
     "recover-mais": recoveryMaisPresentation,
     comfort: {
@@ -182,3 +193,5 @@ export const presentations: Partial<Record<string, ProductPresentation>> = {
     "elite-azul": eliteAzulPresentation,
     "elite-cinza": eliteCinzaPresentation,
 };
+
+export const presentations = withStorageImages(sourcePresentations);
