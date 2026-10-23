@@ -1,5 +1,5 @@
 import { constants } from "node:fs";
-import { access, open, realpath, stat, unlink } from "node:fs/promises";
+import { access, open, realpath, stat, unlink, readdir, lstat } from "node:fs/promises";
 import path from "node:path";
 import { randomUUID, createHash } from "node:crypto";
 
@@ -35,7 +35,11 @@ export async function writeLocalMedia(bytes: Buffer) {
 
 export async function readLocalMedia(filename: string) {
     if (!mediaFilename.test(filename)) throw new Error("Nome inválido.");
-    const directory = await storageRoot();
+    return readMediaFromDirectory(await storageRoot(), filename);
+}
+
+async function readMediaFromDirectory(directory: string, filename: string) {
+    if (!mediaFilename.test(filename)) throw new Error("Nome inválido.");
     const handle = await open(path.join(directory, filename), constants.O_RDONLY | (constants.O_NOFOLLOW ?? 0));
     try {
         const info = await handle.stat();
@@ -46,10 +50,13 @@ export async function readLocalMedia(filename: string) {
 
 // Somente leitura; executado explicitamente pelo OWNER após a extração do pacote.
 export async function validateStorageImages(assets: { filename: string; sha256: string; bytes: number }[]) {
+    // Erros do diretório não podem ser contabilizados como 112 arquivos ausentes.
+    const directory = await storageRoot();
+    await access(directory, constants.R_OK | constants.X_OK);
     const missing: string[] = [], invalid: string[] = [];
     for (const asset of assets) {
         try {
-            const bytes = await readLocalMedia(asset.filename);
+            const bytes = await readMediaFromDirectory(directory, asset.filename);
             if (bytes.length !== asset.bytes || createHash("sha256").update(bytes).digest("hex") !== asset.sha256) invalid.push(asset.filename);
         } catch (error) {
             if ((error as NodeJS.ErrnoException).code === "ENOENT") missing.push(asset.filename);
@@ -57,6 +64,32 @@ export async function validateStorageImages(assets: { filename: string; sha256: 
         }
     }
     return { expected: assets.length, verified: assets.length - missing.length - invalid.length, missing, invalid, valid: !missing.length && !invalid.length };
+}
+
+// Retornar somente pelo endpoint OWNER autenticado. Não registrar caminhos em logs.
+export async function diagnoseStorage(assets: { filename: string }[]) {
+    const configuredPath = localStoragePath();
+    const runtime = { configuredPath, applicationPath: process.cwd() };
+    try {
+        const directory = await storageRoot();
+        await access(directory, constants.R_OK | constants.X_OK);
+        const entries = await readdir(directory);
+        const expectedNames = new Set(assets.map(asset => asset.filename));
+        let nestedProductsMatches: number | null = null;
+        const child = path.join(directory, "products");
+        try {
+            const info = await lstat(child);
+            if (info.isDirectory() && !info.isSymbolicLink()) nestedProductsMatches = (await readdir(child)).filter(name => expectedNames.has(name)).length;
+        } catch { /* Pasta extra opcional; nenhum outro caminho é percorrido. */ }
+        const sample = assets[0]?.filename;
+        return { ...runtime, readable: true, resolvedPath: directory, expected: assets.length,
+            matchingNames: entries.filter(name => expectedNames.has(name)).length,
+            directoryEntries: entries.length, nestedProductsMatches,
+            sampleExpectedPath: sample && mediaFilename.test(sample) ? path.join(directory, sample) : null };
+    } catch (error) {
+        const code = (error as NodeJS.ErrnoException).code;
+        return { ...runtime, readable: false, errorCode: code && ["ENOENT", "EACCES", "EPERM", "ENOTDIR", "ELOOP"].includes(code) ? code : "INVALID_STORAGE_CONFIGURATION" };
+    }
 }
 
 // Executar sob a identidade do processo Node, não apenas no terminal SSH.
