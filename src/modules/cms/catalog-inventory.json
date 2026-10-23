@@ -1,0 +1,1788 @@
+{
+  "products": [
+    {
+      "id": "recover-mais",
+      "name": "Colchão Recovery⁺",
+      "categoryId": "colchoes"
+    },
+    {
+      "id": "diamond",
+      "name": "Diamond",
+      "categoryId": "colchoes"
+    },
+    {
+      "id": "elegance",
+      "name": "Elegance",
+      "categoryId": "colchoes"
+    },
+    {
+      "id": "majestic",
+      "name": "Majestic",
+      "categoryId": "colchoes"
+    },
+    {
+      "id": "comfort",
+      "name": "Comfort Massageador",
+      "categoryId": "colchoes"
+    },
+    {
+      "id": "elite-azul",
+      "name": "Colchão Elite Azul",
+      "categoryId": "linha-a-vacuo"
+    },
+    {
+      "id": "elite-cinza",
+      "name": "Colchão Elite Cinza",
+      "categoryId": "linha-a-vacuo"
+    },
+    {
+      "id": "divan",
+      "name": "Poltrona Massageadora Divan",
+      "categoryId": "linha-divan"
+    },
+    {
+      "id": "house",
+      "name": "Poltrona Massageadora House",
+      "categoryId": "linha-house"
+    },
+    {
+      "id": "travesseiro-viscoelastico",
+      "name": "Travesseiro Viscoelástico",
+      "categoryId": "linha-viscoelastico"
+    },
+    {
+      "id": "travesseiro-future",
+      "name": "Travesseiro Future",
+      "categoryId": "linha-future"
+    },
+    {
+      "id": "travesseiro-cervical-orto-plus",
+      "name": "Travesseiro Cervical Orto Plus",
+      "categoryId": "linha-cervical-orto-plus"
+    }
+  ],
+  "categories": [
+    {
+      "id": "colchoes",
+      "name": "Colchões",
+      "parentId": null
+    },
+    {
+      "id": "linha-a-vacuo",
+      "name": "Linha a Vácuo",
+      "parentId": null
+    },
+    {
+      "id": "camas-box",
+      "name": "Camas Box",
+      "parentId": null
+    },
+    {
+      "id": "cabeceiras",
+      "name": "Cabeceiras",
+      "parentId": null
+    },
+    {
+      "id": "travesseiros",
+      "name": "Travesseiros",
+      "parentId": null
+    },
+    {
+      "id": "poltronas",
+      "name": "Poltronas",
+      "parentId": null
+    },
+    {
+      "id": "linha-divan",
+      "name": "Linha Divan",
+      "parentId": "poltronas"
+    },
+    {
+      "id": "linha-house",
+      "name": "Linha House",
+      "parentId": "poltronas"
+    },
+    {
+      "id": "linha-viscoelastico",
+      "name": "Linha Viscoelástico",
+      "parentId": "travesseiros"
+    },
+    {
+      "id": "linha-future",
+      "name": "Linha Future",
+      "parentId": "travesseiros"
+    },
+    {
+      "id": "linha-cervical-orto-plus",
+      "name": "Linha Cervical Orto Plus",
+      "parentId": "travesseiros"
+    },
+    {
+      "id": "vibro-car",
+      "name": "Vibro Car",
+      "parentId": null
+    },
+    {
+      "id": "dream-pet",
+      "name": "Dream Pet",
+      "parentId": null
+    }
+  ],
+  "totalImages": 82,
+  "selectableImages": 76,
+  "byArea": {
+    "Sem associação publicada": 20,
+    "Produtos": 44,
+    "Versões antigas": 13,
+    "Identidade visual": 2,
+    "Tecnologias": 3
+  },
+  "images": [
+    {
+      "src": "/Sensepro/ChatGPT Image Oct 20, 2026, 09_49_13 PM-1.png",
+      "name": "Sem associação publicada — Sensepro / ChatGPT Image Oct 20, 2026, 09_49_13 PM-1.png",
+      "alt": "ChatGPT Image Oct 20, 2026, 09_49_13 PM-1.png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "Sensepro",
+      "area": "Sem associação publicada",
+      "productIds": "",
+      "valid": true,
+      "references": []
+    },
+    {
+      "src": "/Sensepro/ChatGPT Image Oct 20, 2026, 09_49_13 PM-2.png",
+      "name": "Sem associação publicada — Sensepro / ChatGPT Image Oct 20, 2026, 09_49_13 PM-2.png",
+      "alt": "ChatGPT Image Oct 20, 2026, 09_49_13 PM-2.png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "Sensepro",
+      "area": "Sem associação publicada",
+      "productIds": "",
+      "valid": true,
+      "references": []
+    },
+    {
+      "src": "/Sensepro/ChatGPT Image Oct 20, 2026, 09_49_14 PM-3.png",
+      "name": "Sem associação publicada — Sensepro / ChatGPT Image Oct 20, 2026, 09_49_14 PM-3.png",
+      "alt": "ChatGPT Image Oct 20, 2026, 09_49_14 PM-3.png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "Sensepro",
+      "area": "Sem associação publicada",
+      "productIds": "",
+      "valid": true,
+      "references": []
+    },
+    {
+      "src": "/a vacuo/elite/Cinza/CINZA.png",
+      "name": "Colchão Elite Cinza — a vacuo/elite/Cinza / CINZA.png",
+      "alt": "Colchão Elite Cinza — CINZA.png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "a vacuo/elite/Cinza",
+      "area": "Produtos",
+      "productIds": "elite-cinza",
+      "valid": true,
+      "references": [
+        "produtos:elite-cinza"
+      ]
+    },
+    {
+      "src": "/a vacuo/elite/Cinza/Cama Cinza.png",
+      "name": "Colchão Elite Cinza — a vacuo/elite/Cinza / Cama Cinza.png",
+      "alt": "Colchão Elite Cinza — Cama Cinza.png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "a vacuo/elite/Cinza",
+      "area": "Produtos",
+      "productIds": "elite-cinza",
+      "valid": true,
+      "references": [
+        "produtos:elite-cinza",
+        "seo:48a57a26864b38e8419ab819"
+      ]
+    },
+    {
+      "src": "/a vacuo/elite/Cinza/Colchão Elite a Vácuo Hortoleve Linha cinza.png",
+      "name": "Colchão Elite Cinza — a vacuo/elite/Cinza / Colchão Elite a Vácuo Hortoleve Linha cinza.png",
+      "alt": "Colchão Elite Cinza — Colchão Elite a Vácuo Hortoleve Linha cinza.png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "a vacuo/elite/Cinza",
+      "area": "Produtos",
+      "productIds": "elite-cinza",
+      "valid": true,
+      "references": [
+        "produtos:elite-cinza"
+      ]
+    },
+    {
+      "src": "/a vacuo/elite/Cinza/Infográfico Colchão Elite a Vácuo.png",
+      "name": "Colchão Elite Cinza — a vacuo/elite/Cinza / Infográfico Colchão Elite a Vácuo.png",
+      "alt": "Colchão Elite Cinza — Infográfico Colchão Elite a Vácuo.png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "a vacuo/elite/Cinza",
+      "area": "Produtos",
+      "productIds": "elite-cinza",
+      "valid": true,
+      "references": [
+        "produtos:elite-cinza"
+      ]
+    },
+    {
+      "src": "/a vacuo/elite/azul/Anúncio Colchão Elite a Vácuo Linha Azul.png",
+      "name": "Colchão Elite Azul — a vacuo/elite/azul / Anúncio Colchão Elite a Vácuo Linha Azul.png",
+      "alt": "Colchão Elite Azul — Anúncio Colchão Elite a Vácuo Linha Azul.png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "a vacuo/elite/azul",
+      "area": "Produtos",
+      "productIds": "elite-azul",
+      "valid": true,
+      "references": [
+        "produtos:elite-azul"
+      ]
+    },
+    {
+      "src": "/a vacuo/elite/azul/Infográfico Colchão Elite a Vácuo.png",
+      "name": "Colchão Elite Azul — a vacuo/elite/azul / Infográfico Colchão Elite a Vácuo.png",
+      "alt": "Colchão Elite Azul — Infográfico Colchão Elite a Vácuo.png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "a vacuo/elite/azul",
+      "area": "Produtos",
+      "productIds": "elite-azul",
+      "valid": true,
+      "references": [
+        "produtos:elite-azul"
+      ]
+    },
+    {
+      "src": "/a vacuo/elite/azul/Linha Azul.png",
+      "name": "Colchão Elite Azul — a vacuo/elite/azul / Linha Azul.png",
+      "alt": "Colchão Elite Azul — Linha Azul.png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "a vacuo/elite/azul",
+      "area": "Produtos",
+      "productIds": "elite-azul",
+      "valid": true,
+      "references": [
+        "produtos:elite-azul"
+      ]
+    },
+    {
+      "src": "/a vacuo/elite/azul/Quarto Luxuoso com Colchão Hortoleve Azul.png",
+      "name": "Colchão Elite Azul — a vacuo/elite/azul / Quarto Luxuoso com Colchão Hortoleve Azul.png",
+      "alt": "Colchão Elite Azul — Quarto Luxuoso com Colchão Hortoleve Azul.png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "a vacuo/elite/azul",
+      "area": "Produtos",
+      "productIds": "elite-azul",
+      "valid": true,
+      "references": [
+        "produtos:elite-azul",
+        "seo:80ff6be689b4587409051eec"
+      ]
+    },
+    {
+      "src": "/confort.webp",
+      "name": "Sem associação publicada —  / confort.webp",
+      "alt": "confort.webp",
+      "width": 941,
+      "height": 1672,
+      "folder": "",
+      "area": "Sem associação publicada",
+      "productIds": "",
+      "valid": true,
+      "references": []
+    },
+    {
+      "src": "/confort/1.png",
+      "name": "Comfort Massageador — confort / 1.png",
+      "alt": "Comfort Massageador — 1.png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "confort",
+      "area": "Produtos",
+      "productIds": "comfort",
+      "valid": true,
+      "references": [
+        "produtos:comfort",
+        "seo:ec8941244e195d971b2a1f3c"
+      ]
+    },
+    {
+      "src": "/confort/1_old.png",
+      "name": "Versões antigas — confort / 1_old.png",
+      "alt": "1_old.png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "confort",
+      "area": "Versões antigas",
+      "productIds": "",
+      "valid": true,
+      "references": []
+    },
+    {
+      "src": "/confort/2.png",
+      "name": "Comfort Massageador — confort / 2.png",
+      "alt": "Comfort Massageador — 2.png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "confort",
+      "area": "Produtos",
+      "productIds": "comfort",
+      "valid": true,
+      "references": [
+        "produtos:comfort"
+      ]
+    },
+    {
+      "src": "/confort/2_old.png",
+      "name": "Versões antigas — confort / 2_old.png",
+      "alt": "2_old.png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "confort",
+      "area": "Versões antigas",
+      "productIds": "",
+      "valid": true,
+      "references": []
+    },
+    {
+      "src": "/confort/3.png",
+      "name": "Comfort Massageador — confort / 3.png",
+      "alt": "Comfort Massageador — 3.png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "confort",
+      "area": "Produtos",
+      "productIds": "comfort",
+      "valid": true,
+      "references": [
+        "produtos:comfort"
+      ]
+    },
+    {
+      "src": "/confort/3_old.png",
+      "name": "Versões antigas — confort / 3_old.png",
+      "alt": "3_old.png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "confort",
+      "area": "Versões antigas",
+      "productIds": "",
+      "valid": true,
+      "references": []
+    },
+    {
+      "src": "/confort/4.png",
+      "name": "Comfort Massageador — confort / 4.png",
+      "alt": "Comfort Massageador — 4.png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "confort",
+      "area": "Produtos",
+      "productIds": "comfort",
+      "valid": true,
+      "references": [
+        "produtos:comfort"
+      ]
+    },
+    {
+      "src": "/diamond.webp",
+      "name": "Sem associação publicada —  / diamond.webp",
+      "alt": "diamond.webp",
+      "width": 941,
+      "height": 1672,
+      "folder": "",
+      "area": "Sem associação publicada",
+      "productIds": "",
+      "valid": true,
+      "references": []
+    },
+    {
+      "src": "/diamond/1.png",
+      "name": "Diamond — diamond / 1.png",
+      "alt": "Diamond — 1.png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "diamond",
+      "area": "Produtos",
+      "productIds": "diamond",
+      "valid": true,
+      "references": [
+        "produtos:diamond",
+        "seo:a5fce46a365b6abfd2e52d1a"
+      ]
+    },
+    {
+      "src": "/diamond/1_old.png",
+      "name": "Versões antigas — diamond / 1_old.png",
+      "alt": "1_old.png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "diamond",
+      "area": "Versões antigas",
+      "productIds": "",
+      "valid": true,
+      "references": []
+    },
+    {
+      "src": "/diamond/2.png",
+      "name": "Diamond — diamond / 2.png",
+      "alt": "Diamond — 2.png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "diamond",
+      "area": "Produtos",
+      "productIds": "diamond",
+      "valid": true,
+      "references": [
+        "produtos:diamond"
+      ]
+    },
+    {
+      "src": "/diamond/2_old.png",
+      "name": "Versões antigas — diamond / 2_old.png",
+      "alt": "2_old.png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "diamond",
+      "area": "Versões antigas",
+      "productIds": "",
+      "valid": true,
+      "references": []
+    },
+    {
+      "src": "/diamond/3.png",
+      "name": "Diamond — diamond / 3.png",
+      "alt": "Diamond — 3.png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "diamond",
+      "area": "Produtos",
+      "productIds": "diamond",
+      "valid": true,
+      "references": [
+        "produtos:diamond"
+      ]
+    },
+    {
+      "src": "/diamond/3_old.png",
+      "name": "Versões antigas — diamond / 3_old.png",
+      "alt": "3_old.png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "diamond",
+      "area": "Versões antigas",
+      "productIds": "",
+      "valid": true,
+      "references": []
+    },
+    {
+      "src": "/diamond/4.png",
+      "name": "Diamond — diamond / 4.png",
+      "alt": "Diamond — 4.png",
+      "width": 1122,
+      "height": 1402,
+      "folder": "diamond",
+      "area": "Produtos",
+      "productIds": "diamond",
+      "valid": true,
+      "references": [
+        "produtos:diamond"
+      ]
+    },
+    {
+      "src": "/elegance.webp",
+      "name": "Sem associação publicada —  / elegance.webp",
+      "alt": "elegance.webp",
+      "width": 941,
+      "height": 1672,
+      "folder": "",
+      "area": "Sem associação publicada",
+      "productIds": "",
+      "valid": true,
+      "references": []
+    },
+    {
+      "src": "/elegance/1.png",
+      "name": "Elegance — elegance / 1.png",
+      "alt": "Elegance — 1.png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "elegance",
+      "area": "Produtos",
+      "productIds": "elegance",
+      "valid": true,
+      "references": [
+        "produtos:elegance",
+        "home:principal",
+        "seo:265ae58f1fde005ffa1a9d56"
+      ]
+    },
+    {
+      "src": "/elegance/1_old.png",
+      "name": "Versões antigas — elegance / 1_old.png",
+      "alt": "1_old.png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "elegance",
+      "area": "Versões antigas",
+      "productIds": "",
+      "valid": true,
+      "references": []
+    },
+    {
+      "src": "/elegance/2.png",
+      "name": "Elegance — elegance / 2.png",
+      "alt": "Elegance — 2.png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "elegance",
+      "area": "Produtos",
+      "productIds": "elegance",
+      "valid": true,
+      "references": [
+        "produtos:elegance"
+      ]
+    },
+    {
+      "src": "/elegance/2_old.png",
+      "name": "Versões antigas — elegance / 2_old.png",
+      "alt": "2_old.png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "elegance",
+      "area": "Versões antigas",
+      "productIds": "",
+      "valid": true,
+      "references": []
+    },
+    {
+      "src": "/elegance/3.png",
+      "name": "Elegance — elegance / 3.png",
+      "alt": "Elegance — 3.png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "elegance",
+      "area": "Produtos",
+      "productIds": "elegance",
+      "valid": true,
+      "references": [
+        "produtos:elegance"
+      ]
+    },
+    {
+      "src": "/elegance/3_old.png",
+      "name": "Versões antigas — elegance / 3_old.png",
+      "alt": "3_old.png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "elegance",
+      "area": "Versões antigas",
+      "productIds": "",
+      "valid": true,
+      "references": []
+    },
+    {
+      "src": "/elegance/4.png",
+      "name": "Elegance — elegance / 4.png",
+      "alt": "Elegance — 4.png",
+      "width": 1122,
+      "height": 1402,
+      "folder": "elegance",
+      "area": "Produtos",
+      "productIds": "elegance",
+      "valid": true,
+      "references": [
+        "produtos:elegance"
+      ]
+    },
+    {
+      "src": "/favicom/Luxury Gold H Wave Emblem.png",
+      "name": "Identidade visual — favicom / Luxury Gold H Wave Emblem.png",
+      "alt": "Luxury Gold H Wave Emblem.png",
+      "width": 1278,
+      "height": 1230,
+      "folder": "favicom",
+      "area": "Identidade visual",
+      "productIds": "",
+      "valid": true,
+      "references": []
+    },
+    {
+      "src": "/file.svg",
+      "name": "Sem associação publicada —  / file.svg",
+      "alt": "file.svg",
+      "width": 16,
+      "height": 16,
+      "folder": "",
+      "area": "Sem associação publicada",
+      "productIds": "",
+      "valid": false,
+      "references": []
+    },
+    {
+      "src": "/globe.svg",
+      "name": "Sem associação publicada —  / globe.svg",
+      "alt": "globe.svg",
+      "width": 16,
+      "height": 16,
+      "folder": "",
+      "area": "Sem associação publicada",
+      "productIds": "",
+      "valid": false,
+      "references": []
+    },
+    {
+      "src": "/images/bedroom.svg",
+      "name": "Sem associação publicada — images / bedroom.svg",
+      "alt": "bedroom.svg",
+      "width": 1200,
+      "height": 1100,
+      "folder": "images",
+      "area": "Sem associação publicada",
+      "productIds": "",
+      "valid": false,
+      "references": []
+    },
+    {
+      "src": "/logo/logo-offwhite.PNG",
+      "name": "Identidade visual — logo / logo-offwhite.PNG",
+      "alt": "logo-offwhite.PNG",
+      "width": 2172,
+      "height": 724,
+      "folder": "logo",
+      "area": "Identidade visual",
+      "productIds": "",
+      "valid": true,
+      "references": [
+        "configuracoes:principal"
+      ]
+    },
+    {
+      "src": "/majestic.webp",
+      "name": "Sem associação publicada —  / majestic.webp",
+      "alt": "majestic.webp",
+      "width": 940,
+      "height": 1672,
+      "folder": "",
+      "area": "Sem associação publicada",
+      "productIds": "",
+      "valid": true,
+      "references": []
+    },
+    {
+      "src": "/majestic/1.png",
+      "name": "Majestic — majestic / 1.png",
+      "alt": "Majestic — 1.png",
+      "width": 1122,
+      "height": 1402,
+      "folder": "majestic",
+      "area": "Produtos",
+      "productIds": "majestic",
+      "valid": true,
+      "references": [
+        "produtos:majestic"
+      ]
+    },
+    {
+      "src": "/majestic/2.png",
+      "name": "Majestic — majestic / 2.png",
+      "alt": "Majestic — 2.png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "majestic",
+      "area": "Produtos",
+      "productIds": "majestic",
+      "valid": true,
+      "references": [
+        "produtos:majestic",
+        "seo:c0df6a6b3c6be168dc9319ca"
+      ]
+    },
+    {
+      "src": "/majestic/2_OLD.png",
+      "name": "Versões antigas — majestic / 2_OLD.png",
+      "alt": "2_OLD.png",
+      "width": 1448,
+      "height": 1086,
+      "folder": "majestic",
+      "area": "Versões antigas",
+      "productIds": "",
+      "valid": true,
+      "references": []
+    },
+    {
+      "src": "/majestic/3.png",
+      "name": "Majestic — majestic / 3.png",
+      "alt": "Majestic — 3.png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "majestic",
+      "area": "Produtos",
+      "productIds": "majestic",
+      "valid": true,
+      "references": [
+        "produtos:majestic"
+      ]
+    },
+    {
+      "src": "/majestic/3_OLD.png",
+      "name": "Versões antigas — majestic / 3_OLD.png",
+      "alt": "3_OLD.png",
+      "width": 1448,
+      "height": 1086,
+      "folder": "majestic",
+      "area": "Versões antigas",
+      "productIds": "",
+      "valid": true,
+      "references": []
+    },
+    {
+      "src": "/majestic/4.png",
+      "name": "Majestic — majestic / 4.png",
+      "alt": "Majestic — 4.png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "majestic",
+      "area": "Produtos",
+      "productIds": "majestic",
+      "valid": true,
+      "references": [
+        "produtos:majestic",
+        "home:principal"
+      ]
+    },
+    {
+      "src": "/majestic/4_OLD.png",
+      "name": "Versões antigas — majestic / 4_OLD.png",
+      "alt": "4_OLD.png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "majestic",
+      "area": "Versões antigas",
+      "productIds": "",
+      "valid": true,
+      "references": []
+    },
+    {
+      "src": "/next.svg",
+      "name": "Sem associação publicada —  / next.svg",
+      "alt": "next.svg",
+      "width": 394,
+      "height": 80,
+      "folder": "",
+      "area": "Sem associação publicada",
+      "productIds": "",
+      "valid": false,
+      "references": []
+    },
+    {
+      "src": "/poltronas/divan/ChatGPT Image Oct 21, 2026, 08_36_16 PM-1.png",
+      "name": "Poltrona Massageadora Divan — poltronas/divan / ChatGPT Image Oct 21, 2026, 08_36_16 PM-1.png",
+      "alt": "Poltrona Massageadora Divan — ChatGPT Image Oct 21, 2026, 08_36_16 PM-1.png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "poltronas/divan",
+      "area": "Produtos",
+      "productIds": "divan",
+      "valid": true,
+      "references": [
+        "produtos:divan",
+        "seo:471086314b4408ddc5d45044"
+      ]
+    },
+    {
+      "src": "/poltronas/divan/ChatGPT Image Oct 21, 2026, 08_36_17 PM-2.png",
+      "name": "Poltrona Massageadora Divan — poltronas/divan / ChatGPT Image Oct 21, 2026, 08_36_17 PM-2.png",
+      "alt": "Poltrona Massageadora Divan — ChatGPT Image Oct 21, 2026, 08_36_17 PM-2.png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "poltronas/divan",
+      "area": "Produtos",
+      "productIds": "divan",
+      "valid": true,
+      "references": [
+        "produtos:divan"
+      ]
+    },
+    {
+      "src": "/poltronas/divan/ChatGPT Image Oct 21, 2026, 08_36_17 PM-3.png",
+      "name": "Poltrona Massageadora Divan — poltronas/divan / ChatGPT Image Oct 21, 2026, 08_36_17 PM-3.png",
+      "alt": "Poltrona Massageadora Divan — ChatGPT Image Oct 21, 2026, 08_36_17 PM-3.png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "poltronas/divan",
+      "area": "Produtos",
+      "productIds": "divan",
+      "valid": true,
+      "references": [
+        "produtos:divan"
+      ]
+    },
+    {
+      "src": "/poltronas/house/poltronahouse_1.png",
+      "name": "Poltrona Massageadora House — poltronas/house / poltronahouse_1.png",
+      "alt": "Poltrona Massageadora House — poltronahouse_1.png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "poltronas/house",
+      "area": "Produtos",
+      "productIds": "house",
+      "valid": true,
+      "references": [
+        "produtos:house",
+        "seo:63cb991930d16650eab86cd9"
+      ]
+    },
+    {
+      "src": "/poltronas/house/poltronahouse_2.png",
+      "name": "Poltrona Massageadora House — poltronas/house / poltronahouse_2.png",
+      "alt": "Poltrona Massageadora House — poltronahouse_2.png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "poltronas/house",
+      "area": "Produtos",
+      "productIds": "house",
+      "valid": true,
+      "references": [
+        "produtos:house"
+      ]
+    },
+    {
+      "src": "/poltronas/house/poltronahouse_3.png",
+      "name": "Poltrona Massageadora House — poltronas/house / poltronahouse_3.png",
+      "alt": "Poltrona Massageadora House — poltronahouse_3.png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "poltronas/house",
+      "area": "Produtos",
+      "productIds": "house",
+      "valid": true,
+      "references": [
+        "produtos:house"
+      ]
+    },
+    {
+      "src": "/recover+.webp",
+      "name": "Sem associação publicada —  / recover+.webp",
+      "alt": "recover+.webp",
+      "width": 941,
+      "height": 1672,
+      "folder": "",
+      "area": "Sem associação publicada",
+      "productIds": "",
+      "valid": true,
+      "references": []
+    },
+    {
+      "src": "/recover+/1.png",
+      "name": "Colchão Recovery⁺ — recover+ / 1.png",
+      "alt": "Colchão Recovery⁺ — 1.png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "recover+",
+      "area": "Produtos",
+      "productIds": "recover-mais",
+      "valid": true,
+      "references": [
+        "produtos:recover-mais",
+        "seo:f7c615067010ca202ebcf6c3"
+      ]
+    },
+    {
+      "src": "/recover+/2.png",
+      "name": "Colchão Recovery⁺ — recover+ / 2.png",
+      "alt": "Colchão Recovery⁺ — 2.png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "recover+",
+      "area": "Produtos",
+      "productIds": "recover-mais",
+      "valid": true,
+      "references": [
+        "produtos:recover-mais"
+      ]
+    },
+    {
+      "src": "/recover+/3.png",
+      "name": "Colchão Recovery⁺ — recover+ / 3.png",
+      "alt": "Colchão Recovery⁺ — 3.png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "recover+",
+      "area": "Produtos",
+      "productIds": "recover-mais",
+      "valid": true,
+      "references": [
+        "produtos:recover-mais"
+      ]
+    },
+    {
+      "src": "/recover+/4.png",
+      "name": "Colchão Recovery⁺ — recover+ / 4.png",
+      "alt": "Colchão Recovery⁺ — 4.png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "recover+",
+      "area": "Produtos",
+      "productIds": "recover-mais",
+      "valid": true,
+      "references": [
+        "produtos:recover-mais"
+      ]
+    },
+    {
+      "src": "/recover+/5.png",
+      "name": "Colchão Recovery⁺ — recover+ / 5.png",
+      "alt": "Colchão Recovery⁺ — 5.png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "recover+",
+      "area": "Produtos",
+      "productIds": "recover-mais",
+      "valid": true,
+      "references": [
+        "produtos:recover-mais"
+      ]
+    },
+    {
+      "src": "/showroom/Luxury Bedding Showroom in Warm Green and Gold.png",
+      "name": "Versões antigas — showroom / Luxury Bedding Showroom in Warm Green and Gold.png",
+      "alt": "Luxury Bedding Showroom in Warm Green and Gold.png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "showroom",
+      "area": "Versões antigas",
+      "productIds": "",
+      "valid": true,
+      "references": [
+        "paginas:sobre"
+      ]
+    },
+    {
+      "src": "/tecnologia/Smart Mattress Technology Showcase.png",
+      "name": "Tecnologias — tecnologia / Smart Mattress Technology Showcase.png",
+      "alt": "Smart Mattress Technology Showcase.png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "tecnologia",
+      "area": "Tecnologias",
+      "productIds": "",
+      "valid": true,
+      "references": [
+        "paginas:tecnologias"
+      ]
+    },
+    {
+      "src": "/tecnologia/Tecnologias Hortoleve_ Conforto Inteligente.png",
+      "name": "Tecnologias — tecnologia / Tecnologias Hortoleve_ Conforto Inteligente.png",
+      "alt": "Tecnologias Hortoleve_ Conforto Inteligente.png",
+      "width": 1672,
+      "height": 941,
+      "folder": "tecnologia",
+      "area": "Tecnologias",
+      "productIds": "",
+      "valid": true,
+      "references": [
+        "home:principal",
+        "paginas:tecnologias"
+      ]
+    },
+    {
+      "src": "/tecnologia/cromoterapia e massagem.png",
+      "name": "Tecnologias — tecnologia / cromoterapia e massagem.png",
+      "alt": "cromoterapia e massagem.png",
+      "width": 1672,
+      "height": 941,
+      "folder": "tecnologia",
+      "area": "Tecnologias",
+      "productIds": "",
+      "valid": true,
+      "references": [
+        "paginas:tecnologias"
+      ]
+    },
+    {
+      "src": "/travesseiros/cervicalortoplus/travesseiro_cervical_1.png",
+      "name": "Travesseiro Cervical Orto Plus — travesseiros/cervicalortoplus / travesseiro_cervical_1.png",
+      "alt": "Travesseiro Cervical Orto Plus — travesseiro_cervical_1.png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "travesseiros/cervicalortoplus",
+      "area": "Produtos",
+      "productIds": "travesseiro-cervical-orto-plus",
+      "valid": true,
+      "references": [
+        "produtos:travesseiro-cervical-orto-plus",
+        "seo:8eadfcd5ee4c02c9d9bebd37"
+      ]
+    },
+    {
+      "src": "/travesseiros/cervicalortoplus/travesseiro_cervical_2.png",
+      "name": "Travesseiro Cervical Orto Plus — travesseiros/cervicalortoplus / travesseiro_cervical_2.png",
+      "alt": "Travesseiro Cervical Orto Plus — travesseiro_cervical_2.png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "travesseiros/cervicalortoplus",
+      "area": "Produtos",
+      "productIds": "travesseiro-cervical-orto-plus",
+      "valid": true,
+      "references": [
+        "produtos:travesseiro-cervical-orto-plus"
+      ]
+    },
+    {
+      "src": "/travesseiros/cervicalortoplus/travesseiro_cervical_3.png",
+      "name": "Travesseiro Cervical Orto Plus — travesseiros/cervicalortoplus / travesseiro_cervical_3.png",
+      "alt": "Travesseiro Cervical Orto Plus — travesseiro_cervical_3.png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "travesseiros/cervicalortoplus",
+      "area": "Produtos",
+      "productIds": "travesseiro-cervical-orto-plus",
+      "valid": true,
+      "references": [
+        "produtos:travesseiro-cervical-orto-plus"
+      ]
+    },
+    {
+      "src": "/travesseiros/corpo-magnetico/travesseiro-corpo-magnetico1.png",
+      "name": "Sem associação publicada — travesseiros/corpo-magnetico / travesseiro-corpo-magnetico1.png",
+      "alt": "travesseiro-corpo-magnetico1.png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "travesseiros/corpo-magnetico",
+      "area": "Sem associação publicada",
+      "productIds": "",
+      "valid": true,
+      "references": []
+    },
+    {
+      "src": "/travesseiros/corpo-magnetico/travesseiro-corpo-magnetico2.png",
+      "name": "Sem associação publicada — travesseiros/corpo-magnetico / travesseiro-corpo-magnetico2.png",
+      "alt": "travesseiro-corpo-magnetico2.png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "travesseiros/corpo-magnetico",
+      "area": "Sem associação publicada",
+      "productIds": "",
+      "valid": true,
+      "references": []
+    },
+    {
+      "src": "/travesseiros/corpo-magnetico/travesseiro-corpo-magnetico3.png",
+      "name": "Sem associação publicada — travesseiros/corpo-magnetico / travesseiro-corpo-magnetico3.png",
+      "alt": "travesseiro-corpo-magnetico3.png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "travesseiros/corpo-magnetico",
+      "area": "Sem associação publicada",
+      "productIds": "",
+      "valid": true,
+      "references": []
+    },
+    {
+      "src": "/travesseiros/corpo-white-fibra/travesseiros_corpowhite1.png",
+      "name": "Sem associação publicada — travesseiros/corpo-white-fibra / travesseiros_corpowhite1.png",
+      "alt": "travesseiros_corpowhite1.png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "travesseiros/corpo-white-fibra",
+      "area": "Sem associação publicada",
+      "productIds": "",
+      "valid": true,
+      "references": []
+    },
+    {
+      "src": "/travesseiros/corpo-white-fibra/travesseiros_corpowhite2.png",
+      "name": "Sem associação publicada — travesseiros/corpo-white-fibra / travesseiros_corpowhite2.png",
+      "alt": "travesseiros_corpowhite2.png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "travesseiros/corpo-white-fibra",
+      "area": "Sem associação publicada",
+      "productIds": "",
+      "valid": true,
+      "references": []
+    },
+    {
+      "src": "/travesseiros/corpo-white-fibra/travesseiros_corpowhite3.png",
+      "name": "Sem associação publicada — travesseiros/corpo-white-fibra / travesseiros_corpowhite3.png",
+      "alt": "travesseiros_corpowhite3.png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "travesseiros/corpo-white-fibra",
+      "area": "Sem associação publicada",
+      "productIds": "",
+      "valid": true,
+      "references": []
+    },
+    {
+      "src": "/travesseiros/future/travesseiro_future_1.png",
+      "name": "Travesseiro Future — travesseiros/future / travesseiro_future_1.png",
+      "alt": "Travesseiro Future — travesseiro_future_1.png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "travesseiros/future",
+      "area": "Produtos",
+      "productIds": "travesseiro-future",
+      "valid": true,
+      "references": [
+        "produtos:travesseiro-future",
+        "seo:6aedd0022489cb1e8b2de560"
+      ]
+    },
+    {
+      "src": "/travesseiros/future/travesseiro_future_2.png",
+      "name": "Travesseiro Future — travesseiros/future / travesseiro_future_2.png",
+      "alt": "Travesseiro Future — travesseiro_future_2.png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "travesseiros/future",
+      "area": "Produtos",
+      "productIds": "travesseiro-future",
+      "valid": true,
+      "references": [
+        "produtos:travesseiro-future"
+      ]
+    },
+    {
+      "src": "/travesseiros/future/travesseiro_future_3.png",
+      "name": "Travesseiro Future — travesseiros/future / travesseiro_future_3.png",
+      "alt": "Travesseiro Future — travesseiro_future_3.png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "travesseiros/future",
+      "area": "Produtos",
+      "productIds": "travesseiro-future",
+      "valid": true,
+      "references": [
+        "produtos:travesseiro-future"
+      ]
+    },
+    {
+      "src": "/travesseiros/viscoelastico/travesseiro_viscoelastico_1.png",
+      "name": "Travesseiro Viscoelástico — travesseiros/viscoelastico / travesseiro_viscoelastico_1.png",
+      "alt": "Travesseiro Viscoelástico — travesseiro_viscoelastico_1.png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "travesseiros/viscoelastico",
+      "area": "Produtos",
+      "productIds": "travesseiro-viscoelastico",
+      "valid": true,
+      "references": [
+        "produtos:travesseiro-viscoelastico",
+        "seo:a7979c49dda39e687e123797"
+      ]
+    },
+    {
+      "src": "/travesseiros/viscoelastico/travesseiro_viscoelastico_2.png",
+      "name": "Travesseiro Viscoelástico — travesseiros/viscoelastico / travesseiro_viscoelastico_2.png",
+      "alt": "Travesseiro Viscoelástico — travesseiro_viscoelastico_2.png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "travesseiros/viscoelastico",
+      "area": "Produtos",
+      "productIds": "travesseiro-viscoelastico",
+      "valid": true,
+      "references": [
+        "produtos:travesseiro-viscoelastico"
+      ]
+    },
+    {
+      "src": "/travesseiros/viscoelastico/travesseiro_viscoelastico_3.png",
+      "name": "Travesseiro Viscoelástico — travesseiros/viscoelastico / travesseiro_viscoelastico_3.png",
+      "alt": "Travesseiro Viscoelástico — travesseiro_viscoelastico_3.png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "travesseiros/viscoelastico",
+      "area": "Produtos",
+      "productIds": "travesseiro-viscoelastico",
+      "valid": true,
+      "references": [
+        "produtos:travesseiro-viscoelastico"
+      ]
+    },
+    {
+      "src": "/vercel.svg",
+      "name": "Sem associação publicada —  / vercel.svg",
+      "alt": "vercel.svg",
+      "width": 1155,
+      "height": 1000,
+      "folder": "",
+      "area": "Sem associação publicada",
+      "productIds": "",
+      "valid": false,
+      "references": []
+    },
+    {
+      "src": "/window.svg",
+      "name": "Sem associação publicada —  / window.svg",
+      "alt": "window.svg",
+      "width": 16,
+      "height": 16,
+      "folder": "",
+      "area": "Sem associação publicada",
+      "productIds": "",
+      "valid": false,
+      "references": []
+    }
+  ],
+  "cmsInspected": true,
+  "cms": {
+    "databaseIdentityConfirmed": true,
+    "products": [],
+    "categories": [],
+    "productDocuments": 0,
+    "missingProducts": [
+      {
+        "id": "recover-mais",
+        "name": "Colchão Recovery⁺",
+        "deleted": false
+      },
+      {
+        "id": "diamond",
+        "name": "Diamond",
+        "deleted": false
+      },
+      {
+        "id": "elegance",
+        "name": "Elegance",
+        "deleted": false
+      },
+      {
+        "id": "majestic",
+        "name": "Majestic",
+        "deleted": false
+      },
+      {
+        "id": "comfort",
+        "name": "Comfort Massageador",
+        "deleted": false
+      },
+      {
+        "id": "elite-azul",
+        "name": "Colchão Elite Azul",
+        "deleted": false
+      },
+      {
+        "id": "elite-cinza",
+        "name": "Colchão Elite Cinza",
+        "deleted": false
+      },
+      {
+        "id": "divan",
+        "name": "Poltrona Massageadora Divan",
+        "deleted": false
+      },
+      {
+        "id": "house",
+        "name": "Poltrona Massageadora House",
+        "deleted": false
+      },
+      {
+        "id": "travesseiro-viscoelastico",
+        "name": "Travesseiro Viscoelástico",
+        "deleted": false
+      },
+      {
+        "id": "travesseiro-future",
+        "name": "Travesseiro Future",
+        "deleted": false
+      },
+      {
+        "id": "travesseiro-cervical-orto-plus",
+        "name": "Travesseiro Cervical Orto Plus",
+        "deleted": false
+      }
+    ],
+    "missingCategories": [
+      {
+        "id": "colchoes",
+        "name": "Colchões",
+        "deleted": false
+      },
+      {
+        "id": "linha-a-vacuo",
+        "name": "Linha a Vácuo",
+        "deleted": false
+      },
+      {
+        "id": "camas-box",
+        "name": "Camas Box",
+        "deleted": false
+      },
+      {
+        "id": "cabeceiras",
+        "name": "Cabeceiras",
+        "deleted": false
+      },
+      {
+        "id": "travesseiros",
+        "name": "Travesseiros",
+        "deleted": false
+      },
+      {
+        "id": "poltronas",
+        "name": "Poltronas",
+        "deleted": false
+      },
+      {
+        "id": "linha-divan",
+        "name": "Linha Divan",
+        "deleted": false
+      },
+      {
+        "id": "linha-house",
+        "name": "Linha House",
+        "deleted": false
+      },
+      {
+        "id": "linha-viscoelastico",
+        "name": "Linha Viscoelástico",
+        "deleted": false
+      },
+      {
+        "id": "linha-future",
+        "name": "Linha Future",
+        "deleted": false
+      },
+      {
+        "id": "linha-cervical-orto-plus",
+        "name": "Linha Cervical Orto Plus",
+        "deleted": false
+      },
+      {
+        "id": "vibro-car",
+        "name": "Vibro Car",
+        "deleted": false
+      },
+      {
+        "id": "dream-pet",
+        "name": "Dream Pet",
+        "deleted": false
+      }
+    ],
+    "mediaDocuments": 0,
+    "missingImages": [
+      {
+        "src": "/Sensepro/ChatGPT Image Oct 20, 2026, 09_49_13 PM-1.png",
+        "area": "Sem associação publicada",
+        "selectable": true
+      },
+      {
+        "src": "/Sensepro/ChatGPT Image Oct 20, 2026, 09_49_13 PM-2.png",
+        "area": "Sem associação publicada",
+        "selectable": true
+      },
+      {
+        "src": "/Sensepro/ChatGPT Image Oct 20, 2026, 09_49_14 PM-3.png",
+        "area": "Sem associação publicada",
+        "selectable": true
+      },
+      {
+        "src": "/a vacuo/elite/Cinza/CINZA.png",
+        "area": "Produtos",
+        "selectable": true
+      },
+      {
+        "src": "/a vacuo/elite/Cinza/Cama Cinza.png",
+        "area": "Produtos",
+        "selectable": true
+      },
+      {
+        "src": "/a vacuo/elite/Cinza/Colchão Elite a Vácuo Hortoleve Linha cinza.png",
+        "area": "Produtos",
+        "selectable": true
+      },
+      {
+        "src": "/a vacuo/elite/Cinza/Infográfico Colchão Elite a Vácuo.png",
+        "area": "Produtos",
+        "selectable": true
+      },
+      {
+        "src": "/a vacuo/elite/azul/Anúncio Colchão Elite a Vácuo Linha Azul.png",
+        "area": "Produtos",
+        "selectable": true
+      },
+      {
+        "src": "/a vacuo/elite/azul/Infográfico Colchão Elite a Vácuo.png",
+        "area": "Produtos",
+        "selectable": true
+      },
+      {
+        "src": "/a vacuo/elite/azul/Linha Azul.png",
+        "area": "Produtos",
+        "selectable": true
+      },
+      {
+        "src": "/a vacuo/elite/azul/Quarto Luxuoso com Colchão Hortoleve Azul.png",
+        "area": "Produtos",
+        "selectable": true
+      },
+      {
+        "src": "/confort.webp",
+        "area": "Sem associação publicada",
+        "selectable": true
+      },
+      {
+        "src": "/confort/1.png",
+        "area": "Produtos",
+        "selectable": true
+      },
+      {
+        "src": "/confort/1_old.png",
+        "area": "Versões antigas",
+        "selectable": true
+      },
+      {
+        "src": "/confort/2.png",
+        "area": "Produtos",
+        "selectable": true
+      },
+      {
+        "src": "/confort/2_old.png",
+        "area": "Versões antigas",
+        "selectable": true
+      },
+      {
+        "src": "/confort/3.png",
+        "area": "Produtos",
+        "selectable": true
+      },
+      {
+        "src": "/confort/3_old.png",
+        "area": "Versões antigas",
+        "selectable": true
+      },
+      {
+        "src": "/confort/4.png",
+        "area": "Produtos",
+        "selectable": true
+      },
+      {
+        "src": "/diamond.webp",
+        "area": "Sem associação publicada",
+        "selectable": true
+      },
+      {
+        "src": "/diamond/1.png",
+        "area": "Produtos",
+        "selectable": true
+      },
+      {
+        "src": "/diamond/1_old.png",
+        "area": "Versões antigas",
+        "selectable": true
+      },
+      {
+        "src": "/diamond/2.png",
+        "area": "Produtos",
+        "selectable": true
+      },
+      {
+        "src": "/diamond/2_old.png",
+        "area": "Versões antigas",
+        "selectable": true
+      },
+      {
+        "src": "/diamond/3.png",
+        "area": "Produtos",
+        "selectable": true
+      },
+      {
+        "src": "/diamond/3_old.png",
+        "area": "Versões antigas",
+        "selectable": true
+      },
+      {
+        "src": "/diamond/4.png",
+        "area": "Produtos",
+        "selectable": true
+      },
+      {
+        "src": "/elegance.webp",
+        "area": "Sem associação publicada",
+        "selectable": true
+      },
+      {
+        "src": "/elegance/1.png",
+        "area": "Produtos",
+        "selectable": true
+      },
+      {
+        "src": "/elegance/1_old.png",
+        "area": "Versões antigas",
+        "selectable": true
+      },
+      {
+        "src": "/elegance/2.png",
+        "area": "Produtos",
+        "selectable": true
+      },
+      {
+        "src": "/elegance/2_old.png",
+        "area": "Versões antigas",
+        "selectable": true
+      },
+      {
+        "src": "/elegance/3.png",
+        "area": "Produtos",
+        "selectable": true
+      },
+      {
+        "src": "/elegance/3_old.png",
+        "area": "Versões antigas",
+        "selectable": true
+      },
+      {
+        "src": "/elegance/4.png",
+        "area": "Produtos",
+        "selectable": true
+      },
+      {
+        "src": "/favicom/Luxury Gold H Wave Emblem.png",
+        "area": "Identidade visual",
+        "selectable": true
+      },
+      {
+        "src": "/file.svg",
+        "area": "Sem associação publicada",
+        "selectable": false
+      },
+      {
+        "src": "/globe.svg",
+        "area": "Sem associação publicada",
+        "selectable": false
+      },
+      {
+        "src": "/images/bedroom.svg",
+        "area": "Sem associação publicada",
+        "selectable": false
+      },
+      {
+        "src": "/logo/logo-offwhite.PNG",
+        "area": "Identidade visual",
+        "selectable": true
+      },
+      {
+        "src": "/majestic.webp",
+        "area": "Sem associação publicada",
+        "selectable": true
+      },
+      {
+        "src": "/majestic/1.png",
+        "area": "Produtos",
+        "selectable": true
+      },
+      {
+        "src": "/majestic/2.png",
+        "area": "Produtos",
+        "selectable": true
+      },
+      {
+        "src": "/majestic/2_OLD.png",
+        "area": "Versões antigas",
+        "selectable": true
+      },
+      {
+        "src": "/majestic/3.png",
+        "area": "Produtos",
+        "selectable": true
+      },
+      {
+        "src": "/majestic/3_OLD.png",
+        "area": "Versões antigas",
+        "selectable": true
+      },
+      {
+        "src": "/majestic/4.png",
+        "area": "Produtos",
+        "selectable": true
+      },
+      {
+        "src": "/majestic/4_OLD.png",
+        "area": "Versões antigas",
+        "selectable": true
+      },
+      {
+        "src": "/next.svg",
+        "area": "Sem associação publicada",
+        "selectable": false
+      },
+      {
+        "src": "/poltronas/divan/ChatGPT Image Oct 21, 2026, 08_36_16 PM-1.png",
+        "area": "Produtos",
+        "selectable": true
+      },
+      {
+        "src": "/poltronas/divan/ChatGPT Image Oct 21, 2026, 08_36_17 PM-2.png",
+        "area": "Produtos",
+        "selectable": true
+      },
+      {
+        "src": "/poltronas/divan/ChatGPT Image Oct 21, 2026, 08_36_17 PM-3.png",
+        "area": "Produtos",
+        "selectable": true
+      },
+      {
+        "src": "/poltronas/house/poltronahouse_1.png",
+        "area": "Produtos",
+        "selectable": true
+      },
+      {
+        "src": "/poltronas/house/poltronahouse_2.png",
+        "area": "Produtos",
+        "selectable": true
+      },
+      {
+        "src": "/poltronas/house/poltronahouse_3.png",
+        "area": "Produtos",
+        "selectable": true
+      },
+      {
+        "src": "/recover+.webp",
+        "area": "Sem associação publicada",
+        "selectable": true
+      },
+      {
+        "src": "/recover+/1.png",
+        "area": "Produtos",
+        "selectable": true
+      },
+      {
+        "src": "/recover+/2.png",
+        "area": "Produtos",
+        "selectable": true
+      },
+      {
+        "src": "/recover+/3.png",
+        "area": "Produtos",
+        "selectable": true
+      },
+      {
+        "src": "/recover+/4.png",
+        "area": "Produtos",
+        "selectable": true
+      },
+      {
+        "src": "/recover+/5.png",
+        "area": "Produtos",
+        "selectable": true
+      },
+      {
+        "src": "/showroom/Luxury Bedding Showroom in Warm Green and Gold.png",
+        "area": "Versões antigas",
+        "selectable": true
+      },
+      {
+        "src": "/tecnologia/Smart Mattress Technology Showcase.png",
+        "area": "Tecnologias",
+        "selectable": true
+      },
+      {
+        "src": "/tecnologia/Tecnologias Hortoleve_ Conforto Inteligente.png",
+        "area": "Tecnologias",
+        "selectable": true
+      },
+      {
+        "src": "/tecnologia/cromoterapia e massagem.png",
+        "area": "Tecnologias",
+        "selectable": true
+      },
+      {
+        "src": "/travesseiros/cervicalortoplus/travesseiro_cervical_1.png",
+        "area": "Produtos",
+        "selectable": true
+      },
+      {
+        "src": "/travesseiros/cervicalortoplus/travesseiro_cervical_2.png",
+        "area": "Produtos",
+        "selectable": true
+      },
+      {
+        "src": "/travesseiros/cervicalortoplus/travesseiro_cervical_3.png",
+        "area": "Produtos",
+        "selectable": true
+      },
+      {
+        "src": "/travesseiros/corpo-magnetico/travesseiro-corpo-magnetico1.png",
+        "area": "Sem associação publicada",
+        "selectable": true
+      },
+      {
+        "src": "/travesseiros/corpo-magnetico/travesseiro-corpo-magnetico2.png",
+        "area": "Sem associação publicada",
+        "selectable": true
+      },
+      {
+        "src": "/travesseiros/corpo-magnetico/travesseiro-corpo-magnetico3.png",
+        "area": "Sem associação publicada",
+        "selectable": true
+      },
+      {
+        "src": "/travesseiros/corpo-white-fibra/travesseiros_corpowhite1.png",
+        "area": "Sem associação publicada",
+        "selectable": true
+      },
+      {
+        "src": "/travesseiros/corpo-white-fibra/travesseiros_corpowhite2.png",
+        "area": "Sem associação publicada",
+        "selectable": true
+      },
+      {
+        "src": "/travesseiros/corpo-white-fibra/travesseiros_corpowhite3.png",
+        "area": "Sem associação publicada",
+        "selectable": true
+      },
+      {
+        "src": "/travesseiros/future/travesseiro_future_1.png",
+        "area": "Produtos",
+        "selectable": true
+      },
+      {
+        "src": "/travesseiros/future/travesseiro_future_2.png",
+        "area": "Produtos",
+        "selectable": true
+      },
+      {
+        "src": "/travesseiros/future/travesseiro_future_3.png",
+        "area": "Produtos",
+        "selectable": true
+      },
+      {
+        "src": "/travesseiros/viscoelastico/travesseiro_viscoelastico_1.png",
+        "area": "Produtos",
+        "selectable": true
+      },
+      {
+        "src": "/travesseiros/viscoelastico/travesseiro_viscoelastico_2.png",
+        "area": "Produtos",
+        "selectable": true
+      },
+      {
+        "src": "/travesseiros/viscoelastico/travesseiro_viscoelastico_3.png",
+        "area": "Produtos",
+        "selectable": true
+      },
+      {
+        "src": "/vercel.svg",
+        "area": "Sem associação publicada",
+        "selectable": false
+      },
+      {
+        "src": "/window.svg",
+        "area": "Sem associação publicada",
+        "selectable": false
+      }
+    ]
+  }
+}

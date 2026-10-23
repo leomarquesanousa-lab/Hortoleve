@@ -5,6 +5,7 @@ import { faqs, experiences } from "../content/data.ts";
 import { defaultHeroSlides } from "../cms/hero-defaults.ts";
 import { site } from "../../config/site.ts";
 import { pageDefaults } from "../content/page-defaults.ts";
+import { publicMedia } from "./public-media.generated.ts";
 type Data = Record<string, unknown>;
 export const initialContent: { resource: string; id: string; data: Data; published: boolean }[] = [];
 const add = (resource: string, id: string, data: Data, published = true) => initialContent.push({ resource, id, data: { ...data, published }, published });
@@ -32,3 +33,10 @@ assets.set("/showroom/Luxury Bedding Showroom in Warm Green and Gold.png", { alt
 assets.set("/tecnologia/Smart Mattress Technology Showcase.png", { alt: "Diagrama conceitual das tecnologias do colchão", width: 1536, height: 1024 });
 assets.set("/tecnologia/cromoterapia e massagem.png", { alt: "Representação conceitual de cromoterapia e massagem", width: 1672, height: 941 });
 for (const [src, info] of assets) add("midia", createHash("sha256").update(src).digest("hex").slice(0, 24), { src, ...info, name: src.split("/").pop() });
+// Mesmo ID por URL: ampliar o acervo não duplica imagens já importadas.
+for (const media of publicMedia) {
+    const id = createHash("sha256").update(media.src).digest("hex").slice(0, 24);
+    const existing = initialContent.find(i => i.resource === "midia" && i.id === id);
+    if (existing) existing.data = { ...existing.data, ...media };
+    else add("midia", id, media);
+}

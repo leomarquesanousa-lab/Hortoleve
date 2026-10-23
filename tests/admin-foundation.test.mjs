@@ -917,3 +917,31 @@ test("migracao copia bytes originais, deduplica e preserva referencias e ordem",
         fs.rmSync(temporary, { recursive: true, force: true });
     }
 });
+
+test("inventario completo alimenta biblioteca sem duplicar URLs ou criar produtos por pasta", async () => {
+    const load = loader({ "@/modules/admin/database": { getDatabase: () => { throw Error("Nao consultar banco real"); } } });
+    const { publicMedia } = load("src/modules/cms/public-media.generated.ts");
+    const { initialContent } = load("src/modules/cms/initial-content.ts");
+    const { validateData } = load("src/modules/cms/validation.ts");
+    const media = initialContent.filter(i => i.resource === "midia");
+    assert.equal(new Set(media.map(i => i.data.src)).size, media.length);
+    for (const image of publicMedia) {
+        assert.ok(media.some(i => i.data.src === image.src));
+        assert.ok(fs.existsSync(path.join("public", image.src.slice(1))));
+        assert.ok(image.width > 0 && image.height > 0);
+        const validated = validateData("midia", image);
+        assert.equal(validated.folder, image.folder);
+        assert.equal(validated.productIds, image.productIds);
+    }
+    for (const folder of ["future", "cervicalortoplus", "viscoelastico", "corpo-magnetico", "corpo-white-fibra"]) {
+        assert.ok(publicMedia.filter(i => i.src.startsWith("/travesseiros/" + folder + "/")).length >= 3);
+    }
+    assert.equal(initialContent.filter(i => i.resource === "produtos").length, 12);
+    const { synchronizeContent } = load("src/modules/cms/synchronize.ts");
+    const empty = syncDatabase();
+    const plan = await synchronizeContent(empty.tx);
+    assert.equal(plan.create.midia, media.length);
+    assert.equal(plan.create.produtos, 12);
+    assert.equal(plan.create.categorias, 13);
+    assert.equal(empty.writes(), 0);
+});
