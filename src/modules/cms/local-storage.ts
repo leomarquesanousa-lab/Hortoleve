@@ -1,7 +1,7 @@
 import { constants } from "node:fs";
 import { access, open, realpath, stat, unlink } from "node:fs/promises";
 import path from "node:path";
-import { randomUUID } from "node:crypto";
+import { randomUUID, createHash } from "node:crypto";
 
 export const mediaFilename = /^(?:[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}\.webp|[0-9a-f]{64}\.(?:png|jpe?g|webp))$/;
 
@@ -42,6 +42,21 @@ export async function readLocalMedia(filename: string) {
         if (!info.isFile() || info.size > 32000000) throw new Error("Arquivo inválido.");
         return await handle.readFile();
     } finally { await handle.close(); }
+}
+
+// Somente leitura; executado explicitamente pelo OWNER após a extração do pacote.
+export async function validateStorageImages(assets: { filename: string; sha256: string; bytes: number }[]) {
+    const missing: string[] = [], invalid: string[] = [];
+    for (const asset of assets) {
+        try {
+            const bytes = await readLocalMedia(asset.filename);
+            if (bytes.length !== asset.bytes || createHash("sha256").update(bytes).digest("hex") !== asset.sha256) invalid.push(asset.filename);
+        } catch (error) {
+            if ((error as NodeJS.ErrnoException).code === "ENOENT") missing.push(asset.filename);
+            else invalid.push(asset.filename);
+        }
+    }
+    return { expected: assets.length, verified: assets.length - missing.length - invalid.length, missing, invalid, valid: !missing.length && !invalid.length };
 }
 
 // Executar sob a identidade do processo Node, não apenas no terminal SSH.
