@@ -1,3 +1,4 @@
+import { cabeceiras } from "./cabeceiras.ts";
 import type { Category, Product } from "./types";
 import { divanCategory, divanProduct } from "./divan.ts";
 import { houseCategory, houseProduct } from "./house.ts";
@@ -49,7 +50,7 @@ export const sourceProducts: Product[] = [...lines.map((line): Product => ({
     description: line.summary,
     media: [{ id: line.slug + "-cover", src: line.image, alt: line.slug === "recover-mais" ? "Colchão Recovery+ Hortoleve em quarto ambientado" : "Colchão da linha " + line.name + " Hortoleve em quarto ambientado", width: line.width, height: line.height ?? 1672 }],
     specifications: [], technologyIds: [], featured: true, status: "draft", isDemo: false,
-})), eliteAzulProduct, eliteCinzaProduct, divanProduct, houseProduct, viscoelasticoProduct, futureProduct, cervicalOrtoPlusProduct, corpoWhiteProduct, corpoMagneticoProduct, sensePro.product, dream.product, boxTatameElegance.product, boxTatameJapones.product, ...complementos.map(item => item.product)];
+})), eliteAzulProduct, eliteCinzaProduct, divanProduct, houseProduct, viscoelasticoProduct, futureProduct, cervicalOrtoPlusProduct, corpoWhiteProduct, corpoMagneticoProduct, sensePro.product, dream.product, boxTatameElegance.product, boxTatameJapones.product, ...complementos.map(item => item.product), ...cabeceiras.map(item => item.product)];
 export const products = withStorageImages(sourceProducts);
 export function getProduct(slug: string) { return products.find(product => product.slug === slug); }
 export function getCategory(slug: string) { return categories.find(category => category.slug === slug); }

@@ -1,3 +1,4 @@
+import { cabeceiras } from "./cabeceiras.ts";
 import type { ProductMedia } from "./types";
 import { divanPresentation } from "./divan.ts";
 import { housePresentation } from "./house.ts";
@@ -39,6 +40,7 @@ export const sourcePresentations: Partial<Record<string, ProductPresentation>> =
     "box-tatame-elegance": boxTatameElegance.presentation,
     "box-tatame-japones": boxTatameJapones.presentation,
     ...Object.fromEntries(complementos.map(item => [item.product.slug, item.presentation])),
+    ...Object.fromEntries(cabeceiras.map(item => [item.product.slug, item.presentation])),
     "travesseiro-cervical-orto-plus": cervicalOrtoPlusPresentation,
     "recover-mais": recoveryMaisPresentation,
     comfort: {

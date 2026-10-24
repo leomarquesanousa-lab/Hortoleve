@@ -661,6 +661,96 @@ export const publicMedia = [
     "productIds": "elite-azul"
   },
   {
+    "src": "/cabeceiras/grecia/cabeceira_grecia (1).png",
+    "name": "Cabeceira Grécia — cabeceiras/grecia / cabeceira_grecia (1).png",
+    "alt": "Cabeceira Grécia — cabeceira_grecia (1).png",
+    "width": 1672,
+    "height": 941,
+    "folder": "cabeceiras/grecia",
+    "area": "Produtos",
+    "productIds": "cabeceira-grecia"
+  },
+  {
+    "src": "/cabeceiras/grecia/cabeceira_grecia (2).png",
+    "name": "Cabeceira Grécia — cabeceiras/grecia / cabeceira_grecia (2).png",
+    "alt": "Cabeceira Grécia — cabeceira_grecia (2).png",
+    "width": 1672,
+    "height": 941,
+    "folder": "cabeceiras/grecia",
+    "area": "Produtos",
+    "productIds": "cabeceira-grecia"
+  },
+  {
+    "src": "/cabeceiras/grecia/cabeceira_grecia (3).png",
+    "name": "Cabeceira Grécia — cabeceiras/grecia / cabeceira_grecia (3).png",
+    "alt": "Cabeceira Grécia — cabeceira_grecia (3).png",
+    "width": 1672,
+    "height": 941,
+    "folder": "cabeceiras/grecia",
+    "area": "Produtos",
+    "productIds": "cabeceira-grecia"
+  },
+  {
+    "src": "/cabeceiras/italia/cabeceira_italia (1).png",
+    "name": "Cabeceira Itália — cabeceiras/italia / cabeceira_italia (1).png",
+    "alt": "Cabeceira Itália — cabeceira_italia (1).png",
+    "width": 1536,
+    "height": 1024,
+    "folder": "cabeceiras/italia",
+    "area": "Produtos",
+    "productIds": "cabeceira-italia"
+  },
+  {
+    "src": "/cabeceiras/italia/cabeceira_italia (2).png",
+    "name": "Cabeceira Itália — cabeceiras/italia / cabeceira_italia (2).png",
+    "alt": "Cabeceira Itália — cabeceira_italia (2).png",
+    "width": 1536,
+    "height": 1024,
+    "folder": "cabeceiras/italia",
+    "area": "Produtos",
+    "productIds": "cabeceira-italia"
+  },
+  {
+    "src": "/cabeceiras/italia/cabeceira_italia (3).png",
+    "name": "Cabeceira Itália — cabeceiras/italia / cabeceira_italia (3).png",
+    "alt": "Cabeceira Itália — cabeceira_italia (3).png",
+    "width": 1536,
+    "height": 1024,
+    "folder": "cabeceiras/italia",
+    "area": "Produtos",
+    "productIds": "cabeceira-italia"
+  },
+  {
+    "src": "/cabeceiras/lua/cabeceira_lua (1).png",
+    "name": "Cabeceira Lua — cabeceiras/lua / cabeceira_lua (1).png",
+    "alt": "Cabeceira Lua — cabeceira_lua (1).png",
+    "width": 1536,
+    "height": 1024,
+    "folder": "cabeceiras/lua",
+    "area": "Produtos",
+    "productIds": "cabeceira-lua"
+  },
+  {
+    "src": "/cabeceiras/lua/cabeceira_lua (2).png",
+    "name": "Cabeceira Lua — cabeceiras/lua / cabeceira_lua (2).png",
+    "alt": "Cabeceira Lua — cabeceira_lua (2).png",
+    "width": 1536,
+    "height": 1024,
+    "folder": "cabeceiras/lua",
+    "area": "Produtos",
+    "productIds": "cabeceira-lua"
+  },
+  {
+    "src": "/cabeceiras/lua/cabeceira_lua (3).png",
+    "name": "Cabeceira Lua — cabeceiras/lua / cabeceira_lua (3).png",
+    "alt": "Cabeceira Lua — cabeceira_lua (3).png",
+    "width": 1536,
+    "height": 1024,
+    "folder": "cabeceiras/lua",
+    "area": "Produtos",
+    "productIds": "cabeceira-lua"
+  },
+  {
     "src": "/car/vibro-car1.png",
     "name": "Vibro Car — car / vibro-car1.png",
     "alt": "Vibro Car — vibro-car1.png",

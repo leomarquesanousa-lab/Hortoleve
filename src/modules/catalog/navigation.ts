@@ -7,7 +7,7 @@ export interface CategoryNode { category: Category; label: string; children: Cat
 export function categoryNavigation(categories: Category[], products: Product[] = []): CategoryNode[] {
     const branch = (category: Category, ancestors: string[]): CategoryNode => ({ category, label: labels[category.id] ?? category.name,
         children: categories.filter(c => c.parentId === category.id && !ancestors.includes(c.id)).map(c => branch(c, [...ancestors, c.id])),
-        models: [category.id, ...ancestors].some(id => ["colchoes", "linha-a-vacuo", "camas-box", "vibro-car", "dream-pet"].includes(id))
+        models: [category.id, ...ancestors].some(id => ["colchoes", "linha-a-vacuo", "camas-box", "vibro-car", "dream-pet", "cabeceiras"].includes(id))
             ? [...new Map(products.filter(p => p.categoryId === category.id && !p.isDemo).map(p => {
                 const href = productHref({ ...p, categorySlug: p.categorySlug ?? category.slug });
                 return [href, { id: p.id, label: p.name, href }] as const;

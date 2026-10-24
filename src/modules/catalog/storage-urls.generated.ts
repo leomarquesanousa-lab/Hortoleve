@@ -1,4 +1,4 @@
-// Validated package: 25 products, 113 original paths, 112 immutable assets.
+// Exact original URLs mapped to immutable product storage files.
 export const productStorageURLs: Record<string, string> = {
   "/Box Tatame Elegance/camabox-tatame1.png": "/media/products/27a26c1e490cbf8e205af26a0d904115053b5c314d89a5527d9e378da8ea4e9a.png",
   "/Box Tatame Elegance/camabox-tatame2.png": "/media/products/d2c4bd99b2a9e69ca7c75e9f41898b41b64e362bc2ed1f804708dccfced81e38.png",
@@ -112,5 +112,14 @@ export const productStorageURLs: Record<string, string> = {
   "/travesseiros/future/travesseiro_future_3.png": "/media/products/b547bd2889353660c22c15e855be314febf9c059abe717a06da5a9fe43e505fe.png",
   "/travesseiros/viscoelastico/travesseiro_viscoelastico_1.png": "/media/products/06dceaedd7c0cab03ec734be30c64f2ac413b1763715c59f41f143619674e667.png",
   "/travesseiros/viscoelastico/travesseiro_viscoelastico_2.png": "/media/products/fbdb72ea4dda5c3de76e23334b80fb015c2bef566d93472f862a522bbd02430a.png",
-  "/travesseiros/viscoelastico/travesseiro_viscoelastico_3.png": "/media/products/f2c05e6d09e8e04524ff6d668f740e8e80745fc68d5389459ad1e87a0c4339fa.png"
+  "/travesseiros/viscoelastico/travesseiro_viscoelastico_3.png": "/media/products/f2c05e6d09e8e04524ff6d668f740e8e80745fc68d5389459ad1e87a0c4339fa.png",
+  "/cabeceiras/grecia/cabeceira_grecia (1).png": "/media/products/a3cee9e3adddefe5edc1d1188fc098197fddd043ae219ecebd842cf8fa2aa37e.png",
+  "/cabeceiras/grecia/cabeceira_grecia (2).png": "/media/products/b53940267d2f4eefe10f45f7dcf1985661d3480abc902333a1a0bc6aa6d25051.png",
+  "/cabeceiras/grecia/cabeceira_grecia (3).png": "/media/products/d9a351527d0531011e90a8557f14102f31bf2755c2e05885e1f6104b6eeb8d64.png",
+  "/cabeceiras/italia/cabeceira_italia (1).png": "/media/products/4dc9965e90cd9a4254ed2f27532228c95c0a6de7ffa12c7ddb6d7d7d180b4859.png",
+  "/cabeceiras/italia/cabeceira_italia (2).png": "/media/products/55967722cc91b2da06021adf469751ca7bf2101997649f76e2f62683b9711bee.png",
+  "/cabeceiras/italia/cabeceira_italia (3).png": "/media/products/bf03b32b3e2d1058480bf61209d7f73f5be5f7d39eba147a01a9404c2142450b.png",
+  "/cabeceiras/lua/cabeceira_lua (1).png": "/media/products/bbc999914b1126fcfe4fc609395aa7c762f22c834ce3cfa501c8aea0ba0c99bb.png",
+  "/cabeceiras/lua/cabeceira_lua (2).png": "/media/products/be637474fa49545d89a95bacaf9497b8e056536f02cfefe8079ea9cb176ca3d5.png",
+  "/cabeceiras/lua/cabeceira_lua (3).png": "/media/products/44d8dcaca2a55ae3864353c2d9265c1d7af33dd0251a5b5763b3075a9efbd53d.png"
 };

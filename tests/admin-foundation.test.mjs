@@ -30,6 +30,26 @@ function loader(overrides = {}) {
 }
 const { storageImageURL: storageURL, originalImageURLs } = loader()("src/modules/catalog/storage-images.ts");
 const sourceURL = src => originalImageURLs(src)[0] ?? src;
+
+test("Footer mostra somente categorias principais e nao cresce com produtos", () => {
+    const config = { settings: { name: "Hortoleve", whatsapp: null }, categories: [
+        { id: "colchoes", slug: "colchoes", name: "Colchões" },
+        { id: "vacuo", slug: "linha-a-vacuo", name: "Linha a Vácuo", parentId: "colchoes" },
+        { id: "cabeceiras", slug: "cabeceiras", name: "Cabeceiras" },
+    ], products: Array.from({ length: 100 }, (_, id) => ({ id, name: "Produto " + id })), presentations: {} };
+    const { Footer } = loader({
+        "./PublicConfig": { usePublicConfig: () => config, publicWhatsapp: () => null },
+        "./BrandLogo": { BrandLogo: () => null },
+        "./Footer.module.css": {},
+        "next/link": () => null,
+    })("src/components/Footer.tsx");
+    const categoriesNav = () => Footer().props.children.props.children[0].props.children[2];
+    const links = categoriesNav().props.children[1];
+    assert.deepEqual(links.map(link => link.props.href), ["/produtos/colchoes", "/produtos/cabeceiras"]);
+    assert.deepEqual(links.map(link => link.props.children), ["Colchões", "Cabeceiras"]);
+    config.products.push({ id: "new", name: "Novo produto" });
+    assert.equal(categoriesNav().props.children[1].length, 2);
+});
 const user = { id: "test-user", name: "Test", email: "test@example.test", role: "ADMIN", active: true, permissions: [] };
 
 function syncDatabase() {
@@ -276,11 +296,11 @@ test("Recovery Mais reutiliza apresentação premium, capa e cinco arquivos na o
 test("WhatsApp do formulário codifica dados, identifica origem e rejeita destinos falsos", () => {
     const { leadWhatsappUrl } = loader()("src/modules/leads/whatsapp.ts");
     const input = { name: "Cliente Teste", phone: "71999999999", email: "test@example.test", message: "Dúvida & conforto?", subject: "colchoes", line: "recover-mais", consent: true, website: "" };
-    const url = new URL(leadWhatsappUrl("https://wa.me/5571996461138", input, "Recovery Mais"));
-    assert.equal(url.origin + url.pathname, "https://wa.me/5571996461138");
+    const url = new URL(leadWhatsappUrl("https://wa.me/5571991621130", input, "Recovery Mais"));
+    assert.equal(url.origin + url.pathname, "https://wa.me/5571991621130");
     const message = url.searchParams.get("text");
     for (const value of [input.name, input.phone, input.email, input.message, "Recovery Mais", "Origem: Página Contato"]) assert.ok(message.includes(value));
-    assert.equal(leadWhatsappUrl("https://evil.test/5571996461138", input), null);
+    assert.equal(leadWhatsappUrl("https://evil.test/5571991621130", input), null);
     assert.equal(leadWhatsappUrl(null, input), null);
     const { validateLead } = loader()("src/modules/leads/contracts.ts");
     assert.ok(validateLead({ ...input, consent: false }, ["recover-mais"]).errors.consent);
@@ -358,7 +378,7 @@ test("Orbit desvia de links do rodapé com deslocamento limitado e considera a p
 test("WhatsApp comercial usa configuração única e redes sem perfil continuam sem destino", () => {
     const load = loader(); const { site, whatsappUrl } = load("src/config/site.ts");
     const { socialChannels, socialChannelUrl } = load("src/config/social.ts");
-    assert.equal(site.whatsapp, "5571996461138");
+    assert.equal(site.whatsapp, "5571991621130");
     const link = new URL(whatsappUrl("Olá! Quero conhecer o Elite Azul."));
     assert.equal(link.hostname, "wa.me"); assert.equal(link.pathname, "/" + site.whatsapp);
     assert.equal(link.searchParams.get("text"), "Olá! Quero conhecer o Elite Azul.");
@@ -382,11 +402,11 @@ test("conteúdo inicial é validável, único e preserva cards, galerias e pági
             assert.deepEqual(validated.gallery.map(m => m.src), item.data.gallery.map(m => m.src));
         }
     }
-    assert.equal(initialContent.filter(i => i.resource === "produtos").length, 25);
+    assert.equal(initialContent.filter(i => i.resource === "produtos").length, 28);
     assert.equal(initialContent.filter(i => i.resource === "categorias").length, 13);
     assert.equal(initialContent.find(i => i.resource === "home").data.banners.length, 3);
     assert.equal(initialContent.find(i => i.resource === "paginas" && i.id === "tecnologias").data.slides.length, 1);
-    assert.equal(initialContent.filter(i => i.resource === "seo").length, 43);
+    assert.equal(initialContent.filter(i => i.resource === "seo").length, 46);
     for (const asset of initialContent.filter(i => i.resource === "midia")) {
         let directory = "public";
         for (const segment of sourceURL(asset.data.src).split("/").filter(Boolean)) {
@@ -412,7 +432,7 @@ test("pré-importação exibe fonte sem gravar e bloqueia edição implícita", 
     const tx = { $queryRaw: async () => [], siteSetting: { findMany: async () => [], findUnique: async () => null, upsert: async () => { writes++; } } };
     const repo = loader({ "@/modules/admin/database": { getDatabase: () => ({ ...tx, $transaction: async fn => fn(tx) }) } })("src/modules/cms/repository.ts");
     const records = await repo.listDocuments("produtos");
-    assert.equal(records.length, 25); assert.ok(records.every(r => r.source === "static"));
+    assert.equal(records.length, 28); assert.ok(records.every(r => r.source === "static"));
     await assert.rejects(repo.saveDocument({ ...user, role: "OWNER" }, "produtos", records[0].draft, records[0].id, 0, true), /importação inicial exige autorização/);
     assert.equal(writes, 0);
 });
@@ -790,7 +810,7 @@ test("CMS público desativado preserva catálogo sem consultar banco", async () 
     try {
         const pub = loader({ "next/server": { connection: async () => {} }, "@/modules/admin/database": { getDatabase: () => { throw Error("não consultar"); } } })("src/modules/cms/public.ts");
         const snapshot = await pub.getPublicSnapshot();
-        assert.equal(snapshot.enabled, false); assert.equal(snapshot.products.length, 25); assert.equal(snapshot.categories.length, 13);
+        assert.equal(snapshot.enabled, false); assert.equal(snapshot.products.length, 28); assert.equal(snapshot.categories.length, 13);
     } finally { if (previous === undefined) delete process.env.CMS_PUBLIC_ENABLED; else process.env.CMS_PUBLIC_ENABLED = previous; }
 });
 
@@ -965,12 +985,12 @@ test("inventario completo alimenta biblioteca sem duplicar URLs ou criar produto
     for (const folder of ["future", "cervicalortoplus", "viscoelastico", "corpo-magnetico", "corpo-white-fibra"]) {
         assert.ok(publicMedia.filter(i => i.src.startsWith("/travesseiros/" + folder + "/")).length >= 3);
     }
-    assert.equal(initialContent.filter(i => i.resource === "produtos").length, 25);
+    assert.equal(initialContent.filter(i => i.resource === "produtos").length, 28);
     const { synchronizeContent } = load("src/modules/cms/synchronize.ts");
     const empty = syncDatabase();
     const plan = await synchronizeContent(empty.tx);
     assert.equal(plan.create.midia, media.length);
-    assert.equal(plan.create.produtos, 25);
+    assert.equal(plan.create.produtos, 28);
     assert.equal(plan.create.categorias, 13);
     assert.equal(empty.writes(), 0);
 });
@@ -1119,7 +1139,7 @@ test("menu usa modelos do catalogo em Colchoes, Vacuo e Box sem alterar outras r
     const box = tree.find(n => n.category.id === "camas-box");
     assert.deepEqual(box.models.map(p => p.id), ["box-tatame-elegance", "box-tatame-japones", "box-tatame", "cama-box", "cama-box-bau", "cama-box-com-auxiliar"]);
     for (const node of [mattresses, vacuum, box]) for (const model of node.models) assert.equal(model.href, productHref(products.find(p => p.id === model.id)));
-    for (const id of ["poltronas", "travesseiros", "cabeceiras"]) assert.deepEqual(tree.find(n => n.category.id === id).models, []);
+    for (const id of ["poltronas", "travesseiros"]) assert.deepEqual(tree.find(n => n.category.id === id).models, []);
     const future = { ...products.find(p => p.id === "box-tatame-elegance"), id: "new-box", slug: "new-box", name: "Novo modelo" };
     const next = categoryNavigation(categories, [...products, future, future]);
     const models = next.find(n => n.category.id === "camas-box").models;
@@ -1169,7 +1189,7 @@ test("sete complementos usam galerias completas, capas fotograficas, categorias 
     assert.equal(db.rows.get(key).draft.name, "Edicao do OWNER");
 });
 
-test("25 produtos migram somente URLs validadas, preservando capas, ordem, IDs e URLs personalizadas", () => {
+test("28 produtos usam somente URLs do manifesto, preservando capas, ordem, IDs e URLs personalizadas", () => {
     const load = loader();
     const { products, sourceProducts } = load("src/modules/catalog/data.ts");
     const { presentations, sourcePresentations } = load("src/modules/catalog/presentations.ts");
@@ -1178,8 +1198,8 @@ test("25 produtos migram somente URLs validadas, preservando capas, ordem, IDs e
     const { initialContent } = load("src/modules/cms/initial-content.ts");
     const allowed = new Set(storageAssets.map(a => "/media/products/" + a.filename));
     const manifest = JSON.parse(fs.readFileSync("src/modules/cms/product-images-plan.json", "utf8"));
-    assert.equal(products.length, 25);
-    assert.equal(allowed.size, 112);
+    assert.equal(products.length, 28);
+    assert.equal(allowed.size, 121);
     const referenced = new Set();
     for (const product of products) {
         const source = sourceProducts.find(p => p.id === product.id);
@@ -1192,7 +1212,7 @@ test("25 produtos migram somente URLs validadas, preservando capas, ordem, IDs e
         assert.deepEqual(seed.data.gallery, presentation.media);
         for (const image of [...product.media, ...presentation.media]) { assert.ok(allowed.has(image.src)); referenced.add(image.src); }
     }
-    assert.equal(referenced.size, 112);
+    assert.equal(referenced.size, 121);
     for (const asset of manifest.assets) assert.equal(storageURL(asset.source), asset.target);
     const custom = { src: "https://example.test/custom.png", gallery: [{ src: "/media/products/new-upload.webp" }], name: "Texto editado" };
     assert.deepEqual(withStorageImages(custom), custom);
@@ -1221,5 +1241,36 @@ test("rota publica serve as fotos Divan no storage sem depender de public", asyn
         if (previous === undefined) delete process.env.CMS_STORAGE_PATH; else process.env.CMS_STORAGE_PATH = previous;
         assert.ok(path.resolve(directory).startsWith(path.resolve(os.tmpdir()) + path.sep));
         fs.rmSync(directory, { recursive: true, force: true });
+    }
+});
+
+
+test("Cabeceiras reutilizam categoria, capas fotograficas, ordem e fonte CMS", async () => {
+    const load = loader();
+    const { products, categories, productHref } = load("src/modules/catalog/data.ts");
+    const { presentations } = load("src/modules/catalog/presentations.ts");
+    const { initialContent } = load("src/modules/cms/initial-content.ts");
+    const { categoryNavigation } = load("src/modules/catalog/navigation.ts");
+    const menu = categoryNavigation(categories, products).find(node => node.category.id === "cabeceiras");
+    assert.equal(categories.filter(c => c.id === "cabeceiras").length, 1);
+    assert.equal(menu.models.length, 3);
+    for (const [model, order] of [["lua", [2,3,1]], ["italia", [1,2,3]], ["grecia", [1,2,3]]]) {
+        const id = "cabeceira-" + model, product = products.find(p => p.id === id), presentation = presentations[id];
+        assert.equal(product.categoryId, "cabeceiras");
+        assert.equal(product.media[0].src, presentation.media[0].src);
+        assert.deepEqual(presentation.media.map(m => m.id), order.map(n => id + "-" + n));
+        assert.equal(presentation.technicalSheetId, id + "-" + order[2]);
+        assert.ok(menu.models.some(m => m.href === productHref(product)));
+        const seed = initialContent.find(i => i.resource === "produtos" && i.id === id);
+        assert.deepEqual(seed.data.gallery, presentation.media);
+        assert.ok(initialContent.some(i => i.resource === "seo" && i.data.route === productHref(product)));
+        for (const image of presentation.media) {
+            const original = sourceURL(image.src);
+            assert.match(image.src, /^\/media\/products\/[a-f0-9]{64}\.png$/);
+            assert.ok(fs.existsSync("public" + original));
+            const source = path.join("C:/Users/Leo/Downloads", model, path.basename(original));
+            // Originais do operador sao comparados quando presentes, sem dependencia no CI.
+            if (fs.existsSync(source)) assert.deepEqual(fs.readFileSync("public" + original), fs.readFileSync(source));
+        }
     }
 });

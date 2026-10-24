@@ -124,6 +124,21 @@
       "id": "dream-pet",
       "name": "Dream Pet",
       "categoryId": "dream-pet"
+    },
+    {
+      "id": "cabeceira-lua",
+      "name": "Cabeceira Lua",
+      "categoryId": "cabeceiras"
+    },
+    {
+      "id": "cabeceira-italia",
+      "name": "Cabeceira Itália",
+      "categoryId": "cabeceiras"
+    },
+    {
+      "id": "cabeceira-grecia",
+      "name": "Cabeceira Grécia",
+      "categoryId": "cabeceiras"
     }
   ],
   "categories": [
@@ -193,10 +208,10 @@
       "parentId": null
     }
   ],
-  "totalImages": 145,
-  "selectableImages": 139,
+  "totalImages": 154,
+  "selectableImages": 148,
   "byArea": {
-    "Produtos": 113,
+    "Produtos": 122,
     "Sem associação publicada": 14,
     "Versões antigas": 13,
     "Identidade visual": 2,
@@ -1131,6 +1146,135 @@
       "references": [
         "produtos:elite-azul",
         "seo:80ff6be689b4587409051eec"
+      ]
+    },
+    {
+      "src": "/cabeceiras/grecia/cabeceira_grecia (1).png",
+      "name": "Cabeceira Grécia — cabeceiras/grecia / cabeceira_grecia (1).png",
+      "alt": "Cabeceira Grécia — cabeceira_grecia (1).png",
+      "width": 1672,
+      "height": 941,
+      "folder": "cabeceiras/grecia",
+      "area": "Produtos",
+      "productIds": "cabeceira-grecia",
+      "valid": true,
+      "references": [
+        "produtos:cabeceira-grecia",
+        "seo:f43d1e5d42f14eac3f56f6c9"
+      ]
+    },
+    {
+      "src": "/cabeceiras/grecia/cabeceira_grecia (2).png",
+      "name": "Cabeceira Grécia — cabeceiras/grecia / cabeceira_grecia (2).png",
+      "alt": "Cabeceira Grécia — cabeceira_grecia (2).png",
+      "width": 1672,
+      "height": 941,
+      "folder": "cabeceiras/grecia",
+      "area": "Produtos",
+      "productIds": "cabeceira-grecia",
+      "valid": true,
+      "references": [
+        "produtos:cabeceira-grecia"
+      ]
+    },
+    {
+      "src": "/cabeceiras/grecia/cabeceira_grecia (3).png",
+      "name": "Cabeceira Grécia — cabeceiras/grecia / cabeceira_grecia (3).png",
+      "alt": "Cabeceira Grécia — cabeceira_grecia (3).png",
+      "width": 1672,
+      "height": 941,
+      "folder": "cabeceiras/grecia",
+      "area": "Produtos",
+      "productIds": "cabeceira-grecia",
+      "valid": true,
+      "references": [
+        "produtos:cabeceira-grecia"
+      ]
+    },
+    {
+      "src": "/cabeceiras/italia/cabeceira_italia (1).png",
+      "name": "Cabeceira Itália — cabeceiras/italia / cabeceira_italia (1).png",
+      "alt": "Cabeceira Itália — cabeceira_italia (1).png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "cabeceiras/italia",
+      "area": "Produtos",
+      "productIds": "cabeceira-italia",
+      "valid": true,
+      "references": [
+        "produtos:cabeceira-italia",
+        "seo:c7b08fc051a10254d637f4af"
+      ]
+    },
+    {
+      "src": "/cabeceiras/italia/cabeceira_italia (2).png",
+      "name": "Cabeceira Itália — cabeceiras/italia / cabeceira_italia (2).png",
+      "alt": "Cabeceira Itália — cabeceira_italia (2).png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "cabeceiras/italia",
+      "area": "Produtos",
+      "productIds": "cabeceira-italia",
+      "valid": true,
+      "references": [
+        "produtos:cabeceira-italia"
+      ]
+    },
+    {
+      "src": "/cabeceiras/italia/cabeceira_italia (3).png",
+      "name": "Cabeceira Itália — cabeceiras/italia / cabeceira_italia (3).png",
+      "alt": "Cabeceira Itália — cabeceira_italia (3).png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "cabeceiras/italia",
+      "area": "Produtos",
+      "productIds": "cabeceira-italia",
+      "valid": true,
+      "references": [
+        "produtos:cabeceira-italia"
+      ]
+    },
+    {
+      "src": "/cabeceiras/lua/cabeceira_lua (1).png",
+      "name": "Cabeceira Lua — cabeceiras/lua / cabeceira_lua (1).png",
+      "alt": "Cabeceira Lua — cabeceira_lua (1).png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "cabeceiras/lua",
+      "area": "Produtos",
+      "productIds": "cabeceira-lua",
+      "valid": true,
+      "references": [
+        "produtos:cabeceira-lua"
+      ]
+    },
+    {
+      "src": "/cabeceiras/lua/cabeceira_lua (2).png",
+      "name": "Cabeceira Lua — cabeceiras/lua / cabeceira_lua (2).png",
+      "alt": "Cabeceira Lua — cabeceira_lua (2).png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "cabeceiras/lua",
+      "area": "Produtos",
+      "productIds": "cabeceira-lua",
+      "valid": true,
+      "references": [
+        "produtos:cabeceira-lua",
+        "seo:090e0e23a58dbeadf4fc21ea"
+      ]
+    },
+    {
+      "src": "/cabeceiras/lua/cabeceira_lua (3).png",
+      "name": "Cabeceira Lua — cabeceiras/lua / cabeceira_lua (3).png",
+      "alt": "Cabeceira Lua — cabeceira_lua (3).png",
+      "width": 1536,
+      "height": 1024,
+      "folder": "cabeceiras/lua",
+      "area": "Produtos",
+      "productIds": "cabeceira-lua",
+      "valid": true,
+      "references": [
+        "produtos:cabeceira-lua"
       ]
     },
     {
