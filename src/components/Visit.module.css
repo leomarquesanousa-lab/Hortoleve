@@ -1,0 +1,114 @@
+.page{max-width:960px;margin:0 auto;padding:70px 24px 120px}.page h1{font-size:clamp(2.8rem,6vw,4.7rem);margin:12px 0 24px}.eyebrow{font-size:11px;letter-spacing:.18em;color:var(--gold);margin-bottom:12px}.intro{margin-bottom:32px}.form{padding:clamp(20px,4vw,44px);background:#fffaf3;border:1px solid var(--sand);border-radius:16px;display:grid;gap:20px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}.form label{display:grid;gap:6px;font-size:14px}.form input,.form textarea,.form select{width:100%;padding:12px;border:1px solid #b9b5a9;border-radius:6px;background:white;color:var(--green);font:inherit}.form fieldset{border:0;padding:0;margin:0}.times{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}.button,.times button{border:1px solid var(--green);background:var(--green);color:var(--cream);padding:12px 20px;border-radius:6px;font:inherit;cursor:pointer;display:inline-block}.times button{background:transparent;color:var(--green)}.times button[aria-pressed=true]{background:var(--green);color:white}.button:disabled{opacity:.55;cursor:wait}.form .consent{display:flex;align-items:flex-start;gap:10px}.consent input{width:auto;margin-top:7px}.notice{padding:18px;border:1px solid var(--sand);border-radius:8px;margin:16px 0;background:var(--cream)}.fixed{position:fixed;left:16px;bottom:calc(18px + env(safe-area-inset-bottom));z-index:70;border:1px solid var(--gold);background:var(--green);color:var(--cream);padding:10px 16px;border-radius:30px;font-size:13px;box-shadow:0 4px 20px #213c3720}.hidden{display:none}.admin{display:grid;gap:24px}.admin article{border:1px solid var(--sand);border-radius:10px;padding:24px;overflow-wrap:anywhere}.admin h2{font-size:1.6rem}.admin p{white-space:pre-wrap}.admin button{margin:10px 10px 0 0}.admin select,.admin input{font:inherit;padding:8px;max-width:100%}@media(max-width:600px){.grid{grid-template-columns:1fr}.fixed{font-size:12px;padding:10px 13px}.page{padding-top:40px}}
+.invitation{position:fixed;inset:0;margin:auto;padding:0;width:min(920px,calc(100vw - 48px));max-width:none;max-height:calc(100dvh - 48px);border:1px solid #d9c8ae88;border-radius:18px;background:var(--cream);color:var(--green);box-shadow:0 28px 100px #10242055;overflow:auto}
+.invitation::backdrop{background:#132a25a6;backdrop-filter:blur(3px)}
+.invitation[open]{animation:visit-enter .35s ease-out}
+.invitation[open]::backdrop{animation:visit-shade .35s ease-out}
+.modalLayout{position:relative;display:grid;grid-template-columns:1fr 1.1fr;min-height:530px}
+.modalPhoto{position:relative;min-height:100%;background:var(--sand);overflow:hidden}
+.modalPhoto img{object-fit:cover;object-position:48% center}
+.modalPhoto::after{content:"";position:absolute;inset:45% 0 0;background:linear-gradient(transparent,#142923a6)}
+.photoCaption{position:absolute;left:30px;bottom:30px;right:20px;z-index:1;color:var(--cream);font-family:var(--font-display),Georgia,serif;font-size:1.7rem;line-height:1.2}
+.modalContent{padding:54px 40px 36px;display:flex;flex-direction:column;align-items:flex-start;justify-content:center}
+.modalBrand{padding:9px 14px;background:var(--green);border-radius:4px;margin-bottom:28px;width:155px}
+.modalBrand img{width:100%}
+.modalContent .eyebrow{font-size:10px;letter-spacing:.2em;margin-bottom:16px}
+.modalContent h2{font-size:clamp(2rem,3.5vw,2.85rem);line-height:1.07;letter-spacing:-.025em;margin-bottom:20px;text-wrap:balance}
+.modalContent>p:not(.eyebrow){font-size:14px;line-height:1.8;color:var(--graphite);margin-bottom:28px}
+.modalCta{display:flex;align-items:center;justify-content:space-between;gap:18px;width:100%;padding:15px 20px;border:1px solid var(--green);border-radius:6px;background:var(--green);color:var(--cream);font-size:14px;font-weight:600;transition:background .2s}
+.modalCta:hover{background:#30534c}
+.modalCta span{font-size:20px;line-height:1}
+.modalSecondary{width:100%;min-height:44px;margin-top:10px;padding:8px 0;border:0;background:transparent;color:var(--graphite);font:inherit;font-size:12px;text-decoration:underline;text-underline-offset:4px;cursor:pointer}
+.close{position:absolute;right:10px;top:10px;display:grid;place-items:center;width:48px;height:48px;border:2px solid var(--gold);border-radius:50%;background:var(--cream);color:var(--green);font-size:32px;line-height:1;cursor:pointer;z-index:2}
+@keyframes visit-enter{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@keyframes visit-shade{from{opacity:0}to{opacity:1}}
+@media(max-width:680px){.invitation{width:calc(100vw - 28px);max-height:calc(100dvh - 28px);border-radius:12px}.modalLayout{grid-template-columns:1fr;min-height:0}.modalPhoto{height:clamp(120px,23dvh,190px);min-height:0}.modalPhoto img{object-position:center 52%}.photoCaption{left:22px;bottom:16px;font-size:1.35rem}.modalContent{padding:24px}.modalBrand{display:none}.modalContent .eyebrow{margin-bottom:12px}.modalContent h2{font-size:clamp(1.85rem,7vw,2.3rem);margin-bottom:14px}.modalContent>p:not(.eyebrow){font-size:13px;line-height:1.65;margin-bottom:20px}.modalCta{padding:13px 16px}.close{right:8px;top:8px}}
+@media(max-height:650px) and (max-width:680px){.modalPhoto{height:100px}.photoCaption{display:none}.modalContent{padding:20px}.modalContent h2{font-size:1.8rem}.modalContent>p:not(.eyebrow){margin-bottom:14px}.modalContent .eyebrow{margin-bottom:8px}}
+@media(prefers-reduced-motion:reduce){.invitation[open],.invitation[open]::backdrop{animation:none}.modalCta{transition:none}}
+.modalCta{font-family:inherit;cursor:pointer;text-align:left}
+.booking .modalContent{justify-content:flex-start;padding-top:54px;min-width:0}
+.booking .modalBrand{margin-bottom:18px}
+.booking .modalContent>h2{font-size:2rem}
+.booking .form{width:100%;padding:0;border:0;background:transparent;gap:16px}
+.booking .form h3{font-size:1.4rem;line-height:1.2}
+.booking .form .grid{grid-template-columns:1fr;gap:14px}
+.booking .form label{font-size:13px}
+.booking .form input,.booking .form textarea{padding:9px 11px;font-size:14px}
+.stepHint{font-size:12px;color:var(--graphite);margin-bottom:16px}
+.detailsFields{display:grid;gap:16px}
+.stepActions{display:flex;gap:12px;align-items:center;justify-content:space-between;margin:20px 0 12px}
+.stepActions .modalSecondary{width:auto;margin:0;text-align:left}
+.stepActions .button{font-size:13px;padding:12px 16px}
+.calendar{margin-bottom:24px}
+.calendarHeader{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px;text-transform:capitalize;font-size:14px}
+.calendarHeader button{width:40px;height:40px;border:1px solid var(--sand);border-radius:50%;background:transparent;color:var(--green);font-size:24px;cursor:pointer}
+.calendarDays{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:5px;margin-bottom:12px}
+.calendarDays>span{text-align:center;font-size:10px;color:var(--graphite)}
+.calendarDays button{min-width:0;min-height:38px;border:1px solid var(--sand);background:#fffaf3;border-radius:5px;color:var(--green);font:inherit;font-size:13px;cursor:pointer}
+.calendarDays button[aria-pressed=true]{background:var(--green);color:var(--cream);border-color:var(--green)}
+.calendarDays button[aria-current=date]{box-shadow:inset 0 -3px var(--gold)}
+.calendarDays button:disabled,.calendarHeader button:disabled{opacity:.35;cursor:not-allowed;background:transparent}
+.calendar small,.form fieldset>small{font-size:11px;line-height:1.5;display:block}
+.times button small{display:block;font-size:9px;line-height:1.2}
+.times button:disabled{color:#77746e;border-color:#d8d4cb;background:#eae6de;cursor:not-allowed}
+.booking .times{gap:8px;margin-bottom:10px}
+.booking .times button{padding:9px 10px;flex:1 0 28%;font-size:13px;min-height:46px}
+.invitation{overflow:hidden}
+.modalLayout{max-height:calc(100dvh - 48px);min-height:min(530px,calc(100dvh - 48px))}
+.modalContent{overflow-y:auto;min-height:0;overscroll-behavior:contain}
+@media(max-width:680px){.modalLayout{max-height:calc(100dvh - 28px);min-height:0;grid-template-rows:auto minmax(0,1fr)}.booking .modalContent{padding:22px}.booking .modalContent>h2{font-size:1.65rem}.booking .modalPhoto{height:110px}.booking .photoCaption{display:none}.booking .form h3{font-size:1.25rem}.calendarDays button{min-height:36px}.close{z-index:3}}
+.form label.hidden,.form>div[hidden]{display:none}
+.detailsStep{display:grid;gap:16px}
+.calendar{width:100%;min-width:0;padding:16px;border:1px solid var(--sand);border-radius:12px;background:#fffaf3}
+.calendarHeader{display:grid;grid-template-columns:40px minmax(0,1fr) 40px;align-items:center;gap:8px;margin-bottom:16px;text-align:center}
+.calendarHeader>span{font-weight:600;line-height:1.4}
+.calendarWeekdays,.calendarDays{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:5px;width:100%;min-width:0}
+.calendarWeekdays{margin-bottom:8px}
+.calendarWeekdays>span{display:grid;place-items:center;min-width:0;font-size:11px;font-weight:600;color:var(--green)}
+.calendarDays{margin-bottom:16px}
+.calendarDays .calendarDay{display:grid;place-items:center;width:100%;min-width:0;min-height:40px;aspect-ratio:1;padding:0;line-height:1;font-size:14px;font-variant-numeric:tabular-nums;border-radius:7px}
+.calendarDays .calendarDay[data-status=available]{background:white;border-color:var(--sand);color:var(--green)}
+.calendarDays .calendarDay[data-status=unavailable]{opacity:1;background:#f0ede7;border-color:transparent;color:#928c81;cursor:not-allowed}
+.calendarDays .calendarDay[data-status=full]{opacity:1;background:#ece1d1;border-color:#c8b394;color:#79654a;text-decoration:line-through;cursor:not-allowed}
+.calendarDays .calendarDay[aria-pressed=true]{background:var(--green);color:var(--cream);border:2px solid var(--gold);box-shadow:0 0 0 2px #ae865326;font-weight:700}
+.calendarLegend{display:flex;flex-wrap:wrap;gap:8px 14px;padding-top:12px;border-top:1px solid #d9c8ae80;font-size:10px;line-height:1.5}
+.calendarLegend>span{display:inline-flex;align-items:center;gap:6px}
+.calendarLegend i{display:inline-block;width:9px;height:9px;border:1px solid var(--sand);border-radius:3px;background:white}
+.calendarLegend i[data-status=full]{background:#d9c5aa}
+.calendarLegend i[data-status=unavailable]{background:#e6e1d9;border-color:transparent}
+.formBody{min-width:0}
+.form [hidden]{display:none}
+.stepActions{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:center;gap:12px;padding:16px 0;margin:0;border-top:1px solid var(--sand);background:var(--cream)}
+.stepActions .button{grid-column:2;width:100%;min-height:46px;white-space:normal}
+.stepActions .modalSecondary{width:100%;min-height:46px;margin:0}
+.booking .modalLayout{min-height:0;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);grid-template-rows:minmax(0,1fr)}
+.booking .modalPhoto{min-height:0}
+.booking .modalContent{max-height:calc(100dvh - 48px);min-height:0;min-width:0;overflow:visible;align-items:stretch;padding:54px 28px 0}
+.booking .modalContent>.modalBrand,.booking .modalContent>.eyebrow,.booking .modalContent>h2{flex-shrink:0}
+.booking .modalContent>.eyebrow{margin-bottom:8px}
+.booking .modalContent>h2{margin-bottom:16px}
+.booking .form{display:grid;grid-template-rows:auto minmax(0,1fr) auto;flex:1 1 auto;min-height:0;min-width:0;gap:12px}
+.booking .formBody{min-height:0;overflow-y:auto;overscroll-behavior:contain;scrollbar-gutter:stable;padding:3px 7px 16px 3px}
+.booking .stepActions{padding-bottom:max(16px,env(safe-area-inset-bottom));z-index:1}
+.booking .times{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.booking .times button{min-width:0;padding:10px 5px}
+@media(max-width:680px){.booking{--booking-photo-height:clamp(64px,12dvh,96px)}.booking .modalLayout{grid-template-columns:minmax(0,1fr);grid-template-rows:var(--booking-photo-height) minmax(0,1fr)}.booking .modalPhoto{height:var(--booking-photo-height)}.booking .modalContent{max-height:calc(100dvh - 28px - var(--booking-photo-height));padding:18px 18px 0}.calendar{padding:12px}.calendarWeekdays,.calendarDays{gap:4px}.calendarDays .calendarDay{min-height:34px}.stepActions{gap:8px}.stepActions .button{padding:12px 8px}.booking .formBody{scrollbar-gutter:auto;padding-right:3px}}
+.booking .modalContent:has(>.notice){overflow-y:auto}
+/* Compact date selection only: the approved invitation and details step keep their layout. */
+.booking:has(.form[data-step=calendar]) .modalContent{padding:18px 24px 0}
+.booking:has(.form[data-step=calendar]) .modalBrand{width:130px;margin-bottom:10px}
+.booking:has(.form[data-step=calendar]) .modalContent>.eyebrow,.booking:has(.form[data-step=calendar]) .modalContent>h2{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.booking .form[data-step=calendar]{gap:8px}
+.booking .form[data-step=calendar] .formBody{padding-bottom:8px;scrollbar-gutter:auto}
+.booking .form[data-step=calendar] .stepHint{margin-bottom:8px}
+.booking .form[data-step=calendar] .calendar{padding:10px;margin-bottom:10px}
+.booking .form[data-step=calendar] .calendarHeader{margin-bottom:6px}
+.booking .form[data-step=calendar] .calendarWeekdays{margin-bottom:4px}
+.booking .form[data-step=calendar] .calendarDays{gap:3px;margin-bottom:8px}
+.booking .form[data-step=calendar] .calendarDay{aspect-ratio:auto;min-height:36px}
+.booking .form[data-step=calendar] .calendarLegend{gap:5px 10px;padding-top:8px}
+.booking .form[data-step=calendar] .times{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:8px 0 6px}
+.booking .form[data-step=calendar] .times button{min-height:44px;padding:8px 5px}
+.booking .form[data-step=calendar] .stepActions{padding-top:10px;padding-bottom:max(12px,env(safe-area-inset-bottom))}
+.calendarStep fieldset{min-width:0}
+@media(min-width:1000px){.booking:has(.form[data-step=calendar]){width:min(1100px,calc(100vw - 48px))}.booking:has(.form[data-step=calendar]) .modalLayout{grid-template-columns:minmax(220px,.75fr) minmax(0,1.65fr)}.booking .calendarStep{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.85fr);gap:10px 16px;align-items:start}.booking .calendarStep>.stepHint{grid-column:1/-1;margin-bottom:0}.booking .form[data-step=calendar] .calendar{margin-bottom:0}.booking .calendarStep fieldset{padding-top:4px}}
+@media(max-width:680px){.booking:has(.form[data-step=calendar]){--booking-photo-height:64px}.booking:has(.form[data-step=calendar]) .modalContent{padding:14px 16px 0}.booking .form[data-step=calendar] .calendarDay{min-height:36px}}

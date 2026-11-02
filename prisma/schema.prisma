@@ -209,3 +209,39 @@ model AuditLog {
   @@index([userId, createdAt])
   @@index([entity, recordId])
 }
+model HomeVisit {
+  id String @id
+  requestKey String @unique
+  fingerprint String
+  name String
+  phone String
+  email String
+  city String
+  address String
+  notes String
+  date String
+  time String
+  timeZone String
+  slotKey String? @unique
+  status String @default("PENDING")
+  consentAt DateTime @default(now())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  version Int @default(1)
+  notifications VisitNotification[]
+  @@index([date, time])
+}
+model VisitNotification {
+  id String @id
+  visitId String
+  audience String
+  payload Json
+  sentAt DateTime?
+  firstAttemptAt DateTime?
+  lockedUntil DateTime?
+  attempts Int @default(0)
+  lastError String?
+  createdAt DateTime @default(now())
+  visit HomeVisit @relation(fields: [visitId], references: [id], onDelete: Cascade)
+  @@index([sentAt, lockedUntil])
+}
